@@ -19,7 +19,7 @@
 # ggf. vorher:  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # oder:         Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
-Set-StrictMode -Version Latest
+Set-StrictMode -Version 
 
 $versionMinimum = [Version]'7.5.0'
 $versionCurrent = $PSVersionTable.PSVersion
