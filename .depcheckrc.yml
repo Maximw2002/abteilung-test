@@ -19,4 +19,4 @@ ignores:
   - chai*
   # siehe scripts\init-resources.ts
   - copyfiles
-  - ejs-lint
+  - ejs-lin
