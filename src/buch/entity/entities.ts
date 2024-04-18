@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Abbildung } from './abbildung.entity.js';
-import { Buch } from './buch.entity.js';
-import { Titel } from './titel.entity.js';
+import { Abteilung } from './abteilung.entity.js';
+import { Abteilungsleiter } from './abteilungsleiter.entity.js';
+import { Mitarbeiter } from './mitarbeiter.entity.js';
 
 // erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities = [Abbildung, Buch, Titel];
+export const entities = [Mitarbeiter, Abteilung, Abteilungsleiter];

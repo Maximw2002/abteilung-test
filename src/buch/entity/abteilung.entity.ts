@@ -49,23 +49,23 @@ import {
     UpdateDateColumn,
     VersionColumn,
 } from 'typeorm';
-import { Abbildung } from './abbildung.entity.js';
+import { Abteilungsleiter } from './abteilungsleiter.entity.js';
 import { ApiProperty } from '@nestjs/swagger';
 import { DecimalTransformer } from './decimal-transformer.js';
-import { Titel } from './titel.entity.js';
+import { Mitarbeiter } from './mitarbeiter.entity.js';
 import { dbType } from '../../config/db.js';
 
 /**
- * Alias-Typ für gültige Strings bei der Art eines Buches.
+ * Alias-Typ für gültige Strings bei der Art einer Abteilung.
  */
-export type BuchArt = 'DRUCKAUSGABE' | 'KINDLE';
+export type AbteilungsArt = 'ENTWICKLUNG' | 'VERTRIEB';
 
 /**
  * Entity-Klasse zu einem relationalen Tabelle
  */
 // https://typeorm.io/entities
 @Entity()
-export class Buch {
+export class Abteilung {
     // https://typeorm.io/entities#primary-columns
     // default: strategy = 'increment' (SEQUENCE, GENERATED ALWAYS AS IDENTITY, AUTO_INCREMENT)
     @PrimaryGeneratedColumn()
@@ -75,16 +75,16 @@ export class Buch {
     readonly version: number | undefined;
 
     @Column()
-    @ApiProperty({ example: '0-0070-0644-6', type: String })
-    readonly isbn!: string;
+    @ApiProperty({ example: '1-007', type: String })
+    readonly bueroNummer!: string;
 
     @Column('int')
     @ApiProperty({ example: 5, type: Number })
-    readonly rating: number | undefined;
+    readonly zufriedenheit: number | undefined;
 
     @Column('varchar')
-    @ApiProperty({ example: 'DRUCKAUSGABE', type: String })
-    readonly art: BuchArt | undefined;
+    @ApiProperty({ example: 'ENTWICKLUNG', type: String })
+    readonly art: AbteilungsArt | undefined;
 
     @Column('decimal', {
         precision: 8,
@@ -93,7 +93,7 @@ export class Buch {
     })
     @ApiProperty({ example: 1, type: Number })
     // statt number ggf. Decimal aus decimal.js analog zu BigDecimal von Java
-    readonly preis!: number;
+    readonly budget!: number;
 
     @Column('decimal', {
         precision: 4,
@@ -101,16 +101,16 @@ export class Buch {
         transformer: new DecimalTransformer(),
     })
     @ApiProperty({ example: 0.1, type: Number })
-    readonly rabatt: number | undefined;
+    readonly krankenstandsQuote: number | undefined;
 
     @Column('decimal') // TypeORM unterstuetzt bei Oracle *NICHT* den Typ boolean
     @ApiProperty({ example: true, type: Boolean })
-    readonly lieferbar: boolean | undefined;
+    readonly verfügbar: boolean | undefined;
 
     @Column('date')
     @ApiProperty({ example: '2021-01-31' })
     // TypeORM unterstuetzt *NICHT* das Temporal-API (ES2022)
-    readonly datum: Date | string | undefined;
+    readonly gründungsDatum: Date | string | undefined;
 
     @Column('date')
     @ApiProperty({ example: 'https://test.de/', type: String })
@@ -122,16 +122,20 @@ export class Buch {
     schlagwoerter: string[] | null | undefined;
 
     // undefined wegen Updates
-    @OneToOne(() => Titel, (titel) => titel.buch, {
-        cascade: ['insert', 'remove'],
-    })
-    readonly titel: Titel | undefined;
+    @OneToOne(
+        () => Abteilungsleiter,
+        (abteilungsleiter) => abteilungsleiter.abteilung,
+        {
+            cascade: ['insert', 'remove'],
+        },
+    )
+    readonly abteilungsleiter: Abteilungsleiter | undefined;
 
     // undefined wegen Updates
-    @OneToMany(() => Abbildung, (abbildung) => abbildung.buch, {
+    @OneToMany(() => Mitarbeiter, (mitarbeiter) => mitarbeiter.abteilung, {
         cascade: ['insert', 'remove'],
     })
-    readonly abbildungen: Abbildung[] | undefined;
+    readonly vieleMitarbeiter: Mitarbeiter[] | undefined;
 
     // https://typeorm.io/entities#special-columns
     // https://typeorm.io/entities#column-types-for-postgres
@@ -152,13 +156,13 @@ export class Buch {
         JSON.stringify({
             id: this.id,
             version: this.version,
-            isbn: this.isbn,
-            rating: this.rating,
+            bueroNummer: this.bueroNummer,
+            zufriedenheit: this.zufriedenheit,
             art: this.art,
-            preis: this.preis,
-            rabatt: this.rabatt,
-            lieferbar: this.lieferbar,
-            datum: this.datum,
+            budget: this.budget,
+            krankenstandsQuote: this.krankenstandsQuote,
+            verfügbar: this.verfügbar,
+            gründungsDatum: this.gründungsDatum,
             homepage: this.homepage,
             schlagwoerter: this.schlagwoerter,
             erzeugt: this.erzeugt,

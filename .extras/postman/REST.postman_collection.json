@@ -2207,11 +2207,39 @@
 									"    pm.expect(body).to.be.a('string').that.is.empty;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://localhost:3000/auth/login',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded',\r",
+									"    },\r",
+									"    body: 'username=admin&password=p',\r",
+									"}, (err, res) => pm.collectionVariables.set('TOKEN', res.json().access_token));"
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -2260,11 +2288,39 @@
 									"    pm.expect(message).to.be.a('string').that.includes('ISBN');\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://localhost:3000/auth/login',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded',\r",
+									"    },\r",
+									"    body: 'username=admin&password=p',\r",
+									"}, (err, res) => pm.collectionVariables.set('TOKEN', res.json().access_token));"
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -2315,11 +2371,39 @@
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://localhost:3000/auth/login',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded',\r",
+									"    },\r",
+									"    body: 'username=admin&password=p',\r",
+									"}, (err, res) => pm.collectionVariables.set('TOKEN', res.json().access_token));"
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -2354,16 +2438,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Statuscode 403', () => {\r",
-									"    pm.response.to.have.status(403);\r",
+									"pm.test('Statuscode 201', () => {\r",
+									"    pm.response.to.have.status(201);\r",
 									"});\r",
-									"pm.test('Content-Type application/json', () => {\r",
+									"pm.test('Location', () => {\r",
 									"    const { response } = pm;\r",
-									"    const contentType = response.headers.get('Content-Type');\r",
-									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"    const location = response.headers.get('Location');\r",
+									"    pm.expect(location).to.match(/\\/rest\\/[1-9]\\d*/u);\r",
+									"});\r",
+									"pm.test('Leerer Body', () => {\r",
+									"    const body = pm.response.text();\r",
+									"    pm.expect(body).to.be.a('string').that.is.empty;\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -2376,14 +2465,25 @@
 									"    header: {\r",
 									"        'Content-Type': 'application/x-www-form-urlencoded',\r",
 									"    },\r",
-									"    body: 'username=adriana.alpha&password=p',\r",
-									"}, (err, res) => pm.collectionVariables.set('TOKEN', res.json().token));"
+									"    body: 'username=user&password=p',\r",
+									"}, (err, res) => pm.collectionVariables.set('TOKEN', res.json().access_token));"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -2412,14 +2512,14 @@
 					"response": []
 				},
 				{
-					"name": "Neues Buch ohne Login",
+					"name": "Neues Buch ohne Token",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Statuscode 403', () => {\r",
-									"    pm.response.to.have.status(403);\r",
+									"pm.test('Statuscode 401', () => {\r",
+									"    pm.response.to.have.status(401);\r",
 									"});\r",
 									"pm.test('Content-Type application/json', () => {\r",
 									"    const { response } = pm;\r",
@@ -2427,7 +2527,8 @@
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -3008,54 +3109,7 @@
 		}
 	],
 	"auth": {
-		"type": "oauth2",
-		"oauth2": [
-			{
-				"key": "clientSecret",
-				"value": "{{client_secret}}",
-				"type": "string"
-			},
-			{
-				"key": "clientId",
-				"value": "{{client_id}}",
-				"type": "string"
-			},
-			{
-				"key": "state",
-				"value": "state_value",
-				"type": "string"
-			},
-			{
-				"key": "scope",
-				"value": "offline_access",
-				"type": "string"
-			},
-			{
-				"key": "accessTokenUrl",
-				"value": "{{keycloak_url}}/realms/{{realm}}/protocol/openid-connect/token",
-				"type": "string"
-			},
-			{
-				"key": "authUrl",
-				"value": "{{keycloak_url}}/realms/{{realm}}/protocol/openid-connect/auth",
-				"type": "string"
-			},
-			{
-				"key": "useBrowser",
-				"value": true,
-				"type": "boolean"
-			},
-			{
-				"key": "tokenName",
-				"value": "authToken",
-				"type": "string"
-			},
-			{
-				"key": "addTokenTo",
-				"value": "header",
-				"type": "string"
-			}
-		]
+		"type": "inherit"
 	},
 	"event": [
 		{
@@ -3093,6 +3147,10 @@
 			"value": "",
 			"type": "string",
 			"disabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": ""
 		}
 	]
 }

@@ -21,7 +21,7 @@
  */
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Buch } from './../entity/buch.entity.js';
+import { Buch } from '../entity/abteilung.entity.js';
 import { QueryBuilder } from './query-builder.js';
 import { type Suchkriterien } from './suchkriterien.js';
 import { getLogger } from '../../logger/logger.js';

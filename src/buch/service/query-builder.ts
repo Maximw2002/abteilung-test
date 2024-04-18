@@ -21,12 +21,12 @@
  */
 
 import { Abbildung } from '../entity/abbildung.entity.js';
-import { Buch } from '../entity/buch.entity.js';
+import { Buch } from '../entity/abteilung.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { type Suchkriterien } from './suchkriterien.js';
-import { Titel } from '../entity/titel.entity.js';
+import { Titel } from '../entity/abteilungsleiter.entity.js';
 import { getLogger } from '../../logger/logger.js';
 import { typeOrmModuleOptions } from '../../config/typeormOptions.js';
 

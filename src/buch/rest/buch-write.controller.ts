@@ -51,10 +51,10 @@ import {
 import { BuchDTO, BuchDtoOhneRef } from './buchDTO.entity.js';
 import { Request, Response } from 'express';
 import { type Abbildung } from '../entity/abbildung.entity.js';
-import { type Buch } from '../entity/buch.entity.js';
+import { type Buch } from '../entity/abteilung.entity.js';
 import { BuchWriteService } from '../service/buch-write.service.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-import { type Titel } from '../entity/titel.entity.js';
+import { type Titel } from '../entity/abteilungsleiter.entity.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';

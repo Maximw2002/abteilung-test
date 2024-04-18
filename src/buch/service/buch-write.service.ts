@@ -29,11 +29,11 @@ import {
     VersionOutdatedException,
 } from './exceptions.js';
 import { Abbildung } from '../entity/abbildung.entity.js';
-import { Buch } from '../entity/buch.entity.js';
+import { Buch } from '../entity/abteilung.entity.js';
 import { BuchReadService } from './buch-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MailService } from '../../mail/mail.service.js';
-import { Titel } from '../entity/titel.entity.js';
+import { Titel } from '../entity/abteilungsleiter.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren eines Buches mit `update`. */

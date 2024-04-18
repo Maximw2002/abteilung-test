@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { type Buch, type BuchArt } from '../../src/buch/entity/buch.entity.js';
+import { type Buch, type BuchArt } from '../../src/buch/entity/abteilung.entity.js';
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {

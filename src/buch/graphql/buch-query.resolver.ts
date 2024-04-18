@@ -16,7 +16,7 @@
  */
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { UseFilters, UseInterceptors } from '@nestjs/common';
-import { Buch } from '../entity/buch.entity.js';
+import { Buch } from '../entity/abteilung.entity.js';
 import { BuchReadService } from '../service/buch-read.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { Public } from 'nest-keycloak-connect';

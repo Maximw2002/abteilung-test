@@ -20,13 +20,13 @@ import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
 import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
 import { type Abbildung } from '../entity/abbildung.entity.js';
-import { type Buch } from '../entity/buch.entity.js';
+import { type Buch } from '../entity/abteilung.entity.js';
 import { BuchDTO } from '../rest/buchDTO.entity.js';
 import { BuchWriteService } from '../service/buch-write.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { type IdInput } from './buch-query.resolver.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-import { type Titel } from '../entity/titel.entity.js';
+import { type Titel } from '../entity/abteilungsleiter.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 // Authentifizierung und Autorisierung durch
