@@ -15,18 +15,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 // eslint-disable-next-line max-classes-per-file
+import { type Abteilung } from '../entity/abteilung.entity.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
-import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
-import { type Abbildung } from '../entity/abbildung.entity.js';
-import { type Buch } from '../entity/abteilung.entity.js';
-import { BuchDTO } from '../rest/buchDTO.entity.js';
-import { BuchWriteService } from '../service/buch-write.service.js';
+import { type Mitarbeiter } from '../entity/mitarbeiter.entity.js';
+import { AbteilungDTO } from '../rest/abteilungDTO.entity.js';
+import { AbteilungWriteService } from '../service/abteilung-write.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
-import { type IdInput } from './buch-query.resolver.js';
+import { type IdInput } from './abteilung-query.resolver.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-import { type Titel } from '../entity/abteilungsleiter.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 // Authentifizierung und Autorisierung durch
@@ -47,7 +46,7 @@ export interface UpdatePayload {
     readonly version: number;
 }
 
-export class BuchUpdateDTO extends BuchDTO {
+export class AbteilungUpdateDTO extends AbteilungDTO {
     @IsNumberString()
     readonly id!: string;
 
@@ -60,43 +59,43 @@ export class BuchUpdateDTO extends BuchDTO {
 @UseGuards(AuthGuard)
 @UseFilters(HttpExceptionFilter)
 @UseInterceptors(ResponseTimeInterceptor)
-export class BuchMutationResolver {
-    readonly #service: BuchWriteService;
+export class AbteilungMutationResolver {
+    readonly #service: AbteilungWriteService;
 
-    readonly #logger = getLogger(BuchMutationResolver.name);
+    readonly #logger = getLogger(AbteilungMutationResolver.name);
 
-    constructor(service: BuchWriteService) {
+    constructor(service: AbteilungWriteService) {
         this.#service = service;
     }
 
     @Mutation()
     @Roles({ roles: ['admin', 'user'] })
-    async create(@Args('input') buchDTO: BuchDTO) {
-        this.#logger.debug('create: buchDTO=%o', buchDTO);
+    async create(@Args('input') abteilungDTO: AbteilungDTO) {
+        this.#logger.debug('create: abteilungDTO=%o', abteilungDTO);
 
-        const buch = this.#buchDtoToBuch(buchDTO);
-        const id = await this.#service.create(buch);
+        const abteilung = this.#abteilungDtoToAbteilung(abteilungDTO);
+        const id = await this.#service.create(abteilung);
         // TODO BadUserInputError
-        this.#logger.debug('createBuch: id=%d', id);
+        this.#logger.debug('createAbteilung: id=%d', id);
         const payload: CreatePayload = { id };
         return payload;
     }
 
     @Mutation()
     @Roles({ roles: ['admin', 'user'] })
-    async update(@Args('input') buchDTO: BuchUpdateDTO) {
-        this.#logger.debug('update: buch=%o', buchDTO);
+    async update(@Args('input') abteilungDTO: AbteilungUpdateDTO) {
+        this.#logger.debug('update: abteilung=%o', abteilungDTO);
 
-        const buch = this.#buchUpdateDtoToBuch(buchDTO);
-        const versionStr = `"${buchDTO.version.toString()}"`;
+        const abteilung = this.#abteilungUpdateDtoToAbteilung(abteilungDTO);
+        const versionStr = `"${abteilungDTO.version.toString()}"`;
 
         const versionResult = await this.#service.update({
-            id: Number.parseInt(buchDTO.id, 10),
-            buch,
+            id: Number.parseInt(abteilungDTO.id, 10),
+            abteilung,
             version: versionStr,
         });
         // TODO BadUserInputError
-        this.#logger.debug('updateBuch: versionResult=%d', versionResult);
+        this.#logger.debug('updateAbteilung: versionResult=%d', versionResult);
         const payload: UpdatePayload = { version: versionResult };
         return payload;
     }
@@ -107,7 +106,7 @@ export class BuchMutationResolver {
         const idStr = id.id;
         this.#logger.debug('delete: id=%s', idStr);
         const deletePerformed = await this.#service.delete(idStr);
-        this.#logger.debug('deleteBuch: deletePerformed=%s', deletePerformed);
+        this.#logger.debug('deleteAbteilung: deletePerformed=%s', deletePerformed);
         return deletePerformed;
     }
 
