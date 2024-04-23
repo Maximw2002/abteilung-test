@@ -25,17 +25,17 @@ import { IsOptional, Matches, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 /**
- * Entity-Klasse für Titel ohne TypeORM.
+ * Entity-Klasse für Abteilungsleiter ohne TypeORM.
  */
-export class TitelDTO {
+export class AbteilungsleiterDTO {
     @Matches('^\\w.*')
     @MaxLength(40)
-    @ApiProperty({ example: 'Der Titel', type: String })
-    readonly titel!: string;
+    @ApiProperty({ example: 'Der Abteilungsleiter', type: String })
+    readonly abteilungsleiter!: string;
 
     @IsOptional()
     @MaxLength(40)
-    @ApiProperty({ example: 'Der Untertitel', type: String })
-    readonly untertitel: string | undefined;
+    @ApiProperty({ example: 'Der Vorname', type: String })
+    readonly vorname: string | undefined;
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers */

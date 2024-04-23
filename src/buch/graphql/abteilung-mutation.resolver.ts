@@ -18,13 +18,14 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
+import { UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
 import { type Abteilung } from '../entity/abteilung.entity.js';
-import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
-import { type Mitarbeiter } from '../entity/mitarbeiter.entity.js';
 import { AbteilungDTO } from '../rest/abteilungDTO.entity.js';
 import { AbteilungWriteService } from '../service/abteilung-write.service.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { type IdInput } from './abteilung-query.resolver.js';
+import { type Mitarbeiter } from '../entity/mitarbeiter.entity.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { getLogger } from '../../logger/logger.js';
 
@@ -121,7 +122,8 @@ export class AbteilungMutationResolver {
             vorname: abteilungsleiterDTO.vorname,
             abteilung: undefined,
         };
-        const vieleMitarbeiter = abteilungDTO.vieleMitarbeiter?.map((mitarbeiterDTO) => {
+        const vieleMitarbeiter = abteilungDTO.vieleMitarbeiter?.map(
+            (mitarbeiterDTO) => {
                 const mitarbeiter: Mitarbeiter = {
                     id: undefined,
                     name: mitarbeiterDTO.name,
@@ -166,7 +168,7 @@ export class AbteilungMutationResolver {
             budget: abteilungDTO.budget,
             krankenstandsQuote: abteilungDTO.krankenstandsQuote,
             verfügbar: abteilungDTO.verfügbar,
-            gruendungsdatum: abteilungDTO.gruendungsdatum,
+            gruendungsDatum: abteilungDTO.gruendungsDatum,
             homepage: abteilungDTO.homepage,
             schlagwoerter: abteilungDTO.schlagwoerter,
             abteilungsleiter: undefined,
@@ -176,10 +178,10 @@ export class AbteilungMutationResolver {
         };
     }
 
-    // #errorMsgCreateBuch(err: CreateError) {
+    // #errorMsgCreateAbteilung(err: CreateError) {
     //     switch (err.type) {
-    //         case 'IsbnExists': {
-    //             return `Die ISBN ${err.isbn} existiert bereits`;
+    //         case 'BueroNummerExists': {
+    //             return `Die Büronummer ${err.bueroNummer} existiert bereits`;
     //         }
     //         default: {
     //             return 'Unbekannter Fehler';
@@ -187,10 +189,10 @@ export class AbteilungMutationResolver {
     //     }
     // }
 
-    // #errorMsgUpdateBuch(err: UpdateError) {
+    // #errorMsgUpdateAbteilung(err: UpdateError) {
     //     switch (err.type) {
-    //         case 'BuchNotExists': {
-    //             return `Es gibt kein Buch mit der ID ${err.id}`;
+    //         case 'AbteilungNotExists': {
+    //             return `Es gibt keine Abteilung mit der ID ${err.id}`;
     //         }
     //         case 'VersionInvalid': {
     //             return `"${err.version}" ist keine gueltige Versionsnummer`;
