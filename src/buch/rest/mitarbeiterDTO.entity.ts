@@ -25,15 +25,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { MaxLength } from 'class-validator';
 
 /**
- * Entity-Klasse für Abbildung ohne TypeORM.
+ * Entity-Klasse für Mitarbeiter ohne TypeORM.
  */
-export class AbbildungDTO {
+export class MitarbeiterDTO {
     @MaxLength(32)
-    @ApiProperty({ example: 'Die Beschriftung', type: String })
-    readonly beschriftung!: string;
+    @ApiProperty({ example: 'Der Name', type: String })
+    readonly name!: string;
 
     @MaxLength(16)
-    @ApiProperty({ example: 'image/png', type: String })
-    readonly contentType!: string;
+    @ApiProperty({ example: 'Vertrieb', type: String })
+    readonly jobType!: string;
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers */

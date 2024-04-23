@@ -16,12 +16,12 @@
  */
 
 /**
- * Das Modul besteht aus der Klasse {@linkcode BuchReadService}.
+ * Das Modul besteht aus der Klasse {@linkcode AbteilungReadService}.
  * @packageDocumentation
  */
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Buch } from '../entity/abteilung.entity.js';
+import { Abteilung } from '../entity/abteilung.entity.js';
 import { QueryBuilder } from './query-builder.js';
 import { type Suchkriterien } from './suchkriterien.js';
 import { getLogger } from '../../logger/logger.js';
@@ -30,29 +30,29 @@ import { getLogger } from '../../logger/logger.js';
  * Typdefinition für `findById`
  */
 export interface FindByIdParams {
-    /** ID des gesuchten Buchs */
+    /** ID der gesuchten Abteilung */
     readonly id: number;
-    /** Sollen die Abbildungen mitgeladen werden? */
-    readonly mitAbbildungen?: boolean;
+    /** Sollen die Mitarbeiter mitgeladen werden? */
+    readonly mitMitarbeitern?: boolean;
 }
 
 /**
- * Die Klasse `BuchReadService` implementiert das Lesen für Bücher und greift
+ * Die Klasse `AbteilungReadService` implementiert das Lesen für Abteilungen und greift
  * mit _TypeORM_ auf eine relationale DB zu.
  */
 @Injectable()
-export class BuchReadService {
+export class AbteilungReadService {
     static readonly ID_PATTERN = /^[1-9]\d{0,10}$/u;
 
-    readonly #buchProps: string[];
+    readonly #abteilungProps: string[];
 
     readonly #queryBuilder: QueryBuilder;
 
-    readonly #logger = getLogger(BuchReadService.name);
+    readonly #logger = getLogger(AbteilungReadService.name);
 
     constructor(queryBuilder: QueryBuilder) {
-        const buchDummy = new Buch();
-        this.#buchProps = Object.getOwnPropertyNames(buchDummy);
+        const abteilungDummy = new Abteilung();
+        this.#abteilungProps = Object.getOwnPropertyNames(abteilungDummy);
         this.#queryBuilder = queryBuilder;
     }
 
@@ -69,50 +69,52 @@ export class BuchReadService {
     //              Im Promise-Objekt ist dann die Fehlerursache enthalten.
 
     /**
-     * Ein Buch asynchron anhand seiner ID suchen
-     * @param id ID des gesuchten Buches
-     * @returns Das gefundene Buch vom Typ [Buch](buch_entity_buch_entity.Buch.html)
+     * Eine Abteilung asynchron anhand ihrer ID suchen
+     * @param id ID der gesuchten Abteilung
+     * @returns Die gefundene Abteilung vom Typ [Abteilung](abteilung_entity_abteilung_entity.Abteilung.html)
      *          in einem Promise aus ES2015.
-     * @throws NotFoundException falls kein Buch mit der ID existiert
+     * @throws NotFoundException falls keine Abteilung mit der ID existiert
      */
     // https://2ality.com/2015/01/es6-destructuring.html#simulating-named-parameters-in-javascript
-    async findById({ id, mitAbbildungen = false }: FindByIdParams) {
+    async findById({ id, mitMitarbeitern = false }: FindByIdParams) {
         this.#logger.debug('findById: id=%d', id);
 
         // https://typeorm.io/working-with-repository
         // Das Resultat ist undefined, falls kein Datensatz gefunden
         // Lesen: Keine Transaktion erforderlich
-        const buch = await this.#queryBuilder
-            .buildId({ id, mitAbbildungen })
+        const abteilung = await this.#queryBuilder
+            .buildId({ id, mitMitarbeitern })
             .getOne();
-        if (buch === null) {
-            throw new NotFoundException(`Es gibt kein Buch mit der ID ${id}.`);
+        if (abteilung === null) {
+            throw new NotFoundException(
+                `Es gibt keine Abteilung mit der ID ${id}.`,
+            );
         }
-        if (buch.schlagwoerter === null) {
-            buch.schlagwoerter = [];
+        if (abteilung.schlagwoerter === null) {
+            abteilung.schlagwoerter = [];
         }
 
         if (this.#logger.isLevelEnabled('debug')) {
             this.#logger.debug(
-                'findById: buch=%s, titel=%o',
-                buch.toString(),
-                buch.titel,
+                'findById: abteilung=%s, abteilungsleiter=%o',
+                abteilung.toString(),
+                abteilung.abteilungsleiter,
             );
-            if (mitAbbildungen) {
+            if (mitMitarbeitern) {
                 this.#logger.debug(
-                    'findById: abbildungen=%o',
-                    buch.abbildungen,
+                    'findById: mitarbeiter=%o',
+                    abteilung.vieleMitarbeiter,
                 );
             }
         }
-        return buch;
+        return abteilung;
     }
 
     /**
-     * Bücher asynchron suchen.
+     * Abteilungen asynchron suchen.
      * @param suchkriterien JSON-Objekt mit Suchkriterien
-     * @returns Ein JSON-Array mit den gefundenen Büchern.
-     * @throws NotFoundException falls keine Bücher gefunden wurden.
+     * @returns Ein JSON-Array mit den gefundenen Abteilungen.
+     * @throws NotFoundException falls keine Abteilungen gefunden wurden.
      */
     async find(suchkriterien?: Suchkriterien) {
         this.#logger.debug('find: suchkriterien=%o', suchkriterien);
@@ -134,28 +136,30 @@ export class BuchReadService {
         // QueryBuilder https://typeorm.io/select-query-builder
         // Das Resultat ist eine leere Liste, falls nichts gefunden
         // Lesen: Keine Transaktion erforderlich
-        const buecher = await this.#queryBuilder.build(suchkriterien).getMany();
-        if (buecher.length === 0) {
-            this.#logger.debug('find: Keine Buecher gefunden');
+        const abteilungen = await this.#queryBuilder
+            .build(suchkriterien)
+            .getMany();
+        if (abteilungen.length === 0) {
+            this.#logger.debug('find: Keine Abteilungen gefunden');
             throw new NotFoundException(
-                `Keine Buecher gefunden: ${JSON.stringify(suchkriterien)}`,
+                `Keine Abteilungen gefunden: ${JSON.stringify(suchkriterien)}`,
             );
         }
-        buecher.forEach((buch) => {
-            if (buch.schlagwoerter === null) {
-                buch.schlagwoerter = [];
+        abteilungen.forEach((abteilung) => {
+            if (abteilung.schlagwoerter === null) {
+                abteilung.schlagwoerter = [];
             }
         });
-        this.#logger.debug('find: buecher=%o', buecher);
-        return buecher;
+        this.#logger.debug('find: abteilungen=%o', abteilungen);
+        return abteilungen;
     }
 
     #checkKeys(keys: string[]) {
-        // Ist jedes Suchkriterium auch eine Property von Buch oder "schlagwoerter"?
+        // Ist jedes Suchkriterium auch eine Property von Abteilung oder "schlagwoerter"?
         let validKeys = true;
         keys.forEach((key) => {
             if (
-                !this.#buchProps.includes(key) &&
+                !this.#abteilungProps.includes(key) &&
                 key !== 'javascript' &&
                 key !== 'typescript'
             ) {

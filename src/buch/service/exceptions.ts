@@ -20,17 +20,17 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 /**
  * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei der Verwaltung
- * von Büchern, z.B. beim DB-Zugriff.
+ * von Abteilungen, z.B. beim DB-Zugriff.
  * @packageDocumentation
  */
 
 /**
- * Exception-Klasse für eine bereits existierende ISBN-Nummer.
+ * Exception-Klasse für eine bereits existierende Büronummer.
  */
-export class IsbnExistsException extends HttpException {
-    constructor(readonly isbn: string) {
+export class BueroNummerExistsException extends HttpException {
+    constructor(readonly bueroNummer: string) {
         super(
-            `Die ISBN-Nummer ${isbn} existiert bereits.`,
+            `Die Büronummer ${bueroNummer} existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
     }

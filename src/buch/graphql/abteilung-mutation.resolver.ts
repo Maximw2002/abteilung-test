@@ -15,11 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 // eslint-disable-next-line max-classes-per-file
-import { type Abteilung } from '../entity/abteilung.entity.js';
-import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthGuard, Roles } from 'nest-keycloak-connect';
 import { IsInt, IsNumberString, Min } from 'class-validator';
+import { type Abteilung } from '../entity/abteilung.entity.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { type Mitarbeiter } from '../entity/mitarbeiter.entity.js';
 import { AbteilungDTO } from '../rest/abteilungDTO.entity.js';
 import { AbteilungWriteService } from '../service/abteilung-write.service.js';
@@ -106,65 +106,71 @@ export class AbteilungMutationResolver {
         const idStr = id.id;
         this.#logger.debug('delete: id=%s', idStr);
         const deletePerformed = await this.#service.delete(idStr);
-        this.#logger.debug('deleteAbteilung: deletePerformed=%s', deletePerformed);
+        this.#logger.debug(
+            'deleteAbteilung: deletePerformed=%s',
+            deletePerformed,
+        );
         return deletePerformed;
     }
 
-    #buchDtoToBuch(buchDTO: BuchDTO): Buch {
-        const titelDTO = buchDTO.titel;
-        const titel: Titel = {
+    #abteilungDtoToAbteilung(abteilungDTO: AbteilungDTO): Abteilung {
+        const abteilungsleiterDTO = abteilungDTO.abteilungsleiter;
+        const abteilungsleiter: Abteilungsleiter = {
             id: undefined,
-            titel: titelDTO.titel,
-            untertitel: titelDTO.untertitel,
-            buch: undefined,
+            abteilungsleiter: abteilungsleiterDTO.abteilungsleiter,
+            vorname: abteilungsleiterDTO.vorname,
+            abteilung: undefined,
         };
-        const abbildungen = buchDTO.abbildungen?.map((abbildungDTO) => {
-            const abbildung: Abbildung = {
-                id: undefined,
-                beschriftung: abbildungDTO.beschriftung,
-                contentType: abbildungDTO.contentType,
-                buch: undefined,
-            };
-            return abbildung;
-        });
-        const buch: Buch = {
+        const vieleMitarbeiter = abteilungDTO.vieleMitarbeiter?.map((mitarbeiterDTO) => {
+                const mitarbeiter: Mitarbeiter = {
+                    id: undefined,
+                    name: mitarbeiterDTO.name,
+                    jobType: mitarbeiterDTO.jobType,
+                    abteilung: undefined,
+                };
+                return mitarbeiter;
+            },
+        );
+        const abteilung: Abteilung = {
             id: undefined,
             version: undefined,
-            isbn: buchDTO.isbn,
-            rating: buchDTO.rating,
-            art: buchDTO.art,
-            preis: buchDTO.preis,
-            rabatt: buchDTO.rabatt,
-            lieferbar: buchDTO.lieferbar,
-            datum: buchDTO.datum,
-            homepage: buchDTO.homepage,
-            schlagwoerter: buchDTO.schlagwoerter,
-            titel,
-            abbildungen,
+            bueroNummer: abteilungDTO.bueroNummer,
+            zufriedenheit: abteilungDTO.zufriedenheit,
+            art: abteilungDTO.art,
+            budget: abteilungDTO.budget,
+            krankenstandsQuote: abteilungDTO.krankenstandsQuote,
+            verfügbar: abteilungDTO.verfügbar,
+            gruendungsDatum: abteilungDTO.gruendungsDatum,
+            homepage: abteilungDTO.homepage,
+            schlagwoerter: abteilungDTO.schlagwoerter,
+            abteilungsleiter,
+            vieleMitarbeiter,
             erzeugt: new Date(),
             aktualisiert: new Date(),
         };
 
         // Rueckwaertsverweis
-        buch.titel!.buch = buch;
-        return buch;
+        abteilung.abteilungsleiter!.abteilung = abteilung;
+        return abteilung;
     }
 
-    #buchUpdateDtoToBuch(buchDTO: BuchUpdateDTO): Buch {
+    #abteilungUpdateDtoToAbteilung(
+        abteilungDTO: AbteilungUpdateDTO,
+    ): Abteilung {
         return {
             id: undefined,
             version: undefined,
-            isbn: buchDTO.isbn,
-            rating: buchDTO.rating,
-            art: buchDTO.art,
-            preis: buchDTO.preis,
-            rabatt: buchDTO.rabatt,
-            lieferbar: buchDTO.lieferbar,
-            datum: buchDTO.datum,
-            homepage: buchDTO.homepage,
-            schlagwoerter: buchDTO.schlagwoerter,
-            titel: undefined,
-            abbildungen: undefined,
+            bueroNummer: abteilungDTO.bueroNummer,
+            zufriedenheit: abteilungDTO.zufriedenheit,
+            art: abteilungDTO.art,
+            budget: abteilungDTO.budget,
+            krankenstandsQuote: abteilungDTO.krankenstandsQuote,
+            verfügbar: abteilungDTO.verfügbar,
+            gruendungsdatum: abteilungDTO.gruendungsdatum,
+            homepage: abteilungDTO.homepage,
+            schlagwoerter: abteilungDTO.schlagwoerter,
+            abteilungsleiter: undefined,
+            vieleMitarbeiter: undefined,
             erzeugt: undefined,
             aktualisiert: new Date(),
         };

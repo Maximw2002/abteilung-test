@@ -23,6 +23,10 @@
 
 // eslint-disable-next-line max-classes-per-file
 import {
+    type Abteilung,
+    type AbteilungsArt,
+} from '../entity/abteilung.entity.js';
+import {
     ApiHeader,
     ApiNotFoundResponse,
     ApiOkResponse,
@@ -32,7 +36,6 @@ import {
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { type Buch, type BuchArt } from '../entity/abteilung.entity.js';
 import {
     Controller,
     Get,
@@ -46,11 +49,11 @@ import {
     UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { BuchReadService } from '../service/buch-read.service.js';
+import { AbteilungReadService } from '../service/abteilung-read.service.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { Public } from 'nest-keycloak-connect';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Suchkriterien } from '../service/suchkriterien.js';
-import { type Titel } from '../entity/abteilungsleiter.entity.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
@@ -75,58 +78,63 @@ export interface Links {
     readonly remove?: Link;
 }
 
-/** Typedefinition für ein Titel-Objekt ohne Rückwärtsverweis zum Buch */
-export type TitelModel = Omit<Titel, 'buch' | 'id'>;
+/** Typedefinition für ein Abteilungsleiter-Objekt ohne Rückwärtsverweis zur Abteilung */
+export type AbteilungsleiterModel = Omit<Abteilungsleiter, 'abteilung' | 'id'>;
 
 /** Buch-Objekt mit HATEOAS-Links */
-export type BuchModel = Omit<
-    Buch,
-    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'id' | 'titel' | 'version'
+export type AbteilungModel = Omit<
+    Abteilung,
+    | 'vieleMitarbeiter'
+    | 'aktualisiert'
+    | 'erzeugt'
+    | 'id'
+    | 'abteilungsleiter'
+    | 'version'
 > & {
-    titel: TitelModel;
+    titel: AbteilungsleiterModel;
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _links: Links;
 };
 
-/** Buch-Objekte mit HATEOAS-Links in einem JSON-Array. */
-export interface BuecherModel {
+/** Abteilung-Objekte mit HATEOAS-Links in einem JSON-Array. */
+export interface AbteilungenModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        buecher: BuchModel[];
+        buecher: AbteilungModel[];
     };
 }
 
 /**
- * Klasse für `BuchGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
- * formulieren. `BuchController` hat dieselben Properties wie die Basisklasse
- * `Buch` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
+ * Klasse für `AbteilungGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
+ * formulieren. `AbteilungController` hat dieselben Properties wie die Basisklasse
+ * `Abteilung` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
  * so überschrieben sind, dass sie auch nicht gesetzt bzw. undefined sein
  * dürfen, damit die Queries flexibel formuliert werden können. Deshalb ist auch
  * immer der zusätzliche Typ undefined erforderlich.
  * Außerdem muss noch `string` statt `Date` verwendet werden, weil es in OpenAPI
  * den Typ Date nicht gibt.
  */
-export class BuchQuery implements Suchkriterien {
+export class AbteilungQuery implements Suchkriterien {
     @ApiProperty({ required: false })
-    declare readonly isbn: string;
+    declare readonly bueroNummer: string;
 
     @ApiProperty({ required: false })
-    declare readonly rating: number;
+    declare readonly zufriedenheit: number;
 
     @ApiProperty({ required: false })
-    declare readonly art: BuchArt;
+    declare readonly art: AbteilungsArt;
 
     @ApiProperty({ required: false })
-    declare readonly preis: number;
+    declare readonly budget: number;
 
     @ApiProperty({ required: false })
-    declare readonly rabatt: number;
+    declare readonly krankenstandsQuote: number;
 
     @ApiProperty({ required: false })
-    declare readonly lieferbar: boolean;
+    declare readonly verfügabr: boolean;
 
     @ApiProperty({ required: false })
-    declare readonly datum: string;
+    declare readonly gruendungsDatum: string;
 
     @ApiProperty({ required: false })
     declare readonly homepage: string;
@@ -138,28 +146,28 @@ export class BuchQuery implements Suchkriterien {
     declare readonly typescript: string;
 
     @ApiProperty({ required: false })
-    declare readonly titel: string;
+    declare readonly abteilungsleiter: string;
 }
 
 const APPLICATION_HAL_JSON = 'application/hal+json';
 
 /**
- * Die Controller-Klasse für die Verwaltung von Bücher.
+ * Die Controller-Klasse für die Verwaltung von Abteilungen.
  */
 // Decorator in TypeScript, zur Standardisierung in ES vorgeschlagen (stage 3)
 // https://devblogs.microsoft.com/typescript/announcing-typescript-5-0-beta/#decorators
 // https://github.com/tc39/proposal-decorators
 @Controller(paths.rest)
 @UseInterceptors(ResponseTimeInterceptor)
-@ApiTags('Buch REST-API')
+@ApiTags('Abteilung REST-API')
 // @ApiBearerAuth()
 // Klassen ab ES 2015
-export class BuchGetController {
+export class AbteilungGetController {
     // readonly in TypeScript, vgl. C#
     // private ab ES 2019
-    readonly #service: BuchReadService;
+    readonly #service: AbteilungReadService;
 
-    readonly #logger = getLogger(BuchGetController.name);
+    readonly #logger = getLogger(AbteilungGetController.name);
 
     // Dependency Injection (DI) bzw. Constructor Injection
     // constructor(private readonly service: BuchReadService) {}

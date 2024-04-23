@@ -110,7 +110,7 @@ export class Abteilung {
     @Column('date')
     @ApiProperty({ example: '2021-01-31' })
     // TypeORM unterstuetzt *NICHT* das Temporal-API (ES2022)
-    readonly gründungsDatum: Date | string | undefined;
+    readonly gruendungsDatum: Date | string | undefined;
 
     @Column('date')
     @ApiProperty({ example: 'https://test.de/', type: String })
@@ -162,7 +162,7 @@ export class Abteilung {
             budget: this.budget,
             krankenstandsQuote: this.krankenstandsQuote,
             verfügbar: this.verfügbar,
-            gründungsDatum: this.gründungsDatum,
+            gruendungsDatum: this.gruendungsDatum,
             homepage: this.homepage,
             schlagwoerter: this.schlagwoerter,
             erzeugt: this.erzeugt,

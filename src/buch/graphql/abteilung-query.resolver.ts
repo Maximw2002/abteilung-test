@@ -70,7 +70,6 @@ export class AbteilungQueryResolver {
         return abteilungen;
     }
 
-    //komma entfernen eventuell
     @ResolveField('krankenstandsquote')
     krankenstandsquote(
         @Parent() abteilung: Abteilung,
