@@ -62,72 +62,72 @@ type Abteilung {
   art: Art
   budget: Float!
   verfuegbar: Boolean
-  datum: String
+  gruendungsDatum: String
   homepage: String
   schlagwoerter: [String]
   # 1:1-Beziehung
-  titel: Titel!
+  abteilungsleiter: Abteilungsleiter!
   # field mit @ResolveField
-  rabatt(short: Boolean): String!
+  krankenstandsQuote(short: Boolean): String!
 }
 
-"Enum-Typ für die Art eines Buches"
+"Enum-Typ für die Art einer Abteilung"
 enum Art {
-  DRUCKAUSGABE
-  KINDLE
+  ENTWICKLUNG
+  VERTRIEB
 }
 
-"Suchkriterien für Bücher"
+"Suchkriterien für Abteilungen"
 input SuchkriterienInput {
-  titel: String
-  isbn: String
-  rating: Int
+  abteilungsleiter: String
+  bueroNummer: String
+  zufriedenheit: Int
   art: Art
-  lieferbar: Boolean
+  verfuegbar: Boolean
 }
 
-"Daten zum Titel eines neuen Buches"
-input TitelInput {
-  titel: String!
-  untertitel: String
+"Daten zum Abteilungsleiter einer neuen Abteilung"
+input AbteilungsleiterInput {
+  abteilungsleiter: String!
+  vorname: String
 }
 
-"Daten zu den Abbildungen eines Buches"
-input AbbildungInput {
-  beschriftung: String!
-  contentType: String!
+"Daten zu den Mitarbeitern einer Abteilung"
+input MitarbeiterInput {
+  name: String!
+  jobType: String!
 }
 
-"Daten für ein neues Buch"
-input BuchInput {
-  isbn: String
-  rating: Int
+"Daten für eine neue Abteilung"
+input AbteilungInput {
+  bueroNummer: String
+  zufriedenheit: Int
   art: Art
-  preis: Float
-  rabatt: Float
-  lieferbar: Boolean
-  datum: String
+  budget: Float
+  krankenstandsQuote: Float
+  verfuegbar: Boolean
+  gruendungsDatum: String
   homepage: String
   schlagwoerter: [String]
-  titel: TitelInput!
-  abbildungen: [AbbildungInput!]
+  abteilungsleiter: AbteilungsleiterInput!
+  vieleMitarbeiter: [MitarbeiterInput!]
 }
 
 type CreatePayload {
   id: Int
 }
 
-"Daten für ein zu änderndes Buch"
-input BuchUpdateInput {
+"Daten für eine zu ändernde Abteilung"
+input AbteilungUpdateInput {
   id: ID
   version: Int
-  isbn: String
-  rating: Int
+  bueroNummer: String
+  zufriedenheit: Int
   art: Art
-  preis: Float
-  rabatt: Float
-  lieferbar: Boolean
-  datum: String
+  budget: Float
+  krankenstandsQuote: Float
+  verfuegbar: Boolean
+  gruendungsDatum: String
   homepage: String
   schlagwoerter: [String]
 }
