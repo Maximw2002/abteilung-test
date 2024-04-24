@@ -77,7 +77,7 @@ export class AbteilungDtoOhneRef {
 
     @IsBoolean()
     @ApiProperty({ example: true, type: Boolean })
-    readonly verfügbar: boolean | undefined;
+    readonly verfuegbar: boolean | undefined;
 
     @IsISO8601({ strict: true })
     @IsOptional()

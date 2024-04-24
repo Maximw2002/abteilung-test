@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS abteilung (
     budget        decimal(8,2) NOT NULL,
     krankenstandsQuote decimal(4,3) NOT NULL,
                   -- https://www.postgresql.org/docs/current/datatype-boolean.html
-    verfügbar     boolean NOT NULL DEFAULT FALSE,
+    verfuegbar     boolean NOT NULL DEFAULT FALSE,
                   -- https://www.postgresql.org/docs/current/datatype-datetime.html
     gruendungsDatum  date,
     homepage      varchar(40),

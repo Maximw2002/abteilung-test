@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS abteilung (
     art                 ENUM('ENTWICKLUNG', 'VERTRIEB'),
     budget              DECIMAL(8,2) NOT NULL,
     krankenstandsQuote  DECIMAL(4,3) NOT NULL,
-    verfügbar           BOOLEAN NOT NULL DEFAULT FALSE,
+    verfuegbar           BOOLEAN NOT NULL DEFAULT FALSE,
     gruendungsDatum     DATE,
     homepage            VARCHAR(40),
     schlagwoerter       VARCHAR(64),

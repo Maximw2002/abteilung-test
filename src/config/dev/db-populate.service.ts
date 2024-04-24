@@ -57,8 +57,8 @@ export class DbPopulateService implements OnApplicationBootstrap {
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/using-oracle-external-tables-examples.html
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-sql-loader-commands.html
     readonly #oracleInsertAbteilung = `
-        INSERT INTO abteilung(id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfügbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert)
-        SELECT id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfügbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert
+        INSERT INTO abteilung(id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert)
+        SELECT id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert
         FROM   EXTERNAL (
             (id                NUMBER(10,0),
             version            NUMBER(3,0),
@@ -67,7 +67,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
             art                VARCHAR2(12),
             budget             NUMBER(8,2),
             krankenstandsQuote NUMBER(4,3),
-            verfügbar          NUMBER(1,0),
+            verfuegbar          NUMBER(1,0),
             gruendungsDatum    DATE,
             homepage           VARCHAR2(40),
             schlagwoerter      VARCHAR2(64),
@@ -79,7 +79,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';'
-                (id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfügbar,
+                (id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,
                  gruendungsDatum DATE 'YYYY-MM-DD',
                  homepage,schlagwoerter,
                  erzeugt CHAR(19) date_format TIMESTAMP mask 'YYYY-MM-DD HH24:MI:SS',

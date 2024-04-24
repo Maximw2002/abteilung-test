@@ -31,7 +31,7 @@ export interface Suchkriterien {
     readonly art?: AbteilungsArt;
     readonly budget?: number;
     readonly krankenstandsQuote?: number;
-    readonly verfügbar?: boolean;
+    readonly verfuegbar?: boolean;
     readonly gruendungsDatum?: string;
     readonly homepage?: string;
     readonly javascript?: string;

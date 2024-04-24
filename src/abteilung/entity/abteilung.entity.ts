@@ -105,7 +105,7 @@ export class Abteilung {
 
     @Column('decimal') // TypeORM unterstuetzt bei Oracle *NICHT* den Typ boolean
     @ApiProperty({ example: true, type: Boolean })
-    readonly verfügbar: boolean | undefined;
+    readonly verfuegbar: boolean | undefined;
 
     @Column('date')
     @ApiProperty({ example: '2021-01-31' })
@@ -161,7 +161,7 @@ export class Abteilung {
             art: this.art,
             budget: this.budget,
             krankenstandsQuote: this.krankenstandsQuote,
-            verfügbar: this.verfügbar,
+            verfuegbar: this.verfuegbar,
             gruendungsDatum: this.gruendungsDatum,
             homepage: this.homepage,
             schlagwoerter: this.schlagwoerter,

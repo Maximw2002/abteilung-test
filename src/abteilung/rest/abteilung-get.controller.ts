@@ -336,7 +336,7 @@ export class AbteilungGetController {
             art: abteilung.art,
             budget: abteilung.budget,
             krankenstandsQuote: abteilung.krankenstandsQuote,
-            verfügbar: abteilung.verfügbar,
+            verfuegbar: abteilung.verfuegbar,
             gruendungsDatum: abteilung.gruendungsDatum,
             homepage: abteilung.homepage,
             schlagwoerter: abteilung.schlagwoerter,
