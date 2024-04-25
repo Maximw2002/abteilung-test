@@ -33,6 +33,7 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { dbType } from '../db.js';
 import { getLogger } from '../../logger/logger.js';
 import { readFileSync } from 'node:fs';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 /**
@@ -43,7 +44,7 @@ import { resolve } from 'node:path';
  */
 @Injectable()
 export class DbPopulateService implements OnApplicationBootstrap {
-    readonly #tabellen = ['buch', 'titel', 'abbildung'];
+    readonly #tabellen = ['abteilung', 'abteilungsleiter', 'mitarbeiter'];
 
     readonly #datasource: DataSource;
 
@@ -55,76 +56,76 @@ export class DbPopulateService implements OnApplicationBootstrap {
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/admin/managing-tables.html#GUID-2A801016-0399-4925-AD1B-A02683E81B59
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/using-oracle-external-tables-examples.html
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-sql-loader-commands.html
-    readonly #oracleInsertBuch = `
-        INSERT INTO buch(id,version,isbn,rating,art,preis,rabatt,lieferbar,datum,homepage,schlagwoerter,erzeugt,aktualisiert)
-        SELECT id,version,isbn,rating,art,preis,rabatt,lieferbar,datum,homepage,schlagwoerter,erzeugt,aktualisiert
+    readonly #oracleInsertAbteilung = `
+        INSERT INTO abteilung(id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert)
+        SELECT id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert
         FROM   EXTERNAL (
-            (id            NUMBER(10,0),
-            version       NUMBER(3,0),
-            isbn          VARCHAR2(17),
-            rating        NUMBER(1,0),
-            art           VARCHAR2(12),
-            preis         NUMBER(8,2),
-            rabatt        NUMBER(4,3),
-            lieferbar     NUMBER(1,0),
-            datum         DATE,
-            homepage      VARCHAR2(40),
-            schlagwoerter VARCHAR2(64),
-            erzeugt       TIMESTAMP,
-            aktualisiert  TIMESTAMP)
+            (id                NUMBER(10,0),
+            version            NUMBER(3,0),
+            bueroNummer        VARCHAR2(17),
+            zufriedenheit      NUMBER(1,0),
+            art                VARCHAR2(12),
+            budget             NUMBER(8,2),
+            krankenstandsQuote NUMBER(4,3),
+            verfuegbar          NUMBER(1,0),
+            gruendungsDatum    DATE,
+            homepage           VARCHAR2(40),
+            schlagwoerter      VARCHAR2(64),
+            erzeugt            TIMESTAMP,
+            aktualisiert       TIMESTAMP)
             TYPE ORACLE_LOADER
             DEFAULT DIRECTORY csv_dir
             ACCESS PARAMETERS (
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';'
-                (id,version,isbn,rating,art,preis,rabatt,lieferbar,
-                 datum DATE 'YYYY-MM-DD',
+                (id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,
+                 gruendungsDatum DATE 'YYYY-MM-DD',
                  homepage,schlagwoerter,
                  erzeugt CHAR(19) date_format TIMESTAMP mask 'YYYY-MM-DD HH24:MI:SS',
                  aktualisiert CHAR(19) date_format TIMESTAMP mask 'YYYY-MM-DD HH24:MI:SS')
             )
-            LOCATION ('buch.csv')
+            LOCATION ('abteilung.csv')
             REJECT LIMIT UNLIMITED
-        ) buch_external
+        ) abteilung_external
     `;
 
-    readonly #oracleInsertTitel = `
-        INSERT INTO titel(id,titel,untertitel,buch_id)
-        SELECT id,titel,untertitel,buch_id
+    readonly #oracleInsertAbteilungsleiter = `
+        INSERT INTO abteilungsleiter(id,abteilungsleiter,vorname,abteilung_id)
+        SELECT id,abteilungsleiter,vorname,abteilung_id
         FROM   EXTERNAL (
-            (id         NUMBER(10,0),
-            titel       VARCHAR2(40),
-            untertitel  VARCHAR2(40),
-            buch_id     NUMBER(10,0))
+            (id               NUMBER(10,0),
+            abteilungsleiter  VARCHAR2(40),
+            vorname           VARCHAR2(40),
+            abteilung_id      NUMBER(10,0))
             TYPE ORACLE_LOADER
             DEFAULT DIRECTORY csv_dir
             ACCESS PARAMETERS (
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';')
-            LOCATION ('titel.csv')
+            LOCATION ('abteilungsleiter.csv')
             REJECT LIMIT UNLIMITED
-        ) titel_external
+        ) abteilungsleiter_external
     `;
 
-    readonly #oracleInsertAbbildung = `
-        INSERT INTO abbildung(id,beschriftung,content_type,buch_id)
-        SELECT id,beschriftung,content_type,buch_id
+    readonly #oracleInsertMitarbeiter = `
+        INSERT INTO mitarbeiter(id,name,job_type,abteilung_id)
+        SELECT id,name,job_type,abteilung_id
         FROM   EXTERNAL (
-            (id         NUMBER(10,0),
-            beschriftung VARCHAR2(32),
-            content_type VARCHAR2(16),
-            buch_id     NUMBER(10,0))
+            (id            NUMBER(10,0),
+            name           VARCHAR2(32),
+            job_type       VARCHAR2(16),
+            abteilung_id   NUMBER(10,0))
             TYPE ORACLE_LOADER
             DEFAULT DIRECTORY csv_dir
             ACCESS PARAMETERS (
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';')
-            LOCATION ('abbildung.csv')
+            LOCATION ('mitarbeiter.csv')
             REJECT LIMIT UNLIMITED
-        ) abbildung_external
+        ) mitarbeiter_external
     `;
 
     /**
@@ -240,9 +241,9 @@ export class DbPopulateService implements OnApplicationBootstrap {
         this.#logger.debug('createScript = %s', createScript);
         await this.#executeStatements(createScript, true);
 
-        await this.#oracleInsert(this.#oracleInsertBuch);
-        await this.#oracleInsert(this.#oracleInsertTitel);
-        await this.#oracleInsert(this.#oracleInsertAbbildung);
+        await this.#oracleInsert(this.#oracleInsertAbteilung);
+        await this.#oracleInsert(this.#oracleInsertAbteilungsleiter);
+        await this.#oracleInsert(this.#oracleInsertMitarbeiter);
     }
 
     async #populateSQLite() {

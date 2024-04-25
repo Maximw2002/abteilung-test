@@ -25,37 +25,37 @@
 -- https://dev.mysql.com/blog-archive/mysql-8-0-16-introducing-check-constraint
 -- UNIQUE: impliziter Index als B+ Baum
 
-CREATE TABLE IF NOT EXISTS buch (
-    id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    version       INT NOT NULL DEFAULT 0,
-    isbn          CHAR(17) UNIQUE NOT NULL,
-    rating        INT NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    art           ENUM('DRUCKAUSGABE', 'KINDLE'),
-    preis         DECIMAL(8,2) NOT NULL,
-    rabatt        DECIMAL(4,3) NOT NULL,
-    lieferbar     BOOLEAN NOT NULL DEFAULT FALSE,
-    datum         DATE,
-    homepage      VARCHAR(40),
-    schlagwoerter VARCHAR(64),
-    erzeugt       DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-    aktualisiert  DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
-) TABLESPACE buchspace ROW_FORMAT=COMPACT;
-ALTER TABLE buch AUTO_INCREMENT=1000;
+CREATE TABLE IF NOT EXISTS abteilung (
+    id                  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    version             INT NOT NULL DEFAULT 0,
+    bueroNummer         CHAR(17) UNIQUE NOT NULL,
+    zufriedenheit       INT NOT NULL CHECK (zufriedenheit >= 0 AND zufriedenheit <= 5),
+    art                 ENUM('ENTWICKLUNG', 'VERTRIEB'),
+    budget              DECIMAL(8,2) NOT NULL,
+    krankenstandsQuote  DECIMAL(4,3) NOT NULL,
+    verfuegbar           BOOLEAN NOT NULL DEFAULT FALSE,
+    gruendungsDatum     DATE,
+    homepage            VARCHAR(40),
+    schlagwoerter       VARCHAR(64),
+    erzeugt             DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    aktualisiert        DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+) TABLESPACE abteilungspace ROW_FORMAT=COMPACT;
+ALTER TABLE abteilung AUTO_INCREMENT=1000;
 
-CREATE TABLE IF NOT EXISTS titel (
-    id          INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    titel       VARCHAR(40) NOT NULL,
-    untertitel  VARCHAR(40),
-    buch_id     CHAR(36) UNIQUE NOT NULL references buch(id)
-) TABLESPACE buchspace ROW_FORMAT=COMPACT;
-ALTER TABLE titel AUTO_INCREMENT=1000;
+CREATE TABLE IF NOT EXISTS abteilungsleiter (
+    id                  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    abteilungsleiter    VARCHAR(40) NOT NULL,
+    vorname             VARCHAR(40),
+    abteilung_id        CHAR(36) UNIQUE NOT NULL references abteilung(id)
+) TABLESPACE abteilungspace ROW_FORMAT=COMPACT;
+ALTER TABLE abteilungsleiter AUTO_INCREMENT=1000;
 
-CREATE TABLE IF NOT EXISTS abbildung (
+CREATE TABLE IF NOT EXISTS mitarbeiter (
     id              INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    beschriftung    VARCHAR(32) NOT NULL,
-    content_type    VARCHAR(16) NOT NULL,
-    buch_id         CHAR(36) NOT NULL references buch(id),
+    name            VARCHAR(32) NOT NULL,
+    job_type        VARCHAR(16) NOT NULL,
+    abteilung_id    CHAR(36) NOT NULL references abteilung(id),
 
-    INDEX abbildung_buch_id_idx(buch_id)
-) TABLESPACE buchspace ROW_FORMAT=COMPACT;
-ALTER TABLE abbildung AUTO_INCREMENT=1000;
+    INDEX mitarbeiter_abteilung_id_idx(abteilung_id)
+) TABLESPACE abteilungspace ROW_FORMAT=COMPACT;
+ALTER TABLE mitarbeiter AUTO_INCREMENT=1000;

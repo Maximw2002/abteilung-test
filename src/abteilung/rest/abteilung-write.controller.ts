@@ -20,6 +20,7 @@
  * @packageDocumentation
  */
 
+import { AbteilungDTO, AbteilungDtoOhneRef } from './abteilungDTO.entity.js';
 import {
     ApiBadRequestResponse,
     ApiBearerAuth,
@@ -48,65 +49,64 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { BuchDTO, BuchDtoOhneRef } from './buchDTO.entity.js';
 import { Request, Response } from 'express';
-import { type Abbildung } from '../entity/abbildung.entity.js';
-import { type Buch } from '../entity/buch.entity.js';
-import { BuchWriteService } from '../service/buch-write.service.js';
+import { type Abteilung } from '../entity/abteilung.entity.js';
+import { AbteilungWriteService } from '../service/abteilung-write.service.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
+import { type Mitarbeiter } from '../entity/mitarbeiter.entity.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-import { type Titel } from '../entity/titel.entity.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
 
 const MSG_FORBIDDEN = 'Kein Token mit ausreichender Berechtigung vorhanden';
 /**
- * Die Controller-Klasse für die Verwaltung von Bücher.
+ * Die Controller-Klasse für die Verwaltung von Abteilungen.
  */
 @Controller(paths.rest)
 @UseGuards(AuthGuard)
 @UseInterceptors(ResponseTimeInterceptor)
-@ApiTags('Buch REST-API')
+@ApiTags('Abteilung REST-API')
 @ApiBearerAuth()
-export class BuchWriteController {
-    readonly #service: BuchWriteService;
+export class AbteilungWriteController {
+    readonly #service: AbteilungWriteService;
 
-    readonly #logger = getLogger(BuchWriteController.name);
+    readonly #logger = getLogger(AbteilungWriteController.name);
 
-    constructor(service: BuchWriteService) {
+    constructor(service: AbteilungWriteService) {
         this.#service = service;
     }
 
     /**
-     * Ein neues Buch wird asynchron angelegt. Das neu anzulegende Buch ist als
+     * Eine neue Abteilung wird asynchron angelegt. Die neu anzulegende Abteilung ist als
      * JSON-Datensatz im Request-Objekt enthalten. Wenn es keine
      * Verletzungen von Constraints gibt, wird der Statuscode `201` (`Created`)
      * gesetzt und im Response-Header wird `Location` auf die URI so gesetzt,
-     * dass damit das neu angelegte Buch abgerufen werden kann.
+     * dass damit die neu angelegte Abteilung abgerufen werden kann.
      *
      * Falls Constraints verletzt sind, wird der Statuscode `400` (`Bad Request`)
-     * gesetzt und genauso auch wenn der Titel oder die ISBN-Nummer bereits
+     * gesetzt und genauso auch wenn der Abteilungsleiter oder die Büro-Nummer bereits
      * existieren.
      *
-     * @param buchDTO JSON-Daten für ein Buch im Request-Body.
+     * @param abteilungDTO JSON-Daten für ein Abteilung im Request-Body.
      * @param res Leeres Response-Objekt von Express.
      * @returns Leeres Promise-Objekt.
      */
     @Post()
     @Roles({ roles: ['admin', 'user'] })
-    @ApiOperation({ summary: 'Ein neues Buch anlegen' })
+    @ApiOperation({ summary: 'Eine neue Abteilung anlegen' })
     @ApiCreatedResponse({ description: 'Erfolgreich neu angelegt' })
-    @ApiBadRequestResponse({ description: 'Fehlerhafte Buchdaten' })
+    @ApiBadRequestResponse({ description: 'Fehlerhafte Abteilungsdaten' })
     @ApiForbiddenResponse({ description: MSG_FORBIDDEN })
     async post(
-        @Body() buchDTO: BuchDTO,
+        @Body() abteilungDTO: AbteilungDTO,
         @Req() req: Request,
         @Res() res: Response,
     ): Promise<Response> {
-        this.#logger.debug('post: buchDTO=%o', buchDTO);
+        this.#logger.debug('post: abteilungDTO=%o', abteilungDTO);
 
-        const buch = this.#buchDtoToBuch(buchDTO);
-        const id = await this.#service.create(buch);
+        const abteilung = this.#abteilungDtoToAbteilung(abteilungDTO);
+        const id = await this.#service.create(abteilung);
 
         const location = `${getBaseUri(req)}/${id}`;
         this.#logger.debug('post: location=%s', location);
@@ -114,11 +114,11 @@ export class BuchWriteController {
     }
 
     /**
-     * Ein vorhandenes Buch wird asynchron aktualisiert.
+     * Eine vorhandene Abteilung wird asynchron aktualisiert.
      *
-     * Im Request-Objekt von Express muss die ID des zu aktualisierenden Buches
-     * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf das zu
-     * aktualisierende Buch als JSON-Datensatz enthalten sein. Damit die
+     * Im Request-Objekt von Express muss die ID der zu aktualisierenden Abteilung
+     * als Pfad-Parameter enthalten sein. Außerdem muss im Rumpf die zu
+     * aktualisierende Abteilung als JSON-Datensatz enthalten sein. Damit die
      * Aktualisierung überhaupt durchgeführt werden kann, muss im Header
      * `If-Match` auf die korrekte Version für optimistische Synchronisation
      * gesetzt sein.
@@ -130,9 +130,9 @@ export class BuchWriteController {
      * required`) gesetzt; und falls sie nicht korrekt ist, der Statuscode `412`
      * (`Precondition failed`). Falls Constraints verletzt sind, wird der
      * Statuscode `400` (`Bad Request`) gesetzt und genauso auch wenn der neue
-     * Titel oder die neue ISBN-Nummer bereits existieren.
+     * Abteilungsleiter oder die neue Büro-Nummer bereits existieren.
      *
-     * @param buchDTO Buchdaten im Body des Request-Objekts.
+     * @param abteilungDTO Abteilungsdaten im Body des Request-Objekts.
      * @param id Pfad-Paramater für die ID.
      * @param version Versionsnummer aus dem Header _If-Match_.
      * @param res Leeres Response-Objekt von Express.
@@ -143,7 +143,7 @@ export class BuchWriteController {
     @Roles({ roles: ['admin', 'user'] })
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({
-        summary: 'Ein vorhandenes Buch aktualisieren',
+        summary: 'Eine vorhandene Abteilung aktualisieren',
         tags: ['Aktualisieren'],
     })
     @ApiHeader({
@@ -152,7 +152,7 @@ export class BuchWriteController {
         required: false,
     })
     @ApiNoContentResponse({ description: 'Erfolgreich aktualisiert' })
-    @ApiBadRequestResponse({ description: 'Fehlerhafte Buchdaten' })
+    @ApiBadRequestResponse({ description: 'Fehlerhafte Abteilungsdaten' })
     @ApiPreconditionFailedResponse({
         description: 'Falsche Version im Header "If-Match"',
     })
@@ -162,15 +162,15 @@ export class BuchWriteController {
     })
     @ApiForbiddenResponse({ description: MSG_FORBIDDEN })
     async put(
-        @Body() buchDTO: BuchDtoOhneRef,
+        @Body() abteilungDTO: AbteilungDtoOhneRef,
         @Param('id') id: number,
         @Headers('If-Match') version: string | undefined,
         @Res() res: Response,
     ): Promise<Response> {
         this.#logger.debug(
-            'put: id=%s, buchDTO=%o, version=%s',
+            'put: id=%s, abteilungDTO=%o, version=%s',
             id,
-            buchDTO,
+            abteilungDTO,
             version,
         );
 
@@ -183,14 +183,18 @@ export class BuchWriteController {
                 .send(msg);
         }
 
-        const buch = this.#buchDtoOhneRefToBuch(buchDTO);
-        const neueVersion = await this.#service.update({ id, buch, version });
+        const abteilung = this.#abteilungDtoOhneRefToAbteilung(abteilungDTO);
+        const neueVersion = await this.#service.update({
+            id,
+            abteilung,
+            version,
+        });
         this.#logger.debug('put: version=%d', neueVersion);
         return res.header('ETag', `"${neueVersion}"`).send();
     }
 
     /**
-     * Ein Buch wird anhand seiner ID-gelöscht, die als Pfad-Parameter angegeben
+     * Eine Abteilung wird anhand seiner ID-gelöscht, die als Pfad-Parameter angegeben
      * ist. Der zurückgelieferte Statuscode ist `204` (`No Content`).
      *
      * @param id Pfad-Paramater für die ID.
@@ -199,9 +203,9 @@ export class BuchWriteController {
     @Delete(':id')
     @Roles({ roles: ['admin'] })
     @HttpCode(HttpStatus.NO_CONTENT)
-    @ApiOperation({ summary: 'Buch mit der ID löschen' })
+    @ApiOperation({ summary: 'Abteilung mit der ID löschen' })
     @ApiNoContentResponse({
-        description: 'Das Buch wurde gelöscht oder war nicht vorhanden',
+        description: 'Die Abteilung wurde gelöscht oder war nicht vorhanden',
     })
     @ApiForbiddenResponse({ description: MSG_FORBIDDEN })
     async delete(@Param('id') id: number) {
@@ -209,64 +213,68 @@ export class BuchWriteController {
         await this.#service.delete(id);
     }
 
-    #buchDtoToBuch(buchDTO: BuchDTO): Buch {
-        const titelDTO = buchDTO.titel;
-        const titel: Titel = {
+    #abteilungDtoToAbteilung(abteilungDTO: AbteilungDTO): Abteilung {
+        const abteilungsleiterDTO = abteilungDTO.abteilungsleiter;
+        const abteilungsleiter: Abteilungsleiter = {
             id: undefined,
-            titel: titelDTO.titel,
-            untertitel: titelDTO.untertitel,
-            buch: undefined,
+            abteilungsleiter: abteilungsleiterDTO.abteilungsleiter,
+            vorname: abteilungsleiterDTO.vorname,
+            abteilung: undefined,
         };
-        const abbildungen = buchDTO.abbildungen?.map((abbildungDTO) => {
-            const abbildung: Abbildung = {
-                id: undefined,
-                beschriftung: abbildungDTO.beschriftung,
-                contentType: abbildungDTO.contentType,
-                buch: undefined,
-            };
-            return abbildung;
-        });
-        const buch = {
+        const vieleMitarbeiter = abteilungDTO.vieleMitarbeiter?.map(
+            (mitarbeiterDTO) => {
+                const mitarbeiter: Mitarbeiter = {
+                    id: undefined,
+                    name: mitarbeiterDTO.name,
+                    jobType: mitarbeiterDTO.jobType,
+                    abteilung: undefined,
+                };
+                return mitarbeiter;
+            },
+        );
+        const abteilung = {
             id: undefined,
             version: undefined,
-            isbn: buchDTO.isbn,
-            rating: buchDTO.rating,
-            art: buchDTO.art,
-            preis: buchDTO.preis,
-            rabatt: buchDTO.rabatt,
-            lieferbar: buchDTO.lieferbar,
-            datum: buchDTO.datum,
-            homepage: buchDTO.homepage,
-            schlagwoerter: buchDTO.schlagwoerter,
-            titel,
-            abbildungen,
+            bueroNummer: abteilungDTO.bueroNummer,
+            zufriedenheit: abteilungDTO.zufriedenheit,
+            art: abteilungDTO.art,
+            budget: abteilungDTO.budget,
+            krankenstandsQuote: abteilungDTO.krankenstandsQuote,
+            verfuegbar: abteilungDTO.verfuegbar,
+            gruendungsDatum: abteilungDTO.gruendungsDatum,
+            homepage: abteilungDTO.homepage,
+            schlagwoerter: abteilungDTO.schlagwoerter,
+            abteilungsleiter,
+            vieleMitarbeiter,
             erzeugt: new Date(),
             aktualisiert: new Date(),
         };
 
         // Rueckwaertsverweise
-        buch.titel.buch = buch;
-        buch.abbildungen?.forEach((abbildung) => {
-            abbildung.buch = buch;
+        abteilung.abteilungsleiter.abteilung = abteilung;
+        abteilung.vieleMitarbeiter?.forEach((mitarbeiter) => {
+            mitarbeiter.abteilung = abteilung;
         });
-        return buch;
+        return abteilung;
     }
 
-    #buchDtoOhneRefToBuch(buchDTO: BuchDtoOhneRef): Buch {
+    #abteilungDtoOhneRefToAbteilung(
+        abteilungDTO: AbteilungDtoOhneRef,
+    ): Abteilung {
         return {
             id: undefined,
             version: undefined,
-            isbn: buchDTO.isbn,
-            rating: buchDTO.rating,
-            art: buchDTO.art,
-            preis: buchDTO.preis,
-            rabatt: buchDTO.rabatt,
-            lieferbar: buchDTO.lieferbar,
-            datum: buchDTO.datum,
-            homepage: buchDTO.homepage,
-            schlagwoerter: buchDTO.schlagwoerter,
-            titel: undefined,
-            abbildungen: undefined,
+            bueroNummer: abteilungDTO.bueroNummer,
+            zufriedenheit: abteilungDTO.zufriedenheit,
+            art: abteilungDTO.art,
+            budget: abteilungDTO.budget,
+            krankenstandsQuote: abteilungDTO.krankenstandsQuote,
+            verfuegbar: abteilungDTO.verfuegbar,
+            gruendungsDatum: abteilungDTO.gruendungsDatum,
+            homepage: abteilungDTO.homepage,
+            schlagwoerter: abteilungDTO.schlagwoerter,
+            abteilungsleiter: undefined,
+            vieleMitarbeiter: undefined,
             erzeugt: undefined,
             aktualisiert: new Date(),
         };

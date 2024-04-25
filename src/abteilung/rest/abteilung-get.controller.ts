@@ -23,6 +23,10 @@
 
 // eslint-disable-next-line max-classes-per-file
 import {
+    type Abteilung,
+    type AbteilungsArt,
+} from '../entity/abteilung.entity.js';
+import {
     ApiHeader,
     ApiNotFoundResponse,
     ApiOkResponse,
@@ -32,7 +36,6 @@ import {
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
-import { type Buch, type BuchArt } from '../entity/buch.entity.js';
 import {
     Controller,
     Get,
@@ -46,11 +49,11 @@ import {
     UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { BuchReadService } from '../service/buch-read.service.js';
+import { AbteilungReadService } from '../service/abteilung-read.service.js';
+import { type Abteilungsleiter } from '../entity/abteilungsleiter.entity.js';
 import { Public } from 'nest-keycloak-connect';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { type Suchkriterien } from '../service/suchkriterien.js';
-import { type Titel } from '../entity/titel.entity.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
@@ -75,58 +78,63 @@ export interface Links {
     readonly remove?: Link;
 }
 
-/** Typedefinition für ein Titel-Objekt ohne Rückwärtsverweis zum Buch */
-export type TitelModel = Omit<Titel, 'buch' | 'id'>;
+/** Typedefinition für ein Abteilungsleiter-Objekt ohne Rückwärtsverweis zur Abteilung */
+export type AbteilungsleiterModel = Omit<Abteilungsleiter, 'abteilung' | 'id'>;
 
 /** Buch-Objekt mit HATEOAS-Links */
-export type BuchModel = Omit<
-    Buch,
-    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'id' | 'titel' | 'version'
+export type AbteilungModel = Omit<
+    Abteilung,
+    | 'vieleMitarbeiter'
+    | 'aktualisiert'
+    | 'erzeugt'
+    | 'id'
+    | 'abteilungsleiter'
+    | 'version'
 > & {
-    titel: TitelModel;
+    abteilungsleiter: AbteilungsleiterModel;
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _links: Links;
 };
 
-/** Buch-Objekte mit HATEOAS-Links in einem JSON-Array. */
-export interface BuecherModel {
+/** Abteilung-Objekte mit HATEOAS-Links in einem JSON-Array. */
+export interface AbteilungenModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        buecher: BuchModel[];
+        abteilungen: AbteilungModel[];
     };
 }
 
 /**
- * Klasse für `BuchGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
- * formulieren. `BuchController` hat dieselben Properties wie die Basisklasse
- * `Buch` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
+ * Klasse für `AbteilungGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
+ * formulieren. `AbteilungController` hat dieselben Properties wie die Basisklasse
+ * `Abteilung` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
  * so überschrieben sind, dass sie auch nicht gesetzt bzw. undefined sein
  * dürfen, damit die Queries flexibel formuliert werden können. Deshalb ist auch
  * immer der zusätzliche Typ undefined erforderlich.
  * Außerdem muss noch `string` statt `Date` verwendet werden, weil es in OpenAPI
  * den Typ Date nicht gibt.
  */
-export class BuchQuery implements Suchkriterien {
+export class AbteilungQuery implements Suchkriterien {
     @ApiProperty({ required: false })
-    declare readonly isbn: string;
+    declare readonly bueroNummer: string;
 
     @ApiProperty({ required: false })
-    declare readonly rating: number;
+    declare readonly zufriedenheit: number;
 
     @ApiProperty({ required: false })
-    declare readonly art: BuchArt;
+    declare readonly art: AbteilungsArt;
 
     @ApiProperty({ required: false })
-    declare readonly preis: number;
+    declare readonly budget: number;
 
     @ApiProperty({ required: false })
-    declare readonly rabatt: number;
+    declare readonly krankenstandsQuote: number;
 
     @ApiProperty({ required: false })
-    declare readonly lieferbar: boolean;
+    declare readonly verfügabr: boolean;
 
     @ApiProperty({ required: false })
-    declare readonly datum: string;
+    declare readonly gruendungsDatum: string;
 
     @ApiProperty({ required: false })
     declare readonly homepage: string;
@@ -138,47 +146,47 @@ export class BuchQuery implements Suchkriterien {
     declare readonly typescript: string;
 
     @ApiProperty({ required: false })
-    declare readonly titel: string;
+    declare readonly abteilungsleiter: string;
 }
 
 const APPLICATION_HAL_JSON = 'application/hal+json';
 
 /**
- * Die Controller-Klasse für die Verwaltung von Bücher.
+ * Die Controller-Klasse für die Verwaltung von Abteilungen.
  */
 // Decorator in TypeScript, zur Standardisierung in ES vorgeschlagen (stage 3)
 // https://devblogs.microsoft.com/typescript/announcing-typescript-5-0-beta/#decorators
 // https://github.com/tc39/proposal-decorators
 @Controller(paths.rest)
 @UseInterceptors(ResponseTimeInterceptor)
-@ApiTags('Buch REST-API')
+@ApiTags('Abteilung REST-API')
 // @ApiBearerAuth()
 // Klassen ab ES 2015
-export class BuchGetController {
+export class AbteilungGetController {
     // readonly in TypeScript, vgl. C#
     // private ab ES 2019
-    readonly #service: BuchReadService;
+    readonly #service: AbteilungReadService;
 
-    readonly #logger = getLogger(BuchGetController.name);
+    readonly #logger = getLogger(AbteilungGetController.name);
 
     // Dependency Injection (DI) bzw. Constructor Injection
-    // constructor(private readonly service: BuchReadService) {}
+    // constructor(private readonly service: AbteilungReadService) {}
     // https://github.com/tc39/proposal-type-annotations#omitted-typescript-specific-features-that-generate-code
-    constructor(service: BuchReadService) {
+    constructor(service: AbteilungReadService) {
         this.#service = service;
     }
 
     /**
-     * Ein Buch wird asynchron anhand seiner ID als Pfadparameter gesucht.
+     * Eine Abteilung wird asynchron anhand seiner ID als Pfadparameter gesucht.
      *
-     * Falls es ein solches Buch gibt und `If-None-Match` im Request-Header
-     * auf die aktuelle Version des Buches gesetzt war, wird der Statuscode
+     * Falls es eine solche Abteilung gibt und `If-None-Match` im Request-Header
+     * auf die aktuelle Version der Abteilung gesetzt war, wird der Statuscode
      * `304` (`Not Modified`) zurückgeliefert. Falls `If-None-Match` nicht
-     * gesetzt ist oder eine veraltete Version enthält, wird das gefundene
-     * Buch im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
+     * gesetzt ist oder eine veraltete Version enthält, wird die gefundene
+     * Abteilung im Rumpf des Response als JSON-Datensatz mit Atom-Links für HATEOAS
      * und dem Statuscode `200` (`OK`) zurückgeliefert.
      *
-     * Falls es kein Buch zur angegebenen ID gibt, wird der Statuscode `404`
+     * Falls es keine Abteilung zur angegebenen ID gibt, wird der Statuscode `404`
      * (`Not Found`) zurückgeliefert.
      *
      * @param idStr Pfad-Parameter `id`
@@ -191,7 +199,7 @@ export class BuchGetController {
     // eslint-disable-next-line max-params
     @Get(':id')
     @Public()
-    @ApiOperation({ summary: 'Suche mit der Buch-ID' })
+    @ApiOperation({ summary: 'Suche mit der Abteilung-ID' })
     @ApiParam({
         name: 'id',
         description: 'Z.B. 1',
@@ -201,23 +209,25 @@ export class BuchGetController {
         description: 'Header für bedingte GET-Requests, z.B. "0"',
         required: false,
     })
-    @ApiOkResponse({ description: 'Das Buch wurde gefunden' })
-    @ApiNotFoundResponse({ description: 'Kein Buch zur ID gefunden' })
+    @ApiOkResponse({ description: 'Die Abteilung wurde gefunden' })
+    @ApiNotFoundResponse({ description: 'Keine Abteilung zur ID gefunden' })
     @ApiResponse({
         status: HttpStatus.NOT_MODIFIED,
-        description: 'Das Buch wurde bereits heruntergeladen',
+        description: 'Die Abteilung wurde bereits heruntergeladen',
     })
     async getById(
         @Param('id') idStr: string,
         @Req() req: Request,
         @Headers('If-None-Match') version: string | undefined,
         @Res() res: Response,
-    ): Promise<Response<BuchModel | undefined>> {
+    ): Promise<Response<AbteilungModel | undefined>> {
         this.#logger.debug('getById: idStr=%s, version=%s', idStr, version);
         const id = Number(idStr);
         if (!Number.isInteger(id)) {
             this.#logger.debug('getById: not isInteger()');
-            throw new NotFoundException(`Die Buch-ID ${idStr} ist ungueltig.`);
+            throw new NotFoundException(
+                `Die Abteilung-ID ${idStr} ist ungueltig.`,
+            );
         }
 
         if (req.accepts([APPLICATION_HAL_JSON, 'json', 'html']) === false) {
@@ -225,14 +235,17 @@ export class BuchGetController {
             return res.sendStatus(HttpStatus.NOT_ACCEPTABLE);
         }
 
-        const buch = await this.#service.findById({ id });
+        const abteilung = await this.#service.findById({ id });
         if (this.#logger.isLevelEnabled('debug')) {
-            this.#logger.debug('getById(): buch=%s', buch.toString());
-            this.#logger.debug('getById(): titel=%o', buch.titel);
+            this.#logger.debug('getById(): abteilung=%s', abteilung.toString());
+            this.#logger.debug(
+                'getById(): abteilungsleiter=%o',
+                abteilung.abteilungsleiter,
+            );
         }
 
         // ETags
-        const versionDb = buch.version;
+        const versionDb = abteilung.version;
         if (version === `"${versionDb}"`) {
             this.#logger.debug('getById: NOT_MODIFIED');
             return res.sendStatus(HttpStatus.NOT_MODIFIED);
@@ -241,21 +254,21 @@ export class BuchGetController {
         res.header('ETag', `"${versionDb}"`);
 
         // HATEOAS mit Atom Links und HAL (= Hypertext Application Language)
-        const buchModel = this.#toModel(buch, req);
-        this.#logger.debug('getById: buchModel=%o', buchModel);
-        return res.contentType(APPLICATION_HAL_JSON).json(buchModel);
+        const abteilungModel = this.#toModel(abteilung, req);
+        this.#logger.debug('getById: abteilungModel=%o', abteilungModel);
+        return res.contentType(APPLICATION_HAL_JSON).json(abteilungModel);
     }
 
     /**
-     * Bücher werden mit Query-Parametern asynchron gesucht. Falls es mindestens
-     * ein solches Buch gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
-     * des Response ist das JSON-Array mit den gefundenen Büchern, die jeweils
+     * Abteilungen werden mit Query-Parametern asynchron gesucht. Falls es mindestens
+     * eine solche Abteilung gibt, wird der Statuscode `200` (`OK`) gesetzt. Im Rumpf
+     * des Response ist das JSON-Array mit den gefundenen Abteilungen, die jeweils
      * um Atom-Links für HATEOAS ergänzt sind.
      *
-     * Falls es kein Buch zu den Suchkriterien gibt, wird der Statuscode `404`
+     * Falls es keine Abteilung zu den Suchkriterien gibt, wird der Statuscode `404`
      * (`Not Found`) gesetzt.
      *
-     * Falls es keine Query-Parameter gibt, werden alle Bücher ermittelt.
+     * Falls es keine Query-Parameter gibt, werden alle Abteilungen ermittelt.
      *
      * @param query Query-Parameter von Express.
      * @param req Request-Objekt von Express.
@@ -265,12 +278,12 @@ export class BuchGetController {
     @Get()
     @Public()
     @ApiOperation({ summary: 'Suche mit Suchkriterien' })
-    @ApiOkResponse({ description: 'Eine evtl. leere Liste mit Büchern' })
+    @ApiOkResponse({ description: 'Eine evtl. leere Liste mit Abteilungen' })
     async get(
-        @Query() query: BuchQuery,
+        @Query() query: AbteilungQuery,
         @Req() req: Request,
         @Res() res: Response,
-    ): Promise<Response<BuecherModel | undefined>> {
+    ): Promise<Response<AbteilungenModel | undefined>> {
         this.#logger.debug('get: query=%o', query);
 
         if (req.accepts([APPLICATION_HAL_JSON, 'json', 'html']) === false) {
@@ -278,23 +291,25 @@ export class BuchGetController {
             return res.sendStatus(HttpStatus.NOT_ACCEPTABLE);
         }
 
-        const buecher = await this.#service.find(query);
-        this.#logger.debug('get: %o', buecher);
+        const abteilungen = await this.#service.find(query);
+        this.#logger.debug('get: %o', abteilungen);
 
         // HATEOAS: Atom Links je Buch
-        const buecherModel = buecher.map((buch) =>
-            this.#toModel(buch, req, false),
+        const abteilungenModel = abteilungen.map((abteilung) =>
+            this.#toModel(abteilung, req, false),
         );
-        this.#logger.debug('get: buecherModel=%o', buecherModel);
+        this.#logger.debug('get: abteilungenModel=%o', abteilungenModel);
 
-        const result: BuecherModel = { _embedded: { buecher: buecherModel } };
+        const result: AbteilungenModel = {
+            _embedded: { abteilungen: abteilungenModel },
+        };
         return res.contentType(APPLICATION_HAL_JSON).json(result).send();
     }
 
-    #toModel(buch: Buch, req: Request, all = true) {
+    #toModel(abteilung: Abteilung, req: Request, all = true) {
         const baseUri = getBaseUri(req);
         this.#logger.debug('#toModel: baseUri=%s', baseUri);
-        const { id } = buch;
+        const { id } = abteilung;
         const links = all
             ? {
                   self: { href: `${baseUri}/${id}` },
@@ -305,26 +320,31 @@ export class BuchGetController {
               }
             : { self: { href: `${baseUri}/${id}` } };
 
-        this.#logger.debug('#toModel: buch=%o, links=%o', buch, links);
-        const titelModel: TitelModel = {
-            titel: buch.titel?.titel ?? 'N/A',
-            untertitel: buch.titel?.untertitel ?? 'N/A',
+        this.#logger.debug(
+            '#toModel: abteilung=%o, links=%o',
+            abteilung,
+            links,
+        );
+        const abteilungsleiterModel: AbteilungsleiterModel = {
+            abteilungsleiter:
+                abteilung.abteilungsleiter?.abteilungsleiter ?? 'N/A',
+            vorname: abteilung.abteilungsleiter?.vorname ?? 'N/A',
         };
-        const buchModel: BuchModel = {
-            isbn: buch.isbn,
-            rating: buch.rating,
-            art: buch.art,
-            preis: buch.preis,
-            rabatt: buch.rabatt,
-            lieferbar: buch.lieferbar,
-            datum: buch.datum,
-            homepage: buch.homepage,
-            schlagwoerter: buch.schlagwoerter,
-            titel: titelModel,
+        const abteilungModel: AbteilungModel = {
+            bueroNummer: abteilung.bueroNummer,
+            zufriedenheit: abteilung.zufriedenheit,
+            art: abteilung.art,
+            budget: abteilung.budget,
+            krankenstandsQuote: abteilung.krankenstandsQuote,
+            verfuegbar: abteilung.verfuegbar,
+            gruendungsDatum: abteilung.gruendungsDatum,
+            homepage: abteilung.homepage,
+            schlagwoerter: abteilung.schlagwoerter,
+            abteilungsleiter: abteilungsleiterModel,
             _links: links,
         };
 
-        return buchModel;
+        return abteilungModel;
     }
 }
 /* eslint-enable max-lines */

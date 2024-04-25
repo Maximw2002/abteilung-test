@@ -22,28 +22,28 @@ import {
     OneToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Buch } from './buch.entity.js';
+import { Abteilung } from './abteilung.entity.js';
 
 @Entity()
-export class Titel {
+export class Abteilungsleiter {
     // https://typeorm.io/entities#primary-columns
     @PrimaryGeneratedColumn()
     id: number | undefined;
 
     @Column()
-    readonly titel!: string;
+    readonly abteilungsleiter!: string;
 
     @Column('varchar')
-    readonly untertitel: string | undefined;
+    readonly vorname: string | undefined;
 
-    @OneToOne(() => Buch, (buch) => buch.titel)
-    @JoinColumn({ name: 'buch_id' })
-    buch: Buch | undefined;
+    @OneToOne(() => Abteilung, (abteilung) => abteilung.abteilungsleiter)
+    @JoinColumn({ name: 'abteilung_id' })
+    abteilung: Abteilung | undefined;
 
     public toString = (): string =>
         JSON.stringify({
             id: this.id,
-            titel: this.titel,
-            untertitel: this.untertitel,
+            abteilungsleiter: this.abteilungsleiter,
+            vorname: this.vorname,
         });
 }

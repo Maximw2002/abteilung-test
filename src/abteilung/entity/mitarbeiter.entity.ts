@@ -22,29 +22,29 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Buch } from './buch.entity.js';
+import { Abteilung } from './abteilung.entity.js';
 
 @Entity()
-export class Abbildung {
+export class Mitarbeiter {
     // https://typeorm.io/entities#primary-columns
     // CAVEAT: zuerst @Column() und erst dann @PrimaryGeneratedColumn()
     @PrimaryGeneratedColumn()
     id: number | undefined;
 
     @Column()
-    readonly beschriftung!: string;
+    readonly name!: string;
 
     @Column('varchar')
-    readonly contentType: string | undefined;
+    readonly jobType: string | undefined;
 
-    @ManyToOne(() => Buch, (buch) => buch.abbildungen)
-    @JoinColumn({ name: 'buch_id' })
-    buch: Buch | undefined;
+    @ManyToOne(() => Abteilung, (abteilung) => abteilung.vieleMitarbeiter)
+    @JoinColumn({ name: 'abteilung_id' })
+    abteilung: Abteilung | undefined;
 
     public toString = (): string =>
         JSON.stringify({
             id: this.id,
-            beschriftung: this.beschriftung,
-            contentType: this.contentType,
+            name: this.name,
+            jobType: this.jobType,
         });
 }

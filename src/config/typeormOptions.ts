@@ -24,7 +24,7 @@ import {
     OracleNamingStrategy,
     SnakeNamingStrategy,
 } from './typeormNamingStrategy.js';
-import { Buch } from '../buch/entity/buch.entity.js';
+import { Buch } from '../buch/entity/abteilung.entity.js';
 import { type DataSourceOptions } from 'typeorm';
 import { dbType } from './db.js';
 import { entities } from '../buch/entity/entities.js';

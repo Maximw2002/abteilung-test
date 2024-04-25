@@ -16,8 +16,8 @@
  */
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { UseFilters, UseInterceptors } from '@nestjs/common';
-import { Buch } from '../entity/buch.entity.js';
-import { BuchReadService } from '../service/buch-read.service.js';
+import { Abteilung } from '../entity/abteilung.entity.js';
+import { AbteilungReadService } from '../service/abteilung-read.service.js';
 import { HttpExceptionFilter } from './http-exception.filter.js';
 import { Public } from 'nest-keycloak-connect';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
@@ -32,56 +32,59 @@ export interface SuchkriterienInput {
     readonly suchkriterien: Suchkriterien;
 }
 
-@Resolver((_: any) => Buch)
+@Resolver((_: any) => Abteilung)
 @UseFilters(HttpExceptionFilter)
 @UseInterceptors(ResponseTimeInterceptor)
-export class BuchQueryResolver {
-    readonly #service: BuchReadService;
+export class AbteilungQueryResolver {
+    readonly #service: AbteilungReadService;
 
-    readonly #logger = getLogger(BuchQueryResolver.name);
+    readonly #logger = getLogger(AbteilungQueryResolver.name);
 
-    constructor(service: BuchReadService) {
+    constructor(service: AbteilungReadService) {
         this.#service = service;
     }
 
-    @Query('buch')
+    @Query('abteilung')
     @Public()
     async findById(@Args() { id }: IdInput) {
         this.#logger.debug('findById: id=%d', id);
 
-        const buch = await this.#service.findById({ id });
+        const abteilung = await this.#service.findById({ id });
 
         if (this.#logger.isLevelEnabled('debug')) {
             this.#logger.debug(
-                'findById: buch=%s, titel=%o',
-                buch.toString(),
-                buch.titel,
+                'findById: abteilung=%s, abteilungsleiter=%o',
+                abteilung.toString(),
+                abteilung.abteilungsleiter,
             );
         }
-        return buch;
+        return abteilung;
     }
 
-    @Query('buecher')
+    @Query('abteilungen')
     @Public()
     async find(@Args() input: SuchkriterienInput | undefined) {
         this.#logger.debug('find: input=%o', input);
-        const buecher = await this.#service.find(input?.suchkriterien);
-        this.#logger.debug('find: buecher=%o', buecher);
-        return buecher;
+        const abteilungen = await this.#service.find(input?.suchkriterien);
+        this.#logger.debug('find: abteilungen=%o', abteilungen);
+        return abteilungen;
     }
 
-    @ResolveField('rabatt')
-    rabatt(@Parent() buch: Buch, short: boolean | undefined) {
+    @ResolveField('krankenstandsquote')
+    krankenstandsquote(
+        @Parent() abteilung: Abteilung,
+        short: boolean | undefined,
+    ) {
         if (this.#logger.isLevelEnabled('debug')) {
             this.#logger.debug(
-                'rabatt: buch=%s, short=%s',
-                buch.toString(),
+                'krankenstandsquote: abteilung=%s, short=%s',
+                abteilung.toString(),
                 short,
             );
         }
-        const rabatt = buch.rabatt ?? 0;
+        const krankenstandsQuote = abteilung.krankenstandsQuote ?? 0;
         const shortStr = short === undefined || short ? '%' : 'Prozent';
         // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        return `${(rabatt * 100).toFixed(2)} ${shortStr}`;
+        return `${(krankenstandsQuote * 100).toFixed(2)} ${shortStr}`;
     }
 }

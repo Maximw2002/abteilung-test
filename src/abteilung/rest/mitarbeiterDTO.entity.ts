@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 /*
  * Copyright (C) 2023 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
  *
@@ -15,9 +16,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Abbildung } from './abbildung.entity.js';
-import { Buch } from './buch.entity.js';
-import { Titel } from './titel.entity.js';
+/**
+ * Das Modul besteht aus der Entity-Klasse.
+ * @packageDocumentation
+ */
 
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
-export const entities = [Abbildung, Buch, Titel];
+import { ApiProperty } from '@nestjs/swagger';
+import { MaxLength } from 'class-validator';
+
+/**
+ * Entity-Klasse für Mitarbeiter ohne TypeORM.
+ */
+export class MitarbeiterDTO {
+    @MaxLength(32)
+    @ApiProperty({ example: 'Der Name', type: String })
+    readonly name!: string;
+
+    @MaxLength(16)
+    @ApiProperty({ example: 'Vertrieb', type: String })
+    readonly jobType!: string;
+}
+/* eslint-enable @typescript-eslint/no-magic-numbers */

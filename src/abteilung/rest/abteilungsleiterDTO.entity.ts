@@ -21,19 +21,21 @@
  * @packageDocumentation
  */
 
+import { IsOptional, Matches, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { MaxLength } from 'class-validator';
 
 /**
- * Entity-Klasse für Abbildung ohne TypeORM.
+ * Entity-Klasse für Abteilungsleiter ohne TypeORM.
  */
-export class AbbildungDTO {
-    @MaxLength(32)
-    @ApiProperty({ example: 'Die Beschriftung', type: String })
-    readonly beschriftung!: string;
+export class AbteilungsleiterDTO {
+    @Matches('^\\w.*')
+    @MaxLength(40)
+    @ApiProperty({ example: 'Der Abteilungsleiter', type: String })
+    readonly abteilungsleiter!: string;
 
-    @MaxLength(16)
-    @ApiProperty({ example: 'image/png', type: String })
-    readonly contentType!: string;
+    @IsOptional()
+    @MaxLength(40)
+    @ApiProperty({ example: 'Der Vorname', type: String })
+    readonly vorname: string | undefined;
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers */

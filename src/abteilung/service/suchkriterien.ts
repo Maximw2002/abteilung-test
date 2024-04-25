@@ -20,21 +20,21 @@
  * @packageDocumentation
  */
 
-import { type BuchArt } from './../entity/buch.entity.js';
+import { type AbteilungsArt } from '../entity/abteilung.entity.js';
 
 /**
- * Typdefinition für `BuchReadService.find()`und `QueryBuilder.build()`
+ * Typdefinition für `AbteilungReadService.find()`und `QueryBuilder.build()`
  */
 export interface Suchkriterien {
-    readonly isbn?: string;
-    readonly rating?: number;
-    readonly art?: BuchArt;
-    readonly preis?: number;
-    readonly rabatt?: number;
-    readonly lieferbar?: boolean;
-    readonly datum?: string;
+    readonly bueroNummer?: string;
+    readonly zufriedenheit?: number;
+    readonly art?: AbteilungsArt;
+    readonly budget?: number;
+    readonly krankenstandsQuote?: number;
+    readonly verfuegbar?: boolean;
+    readonly gruendungsDatum?: string;
     readonly homepage?: string;
     readonly javascript?: string;
     readonly typescript?: string;
-    readonly titel?: string;
+    readonly abteilungsleiter?: string;
 }
