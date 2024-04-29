@@ -43,42 +43,42 @@ package nest-keycloak-connect {
   hide Roles circle
 }
 
-package buch #DDDDDD {
+package abteilung #DDDDDD {
   package entity #FFFFFF {
-    class Buch <<entity>>
+    class Abteilung <<entity>>
   }
 
   package service #FFFFFF {
-    class BuchWriteService << control >>
+    class AbteilungWriteService << control >>
   }
 
-  class "type BuchDTO = Omit<Buch, 'abbildungen' | 'aktualisiert' | 'erzeugt'" as BuchDTO
-  hide BuchDTO circle
+  class "type AbteilungDTO = Omit<Abteilung, 'vieleMitarbeiter' | 'aktualisiert' | 'erzeugt'" as AbteilungDTO
+  hide AbteilungDTO circle
 
     interface IdInput {
         id: number
     }
 
-  class BuchMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
-    + @Mutation() @Roles() async create(@Args() buchDTO: BuchDTO): Promise<number>
-    + @Mutation() @Roles() async update(@Args() buchDTO: BuchDTO): Promise<number>
+  class AbteilungMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Mutation() @Roles() async create(@Args() abteilungDTO: AbteilungDTO): Promise<number>
+    + @Mutation() @Roles() async update(@Args() abteilungDTO: Abteilung: Promise<number>
     + @Mutation() @Roles() async delete(@Args() id: IdInput): Promise<boolean>
   }
 
-  BuchMutationResolver o-down-> "1" BuchWriteService : service
+  AbteilungMutationResolver o-down-> "1" AbteilungWriteService : service
 
-  BuchMutationResolver ..> Buch
-  BuchMutationResolver ..> BuchDTO
-  BuchMutationResolver ..> IdInput
-  BuchDTO .up.> Buch
-  BuchMutationResolver ..> Promise
-  BuchMutationResolver ..> Resolver
+  AbteilungMutationResolver ..> Abteilung
+  AbteilungMutationResolver ..> AbteilungDTO
+  AbteilungMutationResolver ..> IdInput
+  AbteilungDTO .up.> Abteilung
+  AbteilungMutationResolver ..> Promise
+  AbteilungMutationResolver ..> Resolver
 
-  BuchMutationResolver .up.> AuthGuard
-  BuchMutationResolver .up.> Roles
+  AbteilungMutationResolver .up.> AuthGuard
+  AbteilungMutationResolver .up.> Roles
 
-  BuchDTO .[hidden].> Promise
-  BuchDTO .[hidden].> Resolver
+  AbteilungDTO .[hidden].> Promise
+  AbteilungDTO .[hidden].> Resolver
 }
 
 hide empty members

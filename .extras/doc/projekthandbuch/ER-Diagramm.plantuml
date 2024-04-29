@@ -23,41 +23,41 @@ hide circle
 ' evtl. Prbleme mit Kraehenfuessen vermeiden
 skinparam linetype ortho
 
-entity "Buch" {
+entity "Abteilung" {
   * id: integer <<generated>>
   --
   * version: integer
-  * isbn: text
-  * rating: number
+  * bueroNummer: text
+  * zufriedenheit: number
   * art: text
-  * preis: number
-  * rabatt: number
-  * lieferbar: boolean
-    datum: date
+  * budget: number
+  * krankenstandsQuote: number
+  * verfuegbar: boolean
+    gruendungsDatum: date
     homepage: text
-  * **titel_id**: integer <<FK>>
+  * **abteilungsleiter_id**: integer <<FK>>
     schlagwoerter: text
   * erzeugt: timestamp
   * aktualisiert: timestamp
 }
 
-entity "Titel" {
+entity "Abteilungsleiter" {
   * id: integer <<generated>>
   --
-  * titel: text
-    untertitel: text
+  * abteilungsleiter: text
+    vorname: text
 }
 
-entity "Abbildung" {
+entity "Mitarbeiter" {
   * id: integer <<generated>>
   --
-  * beschriftung: text
-    contentType: text
-  * **buch_id**: integer <<FK>>
+  * name: text
+    jobType: text
+  * **abteilung_id**: integer <<FK>>
 }
 
-Buch ||..|| Titel
-Buch ||..o{ Abbildung
+Abteilung ||..|| Abteilungsleiter
+Abteilung ||..o{ Mitarbeiter
 
 footer (c) Jürgen Zimmermann
 
