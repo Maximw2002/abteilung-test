@@ -18,7 +18,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { type Buch, type BuchArt } from '../../src/buch/entity/abteilung.entity.js';
+import { type Abteilung, type AbteilungsArt } from '../../src/abteilung/entity/abteilung.entity.js';
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -38,11 +38,11 @@ export interface GraphQLResponseBody {
     errors?: readonly [GraphQLFormattedError];
 }
 
-type BuchDTO = Omit<
-    Buch,
-    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'rabatt'
+type AbteilungDTO = Omit<
+    Abteilung,
+    'mitarbeiter' | 'aktualisiert' | 'erzeugt' | 'krankenstandsquote'
 > & {
-    rabatt: string;
+    krankenstandsquote: string;
 };
 
 // -----------------------------------------------------------------------------
@@ -50,14 +50,14 @@ type BuchDTO = Omit<
 // -----------------------------------------------------------------------------
 const idVorhanden = '1';
 
-const titelVorhanden = 'Alpha';
-const teilTitelVorhanden = 'a';
-const teilTitelNichtVorhanden = 'abc';
+const abteilungsleiterVorhanden = 'Alpha';
+const teilAbteilungsleiterVorhanden = 'a';
+const teilAbteilungsleiterNichtVorhanden = 'abc';
 
-const isbnVorhanden = '978-3-897-22583-1';
+const bueroNummerVorhanden = '978-3-897-22583-1';
 
-const ratingVorhanden = 2;
-const ratingNichtVorhanden = 99;
+const zufriedenheitVorhanden = 2;
+const zufriedenheitNichtVorhanden = 99;
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -85,25 +85,25 @@ describe('GraphQL Queries', () => {
         await shutdownServer();
     });
 
-    test('Buch zu vorhandener ID', async () => {
+    test('Abteilung zu vorhandener ID', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buch(id: "${idVorhanden}") {
+                    abteilung(id: "${idVorhanden}") {
                         version
-                        isbn
-                        rating
+                        bueroNummer
+                        zufriedenheit
                         art
-                        preis
-                        lieferbar
-                        datum
+                        budget
+                        verfuegbar
+                        gruendungsDatum
                         homepage
                         schlagwoerter
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
-                        rabatt(short: true)
+                        krankenstandsquote(short: true)
                     }
                 }
             `,
@@ -119,23 +119,23 @@ describe('GraphQL Queries', () => {
         expect(data.errors).toBeUndefined();
         expect(data.data).toBeDefined();
 
-        const { buch } = data.data!;
-        const result: BuchDTO = buch;
+        const { abteilung } = data.data!;
+        const result: AbteilungDTO = abteilung;
 
-        expect(result.titel?.titel).toMatch(/^\w/u);
+        expect(result.abteilungsleiter?.abteilungsleiter).toMatch(/^\w/u);
         expect(result.version).toBeGreaterThan(-1);
         expect(result.id).toBeUndefined();
     });
 
-    test('Buch zu nicht-vorhandener ID', async () => {
+    test('Abteilung zu nicht-vorhandener ID', async () => {
         // given
         const id = '999999';
         const body: GraphQLRequest = {
             query: `
                 {
-                    buch(id: "${id}") {
-                        titel {
-                            titel
+                    abteilung(id: "${id}") {
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -149,7 +149,7 @@ describe('GraphQL Queries', () => {
         // then
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.buch).toBeNull();
+        expect(data.data!.abteilung).toBeNull();
 
         const { errors } = data;
 
@@ -158,24 +158,24 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toBe(`Es gibt kein Buch mit der ID ${id}.`);
+        expect(message).toBe(`Es gibt keine Abteilung mit der ID ${id}.`);
         expect(path).toBeDefined();
-        expect(path![0]).toBe('buch');
+        expect(path![0]).toBe('abteilung');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Buch zu vorhandenem Titel', async () => {
+    test('Abteilung zu vorhandenem Abteilungsleiter', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        titel: "${titelVorhanden}"
+                    abteilungen(suchkriterien: {
+                        abteilungsleiter: "${abteilungsleiterVorhanden}"
                     }) {
                         art
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -193,29 +193,31 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
 
-        expect(buecherArray).toHaveLength(1);
+        expect(abteilungenArray).toHaveLength(1);
 
-        const [buch] = buecherArray;
+        const [abteilung] = abteilungenArray;
 
-        expect(buch!.titel?.titel).toBe(titelVorhanden);
+        expect(abteilung!.abteilungsleiter?.abteilungsleiter).toBe(
+            abteilungsleiterVorhanden,
+        );
     });
 
-    test('Buch zu vorhandenem Teil-Titel', async () => {
+    test('Abteilung zu vorhandenem Teil-Abteilungsleiter', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        titel: "${teilTitelVorhanden}"
+                    abteilungen(suchkriterien: {
+                        abteilungsleiter: "${teilAbteilungsleiterVorhanden}"
                     }) {
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -232,31 +234,33 @@ describe('GraphQL Queries', () => {
         expect(data.errors).toBeUndefined();
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
-        buecherArray
-            .map((buch) => buch.titel)
-            .forEach((titel) =>
-                expect(titel?.titel.toLowerCase()).toEqual(
-                    expect.stringContaining(teilTitelVorhanden),
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
+        abteilungenArray
+            .map((abteilung) => abteilung.abteilungsleiter)
+            .forEach((abteilungsleiter) =>
+                expect(
+                    abteilungsleiter?.abteilungsleiter.toLowerCase(),
+                ).toEqual(
+                    expect.stringContaining(teilAbteilungsleiterVorhanden),
                 ),
             );
     });
 
-    test('Buch zu nicht vorhandenem Titel', async () => {
+    test('Abteilung zu nicht vorhandenem Abteilungsleiter', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        titel: "${teilTitelNichtVorhanden}"
+                    abteilungen(suchkriterien: {
+                        abteilungsleiter: "${teilAbteilungsleiterNichtVorhanden}"
                     }) {
                         art
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -270,7 +274,7 @@ describe('GraphQL Queries', () => {
         // then
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.buecher).toBeNull();
+        expect(data.data!.abteilungen).toBeNull();
 
         const { errors } = data;
 
@@ -279,24 +283,24 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toMatch(/^Keine Buecher gefunden:/u);
+        expect(message).toMatch(/^Keine Abteilungen gefunden:/u);
         expect(path).toBeDefined();
-        expect(path![0]).toBe('buecher');
+        expect(path![0]).toBe('abteilungen');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Buch zu vorhandener ISBN-Nummer', async () => {
+    test('Abteilung zu vorhandener bueroNummer-Nummer', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        isbn: "${isbnVorhanden}"
+                    abteilungen(suchkriterien: {
+                        bueroNummer: "${bueroNummerVorhanden}"
                     }) {
-                        isbn
-                        titel {
-                            titel
+                        bueroNummer
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -314,33 +318,33 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
 
-        expect(buecherArray).toHaveLength(1);
+        expect(abteilungenArray).toHaveLength(1);
 
-        const [buch] = buecherArray;
-        const { isbn, titel } = buch!;
+        const [abteilung] = abteilungenArray;
+        const { bueroNummer, abteilungsleiter } = abteilung!;
 
-        expect(isbn).toBe(isbnVorhanden);
-        expect(titel?.titel).toBeDefined();
+        expect(bueroNummer).toBe(bueroNummerVorhanden);
+        expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
     });
 
-    test('Buecher zu vorhandenem "rating"', async () => {
+    test('Abteilungen zu vorhandenem "zufriedenheit"', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        rating: ${ratingVorhanden},
-                        titel: "${teilTitelVorhanden}"
+                    abteilungen(suchkriterien: {
+                        zufriedenheit: ${zufriedenheitVorhanden},
+                        abteilungsleiter: "${teilAbteilungsleiterVorhanden}"
                     }) {
-                        rating
-                        titel {
-                            titel
+                        zufriedenheit
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -358,32 +362,32 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
 
-        buecherArray.forEach((buch) => {
-            const { rating, titel } = buch;
+        abteilungenArray.forEach((abteilung) => {
+            const { zufriedenheit, abteilungsleiter } = abteilung;
 
-            expect(rating).toBe(ratingVorhanden);
-            expect(titel?.titel.toLowerCase()).toEqual(
-                expect.stringContaining(teilTitelVorhanden),
+            expect(zufriedenheit).toBe(zufriedenheitVorhanden);
+            expect(abteilungsleiter?.abteilungsleiter.toLowerCase()).toEqual(
+                expect.stringContaining(teilAbteilungsleiterVorhanden),
             );
         });
     });
 
-    test('Kein Buch zu nicht-vorhandenem "rating"', async () => {
+    test('Keine Abteilung zu nicht-vorhandenem "zufriedenheit"', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        rating: ${ratingNichtVorhanden}
+                    abteilungen(suchkriterien: {
+                        zufriedenheit: ${zufriedenheitNichtVorhanden}
                     }) {
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -397,7 +401,7 @@ describe('GraphQL Queries', () => {
         // then
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.buecher).toBeNull();
+        expect(data.data!.abteilungen).toBeNull();
 
         const { errors } = data;
 
@@ -406,25 +410,25 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error;
 
-        expect(message).toMatch(/^Keine Buecher gefunden:/u);
+        expect(message).toMatch(/^Keine Abteilungen gefunden:/u);
         expect(path).toBeDefined();
-        expect(path![0]).toBe('buecher');
+        expect(path![0]).toBe('abteilungen');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Buecher zur Art "KINDLE"', async () => {
+    test('Abteilungen zur Art "KINDLE"', async () => {
         // given
-        const buchArt: BuchArt = 'KINDLE';
+        const abteilungArt: AbteilungArt = 'KINDLE';
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        art: ${buchArt}
+                    abteilungen(suchkriterien: {
+                        art: ${abteilungArt}
                     }) {
                         art
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -442,31 +446,31 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
 
-        buecherArray.forEach((buch) => {
-            const { art, titel } = buch;
+        abteilungenArray.forEach((abteilung) => {
+            const { art, abteilungsleiter } = abteilung;
 
-            expect(art).toBe(buchArt);
-            expect(titel?.titel).toBeDefined();
+            expect(art).toBe(abteilungArt);
+            expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
         });
     });
 
-    test('Buecher zur einer ungueltigen Art', async () => {
+    test('Abteilungen zur einer ungueltigen Art', async () => {
         // given
-        const buchArt = 'UNGUELTIG';
+        const abteilungArt = 'UNGUELTIG';
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        art: ${buchArt}
+                    abteilungen(suchkriterien: {
+                        art: ${abteilungArt}
                     }) {
-                        titel {
-                            titel
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -493,17 +497,17 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('GRAPHQL_VALIDATION_FAILED');
     });
 
-    test('Buecher mit lieferbar=true', async () => {
+    test('Abteilungen mit verfuegbar=true', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
                 {
-                    buecher(suchkriterien: {
-                        lieferbar: true
+                    abteilungen(suchkriterien: {
+                        verfuegbar: true
                     }) {
-                        lieferbar
-                        titel {
-                            titel
+                        verfuegbar
+                        abteilungsleiter {
+                            nachname
                         }
                     }
                 }
@@ -521,17 +525,17 @@ describe('GraphQL Queries', () => {
 
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { abteilungen } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(abteilungen).not.toHaveLength(0);
 
-        const buecherArray: BuchDTO[] = buecher;
+        const abteilungenArray: AbteilungDTO[] = abteilungen;
 
-        buecherArray.forEach((buch) => {
-            const { lieferbar, titel } = buch;
+        abteilungenArray.forEach((abteilung) => {
+            const { verfuegbar, abteilungsleiter } = abteilung;
 
-            expect(lieferbar).toBe(true);
-            expect(titel?.titel).toBeDefined();
+            expect(verfuegbar).toBe(true);
+            expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
         });
     });
 });

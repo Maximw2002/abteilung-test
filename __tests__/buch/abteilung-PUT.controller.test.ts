@@ -24,7 +24,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDtoOhneRef } from '../../src/buch/rest/buchDTO.entity.js';
+import { type AbteilungDtoOhneRef } from '../../src/abteilung/rest/abteilungDTO.entity.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -32,52 +32,52 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-201-63361-0',
-    rating: 5,
+const geaenderteAbteilung: AbteilungDtoOhneRef = {
+    bueroNummer: '978-0-201-63361-0',
+    zufriedenheit: 5,
     art: 'KINDLE',
-    preis: 3333,
-    rabatt: 0.33,
-    lieferbar: true,
-    datum: '2022-03-03',
+    budget: 3333,
+    krankenstandsquote: 0.33,
+    verfuegbar: true,
+    gruendungsDatum: '2022-03-03',
     homepage: 'https://geaendert.put.rest',
     schlagwoerter: ['JAVASCRIPT'],
 };
 const idVorhanden = '30';
 
-const geaendertesBuchIdNichtVorhanden: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
-    rating: 4,
+const geaenderteAbteilungIdNichtVorhanden: AbteilungDtoOhneRef = {
+    bueroNummer: '978-0-007-09732-6',
+    zufriedenheit: 4,
     art: 'DRUCKAUSGABE',
-    preis: 44.4,
-    rabatt: 0.044,
-    lieferbar: true,
-    datum: '2022-02-04',
+    budget: 44.4,
+    krankenstandsquote: 0.044,
+    verfuegbar: true,
+    gruendungsDatum: '2022-02-04',
     homepage: 'https://acme.de',
     schlagwoerter: ['JAVASCRIPT'],
 };
 const idNichtVorhanden = '999999';
 
-const geaendertesBuchInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
-    rating: -1,
+const geaenderteAbteilungInvalid: Record<string, unknown> = {
+    bueroNummer: 'falsche-bueroNummer',
+    zufriedenheit: -1,
     art: 'UNSICHTBAR',
-    preis: -1,
-    rabatt: 2,
-    lieferbar: true,
-    datum: '12345-123-123',
-    titel: '?!',
+    budget: -1,
+    krankenstandsquote: 2,
+    verfuegbar: true,
+    gruendungsDatum: '12345-123-123',
+    abteilungsleiter: '?!',
     homepage: 'anyHomepage',
 };
 
-const veraltesBuch: BuchDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
-    rating: 1,
+const veralteAbteilung: AbteilungDtoOhneRef = {
+    bueroNummer: '978-0-007-09732-6',
+    zufriedenheit: 1,
     art: 'DRUCKAUSGABE',
-    preis: 44.4,
-    rabatt: 0.044,
-    lieferbar: true,
-    datum: '2022-02-04',
+    budget: 44.4,
+    krankenstandsquote: 0.044,
+    verfuegbar: true,
+    gruendungsDatum: '2022-02-04',
     homepage: 'https://acme.de',
     schlagwoerter: ['JAVASCRIPT'],
 };
@@ -109,7 +109,7 @@ describe('PUT /rest/:id', () => {
         await shutdownServer();
     });
 
-    test('Vorhandenes Buch aendern', async () => {
+    test('Vorhandene Abteilung aendern', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
@@ -119,7 +119,7 @@ describe('PUT /rest/:id', () => {
         // when
         const { status, data }: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderteAbteilung,
             { headers },
         );
 
@@ -128,7 +128,7 @@ describe('PUT /rest/:id', () => {
         expect(data).toBe('');
     });
 
-    test('Nicht-vorhandenes Buch aendern', async () => {
+    test('Nicht-vorhandene Abteilung aendern', async () => {
         // given
         const url = `/rest/${idNichtVorhanden}`;
         const token = await loginRest(client);
@@ -138,7 +138,7 @@ describe('PUT /rest/:id', () => {
         // when
         const { status }: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuchIdNichtVorhanden,
+            geaenderteAbteilungIdNichtVorhanden,
             { headers },
         );
 
@@ -146,25 +146,25 @@ describe('PUT /rest/:id', () => {
         expect(status).toBe(HttpStatus.NOT_FOUND);
     });
 
-    test('Vorhandenes Buch aendern, aber mit ungueltigen Daten', async () => {
+    test('Vorhandene Abteilung aendern, aber mit ungueltigen Daten', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
-            expect.stringMatching(/^rating /u),
+            expect.stringMatching(/^bueroNummer /u),
+            expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^art /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
+            expect.stringMatching(/^budget /u),
+            expect.stringMatching(/^krankenstandsquote /u),
+            expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
         ];
 
         // when
         const { status, data }: AxiosResponse<Record<string, any>> =
-            await client.put(url, geaendertesBuchInvalid, { headers });
+            await client.put(url, geaenderteAbteilungInvalid, { headers });
 
         // then
         expect(status).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -177,7 +177,7 @@ describe('PUT /rest/:id', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Versionsnummer', async () => {
+    test('Vorhandene Abteilung aendern, aber ohne Versionsnummer', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
@@ -187,7 +187,7 @@ describe('PUT /rest/:id', () => {
         // when
         const { status, data }: AxiosResponse<string> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderteAbteilung,
             { headers },
         );
 
@@ -196,7 +196,7 @@ describe('PUT /rest/:id', () => {
         expect(data).toBe('Header "If-Match" fehlt');
     });
 
-    test('Vorhandenes Buch aendern, aber mit alter Versionsnummer', async () => {
+    test('Vorhandene Abteilung aendern, aber mit alter Versionsnummer', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
@@ -206,7 +206,7 @@ describe('PUT /rest/:id', () => {
         // when
         const { status, data }: AxiosResponse<ErrorResponse> = await client.put(
             url,
-            veraltesBuch,
+            veralteAbteilung,
             { headers },
         );
 
@@ -219,7 +219,7 @@ describe('PUT /rest/:id', () => {
         expect(statusCode).toBe(HttpStatus.PRECONDITION_FAILED);
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Token', async () => {
+    test('Vorhandene Abteilung aendern, aber ohne Token', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         delete headers.Authorization;
@@ -228,7 +228,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderteAbteilung,
             { headers },
         );
 
@@ -236,7 +236,7 @@ describe('PUT /rest/:id', () => {
         expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
     });
 
-    test('Vorhandenes Buch aendern, aber mit falschem Token', async () => {
+    test('Vorhandene Abteilung aendern, aber mit falschem Token', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = 'FALSCH';
@@ -245,7 +245,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesBuch,
+            geaenderteAbteilung,
             { headers },
         );
 
