@@ -24,8 +24,8 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuchDTO } from '../../src/buch/rest/buchDTO.entity.js';
-import { BuchReadService } from '../../src/buch/service/buch-read.service.js';
+import { type AbteilungDTO } from '../../src/abteilung/rest/abteilungDTO.entity.js';
+import { AbteilungReadService } from '../../src/abteilung/service/abteilung-read.service.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
@@ -33,56 +33,56 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const neuesBuch: BuchDTO = {
-    isbn: '978-0-007-00644-1',
-    rating: 1,
-    art: 'DRUCKAUSGABE',
-    preis: 99.99,
-    rabatt: 0.123,
-    lieferbar: true,
-    datum: '2022-02-28',
+const neueAbteilung: AbteilungDTO = {
+    bueroNummer: '4-202',
+    zufriedenheit: 1,
+    art: 'ENTWICKLUNG',
+    budget: 99.99,
+    krankenstandsQuote: 0.123,
+    verfuegbar: true,
+    gruendungsDatum: '2022-02-28',
     homepage: 'https://post.rest',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    titel: {
-        titel: 'Titelpost',
-        untertitel: 'untertitelpos',
+    abteilungsleiter: {
+        nachname: 'Nachnamepost',
+        vorname: 'vornamepost',
     },
-    abbildungen: [
+    vieleMitarbeiter: [
         {
-            beschriftung: 'Abb. 1',
-            contentType: 'img/png',
+            name: 'Daniel Theis',
+            jobType: 'Support',
         },
     ],
 };
-const neuesBuchInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
-    rating: -1,
+const neueAbteilungInvalid: Record<string, unknown> = {
+    bueroNummer: 'falsche-BueroNummer',
+    zufriedenheit: -1,
     art: 'UNSICHTBAR',
-    preis: -1,
-    rabatt: 2,
-    lieferbar: true,
-    datum: '12345-123-123',
+    budget: -1,
+    krankenstandsQuote: 2,
+    verfuegbar: true,
+    gruendungsDatum: '12345-123-123',
     homepage: 'anyHomepage',
-    titel: {
-        titel: '?!',
-        untertitel: 'Untertitelinvalid',
+    abteilungsleiter: {
+        nachname: '?!',
+        vorname: 'Vornameinvalid',
     },
 };
-const neuesBuchIsbnExistiert: BuchDTO = {
-    isbn: '978-3-897-22583-1',
-    rating: 1,
-    art: 'DRUCKAUSGABE',
-    preis: 99.99,
-    rabatt: 0.099,
-    lieferbar: true,
-    datum: '2022-02-28',
-    homepage: 'https://post.isbn/',
+const neueAbteilungBueroNummerExistiert: AbteilungDTO = {
+    bueroNummer: '3-300',
+    zufriedenheit: 1,
+    art: 'ENTWICKLUNG',
+    budget: 99.99,
+    krankenstandsQuote: 0.099,
+    verfuegbar: true,
+    gruendungsDatum: '2022-02-28',
+    homepage: 'https://post.bueroNummer/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    titel: {
-        titel: 'Titelpostisbn',
-        untertitel: 'Untertitelpostisbn',
+    abteilungsleiter: {
+        nachname: 'NachnamepostbueroNummer',
+        vorname: 'vornamepostbueroNummer',
     },
-    abbildungen: undefined,
+    vieleMitarbeiter: undefined,
 };
 
 // -----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ describe('POST /rest', () => {
         await shutdownServer();
     });
 
-    test('Neues Buch', async () => {
+    test('Neue Abteilung', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -119,7 +119,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<string> = await client.post(
             '/rest',
-            neuesBuch,
+            neueAbteilung,
             { headers },
         );
 
@@ -140,30 +140,30 @@ describe('POST /rest', () => {
         const idStr = location.slice(indexLastSlash + 1);
 
         expect(idStr).toBeDefined();
-        expect(BuchReadService.ID_PATTERN.test(idStr)).toBe(true);
+        expect(AbteilungReadService.ID_PATTERN.test(idStr)).toBe(true);
 
         expect(data).toBe('');
     });
 
-    test('Neues Buch mit ungueltigen Daten', async () => {
+    test('Neues Abteilung mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
-            expect.stringMatching(/^rating /u),
+            expect.stringMatching(/^bueroNummer /u),
+            expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^art /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
+            expect.stringMatching(/^budget /u),
+            expect.stringMatching(/^krankenstandsQuote /u),
+            expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
-            expect.stringMatching(/^titel.titel /u),
+            expect.stringMatching(/^abteilungsleiter.nachname /u),
         ];
 
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuchInvalid,
+            neueAbteilungInvalid,
             { headers },
         );
 
@@ -180,7 +180,7 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Neues Buch, aber die ISBN existiert bereits', async () => {
+    test('Neue Abteilung, aber die BueroNummer existiert bereits', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -188,7 +188,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<ErrorResponse> = await client.post(
             '/rest',
-            neuesBuchIsbnExistiert,
+            neueAbteilungBueroNummerExistiert,
             { headers },
         );
 
@@ -197,22 +197,22 @@ describe('POST /rest', () => {
 
         const { message, statusCode } = data;
 
-        expect(message).toEqual(expect.stringContaining('ISBN'));
+        expect(message).toEqual(expect.stringContaining('BueroNummer'));
         expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
     });
 
-    test('Neues Buch, aber ohne Token', async () => {
+    test('Neue Abteilung, aber ohne Token', async () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuch,
+            neueAbteilung,
         );
 
         // then
         expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
     });
 
-    test('Neues Buch, aber mit falschem Token', async () => {
+    test('Neue Abteilung, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         headers.Authorization = `Bearer ${token}`;
@@ -220,7 +220,7 @@ describe('POST /rest', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.post(
             '/rest',
-            neuesBuch,
+            neueAbteilung,
             { headers },
         );
 

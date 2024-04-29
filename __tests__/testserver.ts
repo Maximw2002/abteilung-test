@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/import-style */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
  *

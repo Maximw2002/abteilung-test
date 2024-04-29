@@ -25,15 +25,15 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type BuecherModel } from '../../src/buch/rest/buch-get.controller.js';
+import { type AbteilungenModel } from '../../src/abteilung/rest/abteilung-get.controller.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const titelVorhanden = 'a';
-const titelNichtVorhanden = 'xx';
+const abteilungsleiterVorhanden = 'a';
+const abteilungsleiterNichtVorhanden = 'xx';
 const schlagwortVorhanden = 'javascript';
 const schlagwortNichtVorhanden = 'csharp';
 
@@ -60,11 +60,11 @@ describe('GET /rest', () => {
         await shutdownServer();
     });
 
-    test('Alle Buecher', async () => {
+    test('Alle Abteilungen', async () => {
         // given
 
         // when
-        const { status, headers, data }: AxiosResponse<BuecherModel> =
+        const { status, headers, data }: AxiosResponse<AbteilungenModel> =
             await client.get('/');
 
         // then
@@ -72,22 +72,22 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu); // eslint-disable-line sonarjs/no-duplicate-string
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { abteilungen } = data._embedded;
 
-        buecher
-            .map((buch) => buch._links.self.href)
+        abteilungen
+            .map((abteilung) => abteilung._links.self.href)
             .forEach((selfLink) => {
                 // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
                 expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'iu'));
             });
     });
 
-    test('Buecher mit einem Teil-Titel suchen', async () => {
+    test('Abteilungen mit einem Teil-Abteilungsleitername suchen', async () => {
         // given
-        const params = { titel: titelVorhanden };
+        const params = { abteilungsleiter: abteilungsleiterVorhanden };
 
         // when
-        const { status, headers, data }: AxiosResponse<BuecherModel> =
+        const { status, headers, data }: AxiosResponse<AbteilungenModel> =
             await client.get('/', { params });
 
         // then
@@ -95,21 +95,21 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu);
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { abteilungen } = data._embedded;
 
-        // Jedes Buch hat einen Titel mit dem Teilstring 'a'
-        buecher
-            .map((buch) => buch.titel)
-            .forEach((titel) =>
-                expect(titel.titel.toLowerCase()).toEqual(
-                    expect.stringContaining(titelVorhanden),
+        // Jede Abteilung hat einen Abteilungsleiter mit dem Teilstring 'a'
+        abteilungen
+            .map((abteilung) => abteilung.abteilungsleiter)
+            .forEach((abteilungsleiter) =>
+                expect(abteilungsleiter.nachname.toLowerCase()).toEqual(
+                    expect.stringContaining(abteilungsleiterVorhanden),
                 ),
             );
     });
 
-    test('Buecher zu einem nicht vorhandenen Teil-Titel suchen', async () => {
+    test('Abteilungen zu einem nicht vorhandenen Teil-Abteilungsleitersnamen suchen', async () => {
         // given
-        const params = { titel: titelNichtVorhanden };
+        const params = { abteilungsleiter: abteilungsleiterNichtVorhanden };
 
         // when
         const { status, data }: AxiosResponse<ErrorResponse> = await client.get(
@@ -126,12 +126,12 @@ describe('GET /rest', () => {
         expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     });
 
-    test('Mind. 1 Buch mit vorhandenem Schlagwort', async () => {
+    test('Mind. 1 Abteilung mit vorhandenem Schlagwort', async () => {
         // given
         const params = { [schlagwortVorhanden]: 'true' };
 
         // when
-        const { status, headers, data }: AxiosResponse<BuecherModel> =
+        const { status, headers, data }: AxiosResponse<AbteilungenModel> =
             await client.get('/', { params });
 
         // then
@@ -140,11 +140,11 @@ describe('GET /rest', () => {
         // JSON-Array mit mind. 1 JSON-Objekt
         expect(data).toBeDefined();
 
-        const { buecher } = data._embedded;
+        const { abteilungen } = data._embedded;
 
-        // Jedes Buch hat im Array der Schlagwoerter z.B. "javascript"
-        buecher
-            .map((buch) => buch.schlagwoerter)
+        // Jedes Abteilung hat im Array der Schlagwoerter z.B. "javascript"
+        abteilungen
+            .map((abteilung) => abteilung.schlagwoerter)
             .forEach((schlagwoerter) =>
                 expect(schlagwoerter).toEqual(
                     expect.arrayContaining([schlagwortVorhanden.toUpperCase()]),
@@ -152,7 +152,7 @@ describe('GET /rest', () => {
             );
     });
 
-    test('Keine Buecher zu einem nicht vorhandenen Schlagwort', async () => {
+    test('Keine Abteilungen zu einem nicht vorhandenen Schlagwort', async () => {
         // given
         const params = { [schlagwortNichtVorhanden]: 'true' };
 
@@ -171,7 +171,7 @@ describe('GET /rest', () => {
         expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     });
 
-    test('Keine Buecher zu einer nicht-vorhandenen Property', async () => {
+    test('Keine Abteilungen zu einer nicht-vorhandenen Property', async () => {
         // given
         const params = { foo: 'bar' };
 

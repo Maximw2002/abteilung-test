@@ -31,7 +31,7 @@ export class AbteilungsleiterDTO {
     @Matches('^\\w.*')
     @MaxLength(40)
     @ApiProperty({ example: 'Der Abteilungsleiter', type: String })
-    readonly abteilungsleiter!: string;
+    readonly nachname!: string;
 
     @IsOptional()
     @MaxLength(40)
