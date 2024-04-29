@@ -24,23 +24,25 @@ import {
     OracleNamingStrategy,
     SnakeNamingStrategy,
 } from './typeormNamingStrategy.js';
-import { Buch } from '../buch/entity/abteilung.entity.js';
+import { Abteilung } from '../abteilung/entity/abteilung.entity.js';
 import { type DataSourceOptions } from 'typeorm';
 import { dbType } from './db.js';
-import { entities } from '../buch/entity/entities.js';
+import { entities } from '../abteilung/entity/entities.js';
 import { loggerDefaultValue } from './logger.js';
 import { nodeConfig } from './node.js';
 import { readFileSync } from 'node:fs';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 const { db } = config;
 
 // nullish coalescing
-const database = (db?.name as string | undefined) ?? Buch.name.toLowerCase();
+const database =
+    (db?.name as string | undefined) ?? Abteilung.name.toLowerCase();
 
 const host = (db?.host as string | undefined) ?? 'localhost';
 const username =
-    (db?.username as string | undefined) ?? Buch.name.toLowerCase();
+    (db?.username as string | undefined) ?? Abteilung.name.toLowerCase();
 const pass = (db?.password as string | undefined) ?? 'p';
 const passAdmin = (db?.passwordAdmin as string | undefined) ?? 'p';
 

@@ -32,9 +32,9 @@ import { typeOrmModuleOptions } from '../../config/typeormOptions.js';
 
 /** Typdefinitionen für die Suche mit der Abteilung-ID. */
 export interface BuildIdParams {
-    /** ID des gesuchten Buchs. */
+    /** ID der gesuchten Abteilung. */
     readonly id: number;
-    /** Sollen die Abbildungen mitgeladen werden? */
+    /** Sollen die Mitarbeiter mitgeladen werden? */
     readonly mitMitarbeitern?: boolean;
 }
 /**
@@ -74,9 +74,9 @@ export class QueryBuilder {
             this.#abteilungAlias,
         );
 
-        // Fetch-Join: aus QueryBuilder "buch" die Property "titel" ->  Tabelle "titel"
+        // Fetch-Join: aus QueryBuilder "abteilung" die Property "abteilungsleiter" ->  Tabelle "abteilungsleiter"
         queryBuilder.innerJoinAndSelect(
-            `${this.#abteilungAlias}.titel`,
+            `${this.#abteilungAlias}.abteilungsleiter`,
             this.#abteilungsleiterAlias,
         );
 

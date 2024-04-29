@@ -38,9 +38,9 @@ import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren einer Abteilung mit `update`. */
 export interface UpdateParams {
-    /** ID des zu aktualisierenden Buches. */
+    /** ID der zu aktualisierenden Abteilung. */
     readonly id: number | undefined;
-    /** Buch-Objekt mit den aktualisierten Werten. */
+    /** Abteilung-Objekt mit den aktualisierten Werten. */
     readonly abteilung: Abteilung;
     /** Versionsnummer für die aktualisierenden Werte. */
     readonly version: string;
@@ -148,7 +148,7 @@ export class AbteilungWriteService {
 
         let deleteResult: DeleteResult | undefined;
         await this.#repo.manager.transaction(async (transactionalMgr) => {
-            // Das Buch zur gegebenen ID mit Titel und Abb. asynchron loeschen
+            // Die Abteilung zur gegebenen ID mit Abteilungsleiter und Abb. asynchron loeschen
 
             // TODO "cascade" funktioniert nicht beim Loeschen
             const abteilungsleiterId = abteilung.abteilungsleiter?.id;

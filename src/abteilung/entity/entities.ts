@@ -19,5 +19,5 @@ import { Abteilung } from './abteilung.entity.js';
 import { Abteilungsleiter } from './abteilungsleiter.entity.js';
 import { Mitarbeiter } from './mitarbeiter.entity.js';
 
-// erforderlich in src/config/db.ts und src/buch/buch.module.ts
+// erforderlich in src/config/db.ts und src/abteilung/abteilung.module.ts
 export const entities = [Mitarbeiter, Abteilung, Abteilungsleiter];

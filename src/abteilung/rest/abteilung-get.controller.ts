@@ -81,7 +81,7 @@ export interface Links {
 /** Typedefinition für ein Abteilungsleiter-Objekt ohne Rückwärtsverweis zur Abteilung */
 export type AbteilungsleiterModel = Omit<Abteilungsleiter, 'abteilung' | 'id'>;
 
-/** Buch-Objekt mit HATEOAS-Links */
+/** Abteilung-Objekt mit HATEOAS-Links */
 export type AbteilungModel = Omit<
     Abteilung,
     | 'vieleMitarbeiter'
@@ -294,7 +294,7 @@ export class AbteilungGetController {
         const abteilungen = await this.#service.find(query);
         this.#logger.debug('get: %o', abteilungen);
 
-        // HATEOAS: Atom Links je Buch
+        // HATEOAS: Atom Links je Abteilung
         const abteilungenModel = abteilungen.map((abteilung) =>
             this.#toModel(abteilung, req, false),
         );
