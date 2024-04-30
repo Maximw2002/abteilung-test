@@ -32,9 +32,13 @@ import { typeOrmModuleOptions } from '../../config/typeormOptions.js';
 
 /** Typdefinitionen für die Suche mit der Abteilung-ID. */
 export interface BuildIdParams {
-    /** ID des gesuchten Buchs. */
+    /** ID der gesuchten Abteilung. */
     readonly id: number;
+<<<<<<< HEAD
     /** Sollen die Abbildungen mitgeladen werden? */
+=======
+    /** Sollen die Mitarbeiter mitgeladen werden? */
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
     readonly mitMitarbeitern?: boolean;
 }
 /**
@@ -72,6 +76,7 @@ export class QueryBuilder {
         // QueryBuilder "abteilung" fuer Repository<Abteilung>
         const queryBuilder = this.#repo.createQueryBuilder(
             this.#abteilungAlias,
+<<<<<<< HEAD
         );
 
         // Fetch-Join: aus QueryBuilder "buch" die Property "titel" ->  Tabelle "titel"
@@ -80,6 +85,16 @@ export class QueryBuilder {
             this.#abteilungsleiterAlias,
         );
 
+=======
+        );
+
+        // Fetch-Join: aus QueryBuilder "abteilung" die Property "abteilungsleiter" ->  Tabelle "abteilungsleiter"
+        queryBuilder.innerJoinAndSelect(
+            `${this.#abteilungAlias}.abteilungsleiter`,
+            this.#abteilungsleiterAlias,
+        );
+
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
         if (mitMitarbeitern) {
             // Fetch-Join: aus QueryBuilder "abteilung" die Property "vieleMitarbeiter" -> Tabelle "mitarbeiter"
             queryBuilder.leftJoinAndSelect(

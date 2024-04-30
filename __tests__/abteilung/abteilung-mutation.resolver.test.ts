@@ -71,22 +71,39 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                             bueronummer: "978-0-321-19368-1",
                             zufriedenheit: 1,
                             art: KINDLE,
                             budget: 99.99,
                             krankenstandsquote: 0.123,
+=======
+                            bueroNummer: "0-200",
+                            zufriedenheit: 1,
+                            art: VERTRIEB,
+                            budget: 99.99,
+                            krankenstandsQuote: 0.123,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                             verfuegbar: true,
                             gruendungsDatum: "2022-02-28",
                             homepage: "https://create.mutation",
                             schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
                             abteilungsleiter: {
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                                 vorname: "Vornamecreatemutation",
                                 nachname: "nachnamecreatemutation"
                             },
                             vieleMitarbeiter: [{
                                 name: "Abb. 1",
                                 jobType: "img/png"
+=======
+                                nachname: "nachnamecreatemutation",
+                                vorname: "vornamecreatemutation"
+                            },
+                            vieleMitarbeiter: [{
+                                name: "Moritz Wagner",
+                                contentType: "Projektleiter"
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                             }]
                         }
                     ) {
@@ -113,7 +130,10 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
     // eslint-disable-next-line max-lines-per-function
+=======
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
     test('Abteilung mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
@@ -123,6 +143,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                             bueronummer: "falsche-BUERONUMMER",
                             zufriedenheit: -1,
                             art: KINDLE,
@@ -132,6 +153,17 @@ describe('GraphQL Mutations', () => {
                             gruendungsDatum: "12345-123-123",
                             homepage: "anyHomepage",
                             nachname: {
+=======
+                            bueroNummer: "falsche-BueroNummer",
+                            zufriedenheit: -1,
+                            art: VERTRIEB,
+                            budget: -1,
+                            krankenstandsQuote: 2,
+                            verfuegbar: false,
+                            gruendungsDatum: "12345-123-123",
+                            homepage: "anyHomepage",
+                            abteilungsleiter: {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                                 nachname: "?!"
                             }
                         }
@@ -142,6 +174,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
             expect.stringMatching(/^bueronummer /u),
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
@@ -149,6 +182,15 @@ describe('GraphQL Mutations', () => {
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
             expect.stringMatching(/^abteilungsleiter.abteilungsleiter /u),
+=======
+            expect.stringMatching(/^bueroNummer /u),
+            expect.stringMatching(/^zufriedenheit /u),
+            expect.stringMatching(/^budget /u),
+            expect.stringMatching(/^krankenstandsQuote /u),
+            expect.stringMatching(/^datum /u),
+            expect.stringMatching(/^homepage /u),
+            expect.stringMatching(/^abteilungsleiter.nachname /u),
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
         ];
 
         // when
@@ -188,11 +230,19 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "40",
                             version: 0,
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                             bueronummer: "978-0-007-09732-6",
                             zufriedenheit: 5,
                             art: KINDLE,
                             budget: 444.44,
                             krankenstandsquote: 0.099,
+=======
+                            bueroNummer: "2-301",
+                            zufriedenheit: 5,
+                            art: VERTRIEB,
+                            budget: 444.44,
+                            krankenstandsQuote: 0.099,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                             verfuegbar: false,
                             gruendungsDatum: "2021-04-04",
                             homepage: "https://update.mutation"
@@ -233,11 +283,19 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                             bueronummer: "falsche-BUERONUMMER",
                             zufriedenheit: -1,
                             art: KINDLE,
                             budget: -1,
                             krankenstandsquote: 2,
+=======
+                            bueroNummer: "falsche-BueroNummer",
+                            zufriedenheit: -1,
+                            art: VERTRIEB,
+                            budget: -1,
+                            krankenstandsQuote: 2,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                             verfuegbar: false,
                             gruendungsDatum: "12345-123-123",
                             homepage: "anyHomepage",
@@ -250,10 +308,17 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
             expect.stringMatching(/^bueronummer /u),
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
             expect.stringMatching(/^krankenstandsquote /u),
+=======
+            expect.stringMatching(/^bueroNummer /u),
+            expect.stringMatching(/^zufriedenheit /u),
+            expect.stringMatching(/^budget /u),
+            expect.stringMatching(/^krankenstandsQuote /u),
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
         ];
@@ -293,11 +358,19 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
+<<<<<<< HEAD:__tests__/buch/abteilung-mutation.resolver.test.ts
                             bueronummer: "978-0-007-09732-6",
                             zufriedenheit: 5,
                             art: DRUCKAUSGABE,
                             budget: 99.99,
                             krankenstandsquote: 0.099,
+=======
+                            bueroNummer: "1-300",
+                            zufriedenheit: 5,
+                            art: DRUCKAUSGABE,
+                            budget: 99.99,
+                            krankenstandsQuote: 0.099,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-mutation.resolver.test.ts
                             verfuegbar: false,
                             gruendungsDatum: "2021-01-02",
                             homepage: "https://acme.com",

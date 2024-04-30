@@ -36,43 +36,43 @@ package typeorm {
   hide UpdateDateColumn circle
 }
 
-package buch.entity {
-  class "type BuchArt = 'KINDLE' | 'DRUCKAUSGABE'" as BuchArt
-  hide BuchArt circle
+package abteilung.entity {
+  class "type AbteilungsArt = 'ENTWICKLUNG' | 'VERTRIEB'" as AbteilungsArt
+  hide AbteilungsArt circle
 
-  class Buch <<entity>> <<@Entity>> {
+  class Abteilung <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: number
     @Column() readonly version: number
-    @Column() readonly isbn: string
-    @Column() readonly rating: number
-    @Column() readonly art: BuchArt
-    @Column() readonly preis: number
-    @Column() readonly rabatt: number
-    @Column() readonly lieferbar: boolean
-    @Column() readonly datum: Date
+    @Column() readonly bueroNummer: string
+    @Column() readonly zufriedenheit: number
+    @Column() readonly art: AbteilungsArt
+    @Column() readonly budget: number
+    @Column() readonly krankenstandsQuote: number
+    @Column() readonly verfuegbar: boolean
+    @Column() readonly gruendungsDatum: Date
     @Column() readonly homepage?: string
     @Column() readonly schlagwoerter?: string
     @CreateDateColumn() readonly erzeugt: Date
     @UpdateDateColumn() readonly aktualisiert: Date
   }
 
-  class Titel <<entity>> <<@Entity>> {
+  class Abteilungsleiter <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: number
-    @Column() readonly titel: string
-    @Column() readonly untertitel?: string
+    @Column() readonly abteilungsleiter: string
+    @Column() readonly vorname?: string
   }
 
-  class Abbildung <<entity>> <<@Entity>> {
+  class Mitarbeiter <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: number
-    @Column() readonly beschriftung: string
-    @Column() readonly contentType?: string
+    @Column() readonly name: string
+    @Column() readonly jobType?: string
   }
 
-  Buch *--> "1" Titel : @OneToOne() \ntitel
-  Buch *--> "*" Abbildung : @OneToMany() \nabbildungen
+  Abteilung *--> "1" Abteilungsleiter : @OneToOne() \nabteilungsleiter
+  Abteilung *--> "*" Mitarbeiter : @OneToMany() \nmitarbeiter
 
-  Buch .right.> Entity
-  Buch .right.> BuchArt
+  Abteilung .right.> Entity
+  Abteilung .right.> AbteilungsArt
 }
 
 hide empty members

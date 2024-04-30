@@ -33,11 +33,19 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const geaenderteAbteilung: AbteilungDtoOhneRef = {
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
     bueroNummer: '978-0-201-63361-0',
     zufriedenheit: 5,
     art: 'KINDLE',
     budget: 3333,
     krankenstandsquote: 0.33,
+=======
+    bueroNummer: '3-202',
+    zufriedenheit: 5,
+    art: 'VERTRIEB',
+    budget: 3333,
+    krankenstandsQuote: 0.33,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '2022-03-03',
     homepage: 'https://geaendert.put.rest',
@@ -46,11 +54,19 @@ const geaenderteAbteilung: AbteilungDtoOhneRef = {
 const idVorhanden = '30';
 
 const geaenderteAbteilungIdNichtVorhanden: AbteilungDtoOhneRef = {
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
     bueroNummer: '978-0-007-09732-6',
     zufriedenheit: 4,
     art: 'DRUCKAUSGABE',
     budget: 44.4,
     krankenstandsquote: 0.044,
+=======
+    bueroNummer: '1-301',
+    zufriedenheit: 4,
+    art: 'ENTWICKLUNG',
+    budget: 44.4,
+    krankenstandsQuote: 0.044,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '2022-02-04',
     homepage: 'https://acme.de',
@@ -59,23 +75,40 @@ const geaenderteAbteilungIdNichtVorhanden: AbteilungDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaenderteAbteilungInvalid: Record<string, unknown> = {
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
     bueroNummer: 'falsche-bueroNummer',
     zufriedenheit: -1,
     art: 'UNSICHTBAR',
     budget: -1,
     krankenstandsquote: 2,
+=======
+    bueroNummer: 'falsche-BueroNummer',
+    zufriedenheit: -1,
+    art: 'UNSICHTBAR',
+    budget: -1,
+    krankenstandsQuote: 2,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '12345-123-123',
     abteilungsleiter: '?!',
     homepage: 'anyHomepage',
 };
 
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
 const veralteAbteilung: AbteilungDtoOhneRef = {
     bueroNummer: '978-0-007-09732-6',
     zufriedenheit: 1,
     art: 'DRUCKAUSGABE',
     budget: 44.4,
     krankenstandsquote: 0.044,
+=======
+const veralteteAbteilung: AbteilungDtoOhneRef = {
+    bueroNummer: '1-205',
+    zufriedenheit: 1,
+    art: 'ENTWICKLUNG',
+    budget: 44.4,
+    krankenstandsQuote: 0.044,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '2022-02-04',
     homepage: 'https://acme.de',
@@ -157,7 +190,11 @@ describe('PUT /rest/:id', () => {
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^art /u),
             expect.stringMatching(/^budget /u),
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
             expect.stringMatching(/^krankenstandsquote /u),
+=======
+            expect.stringMatching(/^krankenstandsQuote /u),
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
         ];
@@ -206,7 +243,11 @@ describe('PUT /rest/:id', () => {
         // when
         const { status, data }: AxiosResponse<ErrorResponse> = await client.put(
             url,
+<<<<<<< HEAD:__tests__/buch/abteilung-PUT.controller.test.ts
             veralteAbteilung,
+=======
+            veralteteAbteilung,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-PUT.controller.test.ts
             { headers },
         );
 

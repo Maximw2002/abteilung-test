@@ -91,11 +91,19 @@ export class DbPopulateService implements OnApplicationBootstrap {
     `;
 
     readonly #oracleInsertAbteilungsleiter = `
+<<<<<<< HEAD
         INSERT INTO abteilungsleiter(id,abteilungsleiter,vorname,abteilung_id)
         SELECT id,abteilungsleiter,vorname,abteilung_id
         FROM   EXTERNAL (
             (id               NUMBER(10,0),
             abteilungsleiter  VARCHAR2(40),
+=======
+        INSERT INTO abteilungsleiter(id,nachname,vorname,abteilung_id)
+        SELECT id,nachname,vorname,abteilung_id
+        FROM   EXTERNAL (
+            (id               NUMBER(10,0),
+            nachname          VARCHAR2(40),
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
             vorname           VARCHAR2(40),
             abteilung_id      NUMBER(10,0))
             TYPE ORACLE_LOADER

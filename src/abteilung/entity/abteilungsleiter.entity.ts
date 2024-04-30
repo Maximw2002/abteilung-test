@@ -31,7 +31,7 @@ export class Abteilungsleiter {
     id: number | undefined;
 
     @Column()
-    readonly abteilungsleiter!: string;
+    readonly titel!: string;
 
     @Column('varchar')
     readonly vorname: string | undefined;
@@ -43,7 +43,7 @@ export class Abteilungsleiter {
     public toString = (): string =>
         JSON.stringify({
             id: this.id,
-            abteilungsleiter: this.abteilungsleiter,
-            vorname: this.vorname,
+            titel: this.titel,
+            untertitel: this.untertitel,
         });
 }

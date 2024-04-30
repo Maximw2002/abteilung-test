@@ -18,7 +18,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
 import { type Abteilung, type AbteilungsArt } from '../../src/abteilung/entity/abteilung.entity.js';
+=======
+import {
+    type Abteilung,
+    type AbteilungsArt,
+} from '../../src/abteilung/entity/abteilung.entity.js';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -40,9 +47,15 @@ export interface GraphQLResponseBody {
 
 type AbteilungDTO = Omit<
     Abteilung,
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
     'mitarbeiter' | 'aktualisiert' | 'erzeugt' | 'krankenstandsquote'
 > & {
     krankenstandsquote: string;
+=======
+    'vieleMitarbeiter' | 'aktualisiert' | 'erzeugt' | 'krankenstandsQuote'
+> & {
+    krankenstandsQuote: string;
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
 };
 
 // -----------------------------------------------------------------------------
@@ -54,7 +67,11 @@ const abteilungsleiterVorhanden = 'Alpha';
 const teilAbteilungsleiterVorhanden = 'a';
 const teilAbteilungsleiterNichtVorhanden = 'abc';
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
 const bueroNummerVorhanden = '978-3-897-22583-1';
+=======
+const bueroNummerVorhanden = '4-205';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
 
 const zufriedenheitVorhanden = 2;
 const zufriedenheitNichtVorhanden = 99;
@@ -103,7 +120,11 @@ describe('GraphQL Queries', () => {
                         abteilungsleiter {
                             nachname
                         }
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
                         krankenstandsquote(short: true)
+=======
+                        krankenstandsQuote(short: true)
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
                     }
                 }
             `,
@@ -122,7 +143,11 @@ describe('GraphQL Queries', () => {
         const { abteilung } = data.data!;
         const result: AbteilungDTO = abteilung;
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
         expect(result.abteilungsleiter?.abteilungsleiter).toMatch(/^\w/u);
+=======
+        expect(result.abteilungsleiter?.nachname).toMatch(/^\w/u);
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         expect(result.version).toBeGreaterThan(-1);
         expect(result.id).toBeUndefined();
     });
@@ -203,7 +228,11 @@ describe('GraphQL Queries', () => {
 
         const [abteilung] = abteilungenArray;
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
         expect(abteilung!.abteilungsleiter?.abteilungsleiter).toBe(
+=======
+        expect(abteilung!.abteilungsleiter?.nachname).toBe(
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
             abteilungsleiterVorhanden,
         );
     });
@@ -242,9 +271,13 @@ describe('GraphQL Queries', () => {
         abteilungenArray
             .map((abteilung) => abteilung.abteilungsleiter)
             .forEach((abteilungsleiter) =>
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
                 expect(
                     abteilungsleiter?.abteilungsleiter.toLowerCase(),
                 ).toEqual(
+=======
+                expect(abteilungsleiter?.nachname.toLowerCase()).toEqual(
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
                     expect.stringContaining(teilAbteilungsleiterVorhanden),
                 ),
             );
@@ -290,7 +323,11 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
     test('Abteilung zu vorhandener bueroNummer-Nummer', async () => {
+=======
+    test('Abteilung zu vorhandener BueroNummer-Nummer', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         // given
         const body: GraphQLRequest = {
             query: `
@@ -330,10 +367,17 @@ describe('GraphQL Queries', () => {
         const { bueroNummer, abteilungsleiter } = abteilung!;
 
         expect(bueroNummer).toBe(bueroNummerVorhanden);
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
         expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
     });
 
     test('Abteilungen zu vorhandenem "zufriedenheit"', async () => {
+=======
+        expect(abteilungsleiter?.nachname).toBeDefined();
+    });
+
+    test('Abteilungen zu vorhandener "zufriedenheit"', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         // given
         const body: GraphQLRequest = {
             query: `
@@ -372,13 +416,21 @@ describe('GraphQL Queries', () => {
             const { zufriedenheit, abteilungsleiter } = abteilung;
 
             expect(zufriedenheit).toBe(zufriedenheitVorhanden);
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
             expect(abteilungsleiter?.abteilungsleiter.toLowerCase()).toEqual(
+=======
+            expect(abteilungsleiter?.nachname.toLowerCase()).toEqual(
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
                 expect.stringContaining(teilAbteilungsleiterVorhanden),
             );
         });
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
     test('Keine Abteilung zu nicht-vorhandenem "zufriedenheit"', async () => {
+=======
+    test('Keine Abteilung zu nicht-vorhandener "zufriedenheit"', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         // given
         const body: GraphQLRequest = {
             query: `
@@ -417,14 +469,24 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
     test('Abteilungen zur Art "KINDLE"', async () => {
         // given
         const abteilungArt: AbteilungArt = 'KINDLE';
+=======
+    test('Abteilungen zur Art "VERTRIEB"', async () => {
+        // given
+        const abteilungsArt: AbteilungsArt = 'VERTRIEB';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         const body: GraphQLRequest = {
             query: `
                 {
                     abteilungen(suchkriterien: {
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
                         art: ${abteilungArt}
+=======
+                        art: ${abteilungsArt}
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
                     }) {
                         art
                         abteilungsleiter {
@@ -455,19 +517,32 @@ describe('GraphQL Queries', () => {
         abteilungenArray.forEach((abteilung) => {
             const { art, abteilungsleiter } = abteilung;
 
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
             expect(art).toBe(abteilungArt);
             expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
+=======
+            expect(art).toBe(abteilungsArt);
+            expect(abteilungsleiter?.nachname).toBeDefined();
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         });
     });
 
     test('Abteilungen zur einer ungueltigen Art', async () => {
         // given
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
         const abteilungArt = 'UNGUELTIG';
+=======
+        const abteilungsArt = 'UNGUELTIG';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         const body: GraphQLRequest = {
             query: `
                 {
                     abteilungen(suchkriterien: {
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
                         art: ${abteilungArt}
+=======
+                        art: ${abteilungsArt}
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
                     }) {
                         abteilungsleiter {
                             nachname
@@ -535,7 +610,11 @@ describe('GraphQL Queries', () => {
             const { verfuegbar, abteilungsleiter } = abteilung;
 
             expect(verfuegbar).toBe(true);
+<<<<<<< HEAD:__tests__/buch/abteilung-query.resolver.test.ts
             expect(abteilungsleiter?.abteilungsleiter).toBeDefined();
+=======
+            expect(abteilungsleiter?.nachname).toBeDefined();
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-query.resolver.test.ts
         });
     });
 });

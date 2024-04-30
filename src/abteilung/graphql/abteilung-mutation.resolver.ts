@@ -118,7 +118,11 @@ export class AbteilungMutationResolver {
         const abteilungsleiterDTO = abteilungDTO.abteilungsleiter;
         const abteilungsleiter: Abteilungsleiter = {
             id: undefined,
+<<<<<<< HEAD
             abteilungsleiter: abteilungsleiterDTO.abteilungsleiter,
+=======
+            nachname: abteilungsleiterDTO.nachname,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
             vorname: abteilungsleiterDTO.vorname,
             abteilung: undefined,
         };

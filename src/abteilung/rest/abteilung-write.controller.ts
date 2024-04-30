@@ -217,9 +217,9 @@ export class AbteilungWriteController {
         const abteilungsleiterDTO = abteilungDTO.abteilungsleiter;
         const abteilungsleiter: Abteilungsleiter = {
             id: undefined,
-            abteilungsleiter: abteilungsleiterDTO.abteilungsleiter,
-            vorname: abteilungsleiterDTO.vorname,
-            abteilung: undefined,
+            titel: titelDTO.titel,
+            untertitel: titelDTO.untertitel,
+            buch: undefined,
         };
         const vieleMitarbeiter = abteilungDTO.vieleMitarbeiter?.map(
             (mitarbeiterDTO) => {

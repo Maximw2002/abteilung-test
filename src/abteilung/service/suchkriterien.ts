@@ -16,7 +16,7 @@
  */
 
 /**
- * Das Modul besteht aus der Klasse {@linkcode BuchReadService}.
+ * Das Modul besteht aus der Klasse {@linkcode AbteilungReadService}.
  * @packageDocumentation
  */
 

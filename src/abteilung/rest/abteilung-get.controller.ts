@@ -82,14 +82,9 @@ export interface Links {
 export type AbteilungsleiterModel = Omit<Abteilungsleiter, 'abteilung' | 'id'>;
 
 /** Buch-Objekt mit HATEOAS-Links */
-export type AbteilungModel = Omit<
-    Abteilung,
-    | 'vieleMitarbeiter'
-    | 'aktualisiert'
-    | 'erzeugt'
-    | 'id'
-    | 'abteilungsleiter'
-    | 'version'
+export type BuchModel = Omit<
+    Buch,
+    'abbildungen' | 'aktualisiert' | 'erzeugt' | 'id' | 'titel' | 'version'
 > & {
     abteilungsleiter: AbteilungsleiterModel;
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -100,7 +95,7 @@ export type AbteilungModel = Omit<
 export interface AbteilungenModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        abteilungen: AbteilungModel[];
+        buecher: BuchModel[];
     };
 }
 
@@ -220,7 +215,7 @@ export class AbteilungGetController {
         @Req() req: Request,
         @Headers('If-None-Match') version: string | undefined,
         @Res() res: Response,
-    ): Promise<Response<AbteilungModel | undefined>> {
+    ): Promise<Response<BuchModel | undefined>> {
         this.#logger.debug('getById: idStr=%s, version=%s', idStr, version);
         const id = Number(idStr);
         if (!Number.isInteger(id)) {
@@ -254,9 +249,9 @@ export class AbteilungGetController {
         res.header('ETag', `"${versionDb}"`);
 
         // HATEOAS mit Atom Links und HAL (= Hypertext Application Language)
-        const abteilungModel = this.#toModel(abteilung, req);
-        this.#logger.debug('getById: abteilungModel=%o', abteilungModel);
-        return res.contentType(APPLICATION_HAL_JSON).json(abteilungModel);
+        const buchModel = this.#toModel(buch, req);
+        this.#logger.debug('getById: buchModel=%o', buchModel);
+        return res.contentType(APPLICATION_HAL_JSON).json(buchModel);
     }
 
     /**
@@ -295,8 +290,8 @@ export class AbteilungGetController {
         this.#logger.debug('get: %o', abteilungen);
 
         // HATEOAS: Atom Links je Buch
-        const abteilungenModel = abteilungen.map((abteilung) =>
-            this.#toModel(abteilung, req, false),
+        const buecherModel = buecher.map((buch) =>
+            this.#toModel(buch, req, false),
         );
         this.#logger.debug('get: abteilungenModel=%o', abteilungenModel);
 
@@ -320,31 +315,26 @@ export class AbteilungGetController {
               }
             : { self: { href: `${baseUri}/${id}` } };
 
-        this.#logger.debug(
-            '#toModel: abteilung=%o, links=%o',
-            abteilung,
-            links,
-        );
-        const abteilungsleiterModel: AbteilungsleiterModel = {
-            abteilungsleiter:
-                abteilung.abteilungsleiter?.abteilungsleiter ?? 'N/A',
-            vorname: abteilung.abteilungsleiter?.vorname ?? 'N/A',
+        this.#logger.debug('#toModel: buch=%o, links=%o', buch, links);
+        const titelModel: TitelModel = {
+            titel: buch.titel?.titel ?? 'N/A',
+            untertitel: buch.titel?.untertitel ?? 'N/A',
         };
-        const abteilungModel: AbteilungModel = {
-            bueroNummer: abteilung.bueroNummer,
-            zufriedenheit: abteilung.zufriedenheit,
-            art: abteilung.art,
-            budget: abteilung.budget,
-            krankenstandsQuote: abteilung.krankenstandsQuote,
-            verfuegbar: abteilung.verfuegbar,
-            gruendungsDatum: abteilung.gruendungsDatum,
-            homepage: abteilung.homepage,
-            schlagwoerter: abteilung.schlagwoerter,
-            abteilungsleiter: abteilungsleiterModel,
+        const buchModel: BuchModel = {
+            isbn: buch.isbn,
+            rating: buch.rating,
+            art: buch.art,
+            preis: buch.preis,
+            rabatt: buch.rabatt,
+            lieferbar: buch.lieferbar,
+            datum: buch.datum,
+            homepage: buch.homepage,
+            schlagwoerter: buch.schlagwoerter,
+            titel: titelModel,
             _links: links,
         };
 
-        return abteilungModel;
+        return buchModel;
     }
 }
 /* eslint-enable max-lines */

@@ -38,9 +38,15 @@ import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren einer Abteilung mit `update`. */
 export interface UpdateParams {
+<<<<<<< HEAD
     /** ID des zu aktualisierenden Buches. */
     readonly id: number | undefined;
     /** Buch-Objekt mit den aktualisierten Werten. */
+=======
+    /** ID der zu aktualisierenden Abteilung. */
+    readonly id: number | undefined;
+    /** Abteilung-Objekt mit den aktualisierten Werten. */
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
     readonly abteilung: Abteilung;
     /** Versionsnummer für die aktualisierenden Werte. */
     readonly version: string;
@@ -148,7 +154,11 @@ export class AbteilungWriteService {
 
         let deleteResult: DeleteResult | undefined;
         await this.#repo.manager.transaction(async (transactionalMgr) => {
+<<<<<<< HEAD
             // Das Buch zur gegebenen ID mit Titel und Abb. asynchron loeschen
+=======
+            // Die Abteilung zur gegebenen ID mit Abteilungsleiter und Abb. asynchron loeschen
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
 
             // TODO "cascade" funktioniert nicht beim Loeschen
             const abteilungsleiterId = abteilung.abteilungsleiter?.id;
@@ -183,8 +193,12 @@ export class AbteilungWriteService {
 
     async #sendmail(abteilung: Abteilung) {
         const subject = `Neue Abteilung ${abteilung.id}`;
+<<<<<<< HEAD
         const abteilungsleiter =
             abteilung.abteilungsleiter?.abteilungsleiter ?? 'N/A';
+=======
+        const abteilungsleiter = abteilung.abteilungsleiter?.nachname ?? 'N/A';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507
         const body = `Die Abteilung mit dem Abteilungsleiter <strong>${abteilungsleiter}</strong> ist angelegt`;
         await this.#mailService.sendmail({ subject, body });
     }

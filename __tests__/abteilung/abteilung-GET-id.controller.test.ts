@@ -42,7 +42,11 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
+<<<<<<< HEAD:__tests__/buch/abteilung-GET-id.controller.test.ts
 import { type AbteilungModel } from '../../src/abteilung/rest/abteilung-get.controller.js';
+=======
+import { type AbteilungsModel } from '../../src/abteilung/rest/abteilung-get.controller.js';
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET-id.controller.test.ts
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
@@ -82,7 +86,11 @@ describe('GET /rest/:id', () => {
         const url = `/${idVorhanden}`;
 
         // when
+<<<<<<< HEAD:__tests__/buch/abteilung-GET-id.controller.test.ts
         const { status, headers, data }: AxiosResponse<AbteilungModel> =
+=======
+        const { status, headers, data }: AxiosResponse<AbteilungsModel> =
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET-id.controller.test.ts
             await client.get(url);
 
         // then

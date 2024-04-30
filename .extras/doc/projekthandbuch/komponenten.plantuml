@@ -25,12 +25,12 @@ actor GraphQLClient
 node "Nest" {
   [RequestLoggerMiddleware]
 
-  [BuchController]
-  [BuchResolver]
+  [AbteilungController]
+  [AbteilungResolver]
 
-  [BuchService]
+  [AbteilungService]
 
-  [Repository<Buch>]
+  [Repository<Abteilung>]
 
   [MailService]
 }
@@ -48,10 +48,10 @@ cloud {
     [nodemailer]
 }
 
-database "DB buch" {
-    [Tabelle buch]
-    [Tabelle titel]
-    [Tabelle abbildung]
+database "DB abteilung" {
+    [Tabelle abteilung]
+    [Tabelle abteilungsleiter]
+    [Tabelle mitarbeiter]
 }
 
 node {
@@ -65,22 +65,22 @@ node {
 RESTClient ~~> [RequestLoggerMiddleware]
 GraphQLClient ~~> [RequestLoggerMiddleware]
 
-[RequestLoggerMiddleware] ~~> [BuchController]
-[RequestLoggerMiddleware] ~~> [BuchResolver]
+[RequestLoggerMiddleware] ~~> [AbteilungController]
+[RequestLoggerMiddleware] ~~> [AbteilungResolver]
 
-[BuchController] ..> [BuchService]
-[BuchResolver] ..> [BuchService]
-[BuchService] ..> [Repository<Buch>]
+[AbteilungController] ..> [AbteilungService]
+[AbteilungResolver] ..> [AbteilungService]
+[AbteilungService] ..> [Repository<Abteilung>]
 
-[Repository<Buch>] ~~> [TypeORM]
-[TypeORM] ~~> [Tabelle buch]
-[TypeORM] ~~> [Tabelle titel]
-[TypeORM] ~~> [Tabelle abbildung]
+[Repository<Abteilung>] ~~> [TypeORM]
+[TypeORM] ~~> [Tabelle abteilung]
+[TypeORM] ~~> [Tabelle abteilungsleiter]
+[TypeORM] ~~> [Tabelle mitarbeiter]
 
-[BuchController] ..> [nest-keycloak-connect]
+[AbteilungController] ..> [nest-keycloak-connect]
 [nest-keycloak-connect] ~~> [Keycloak]
 
-[BuchService] ..> [MailService]
+[AbteilungService] ..> [MailService]
 [MailService] ~~> [nodemailer]
 [nodemailer] ~~> [Mailserver]
 

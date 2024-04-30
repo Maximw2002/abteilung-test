@@ -82,7 +82,11 @@ describe('GET /rest', () => {
             });
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-GET.controller.test.ts
     test('Abteilungen mit einem Teil-Abteilungsleiter suchen', async () => {
+=======
+    test('Abteilungen mit einem Teil-Abteilungsleitername suchen', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET.controller.test.ts
         // given
         const params = { abteilungsleiter: abteilungsleiterVorhanden };
 
@@ -101,13 +105,21 @@ describe('GET /rest', () => {
         abteilungen
             .map((abteilung) => abteilung.abteilungsleiter)
             .forEach((abteilungsleiter) =>
+<<<<<<< HEAD:__tests__/buch/abteilung-GET.controller.test.ts
                 expect(abteilungsleiter.abteilungsleiter.toLowerCase()).toEqual(
+=======
+                expect(abteilungsleiter.nachname.toLowerCase()).toEqual(
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET.controller.test.ts
                     expect.stringContaining(abteilungsleiterVorhanden),
                 ),
             );
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-GET.controller.test.ts
     test('Abteilungen zu einem nicht vorhandenen Teil-Abteilungsleiter suchen', async () => {
+=======
+    test('Abteilungen zu einem nicht vorhandenen Teil-Abteilungsleitersnamen suchen', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET.controller.test.ts
         // given
         const params = { abteilungsleiter: abteilungsleiterNichtVorhanden };
 
@@ -142,7 +154,11 @@ describe('GET /rest', () => {
 
         const { abteilungen } = data._embedded;
 
+<<<<<<< HEAD:__tests__/buch/abteilung-GET.controller.test.ts
         // Jede Abteilung hat im Array der Schlagwoerter z.B. "javascript"
+=======
+        // Jedes Abteilung hat im Array der Schlagwoerter z.B. "javascript"
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-GET.controller.test.ts
         abteilungen
             .map((abteilung) => abteilung.schlagwoerter)
             .forEach((schlagwoerter) =>

@@ -34,16 +34,25 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neueAbteilung: AbteilungDTO = {
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
     buernoNummer: '978-0-007-00644-1',
     zufriedenheit: 1,
     art: 'DRUCKAUSGABE',
     budget: 99.99,
     krankenstandsquote: 0.123,
+=======
+    bueroNummer: '4-202',
+    zufriedenheit: 1,
+    art: 'ENTWICKLUNG',
+    budget: 99.99,
+    krankenstandsQuote: 0.123,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '2022-02-28',
     homepage: 'https://post.rest',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     abteilungsleiter: {
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
         vorname: 'Vornamepost',
         nachname: 'nachnamepos',
     },
@@ -51,19 +60,37 @@ const neueAbteilung: AbteilungDTO = {
         {
             name: 'Abb. 1',
             jobType: 'img/png',
+=======
+        nachname: 'Nachnamepost',
+        vorname: 'vornamepost',
+    },
+    vieleMitarbeiter: [
+        {
+            name: 'Daniel Theis',
+            jobType: 'Support',
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
         },
     ],
 };
 const neueAbteilungInvalid: Record<string, unknown> = {
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
     bueroNummer: 'falsche-bueroNummer',
     zufriedenheit: -1,
     art: 'UNSICHTBAR',
     budget: -1,
     krankenstandsquote: 2,
+=======
+    bueroNummer: 'falsche-BueroNummer',
+    zufriedenheit: -1,
+    art: 'UNSICHTBAR',
+    budget: -1,
+    krankenstandsQuote: 2,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '12345-123-123',
     homepage: 'anyHomepage',
     abteilungsleiter: {
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
         vorname: '?!',
         nachname: 'Nachnameinvalid',
     },
@@ -74,13 +101,30 @@ const neueAbteilungBueroNummerExistiert: AbteilungDTO = {
     art: 'DRUCKAUSGABE',
     budget: 99.99,
     krankenstandsquote: 0.099,
+=======
+        nachname: '?!',
+        vorname: 'Vornameinvalid',
+    },
+};
+const neueAbteilungBueroNummerExistiert: AbteilungDTO = {
+    bueroNummer: '3-300',
+    zufriedenheit: 1,
+    art: 'ENTWICKLUNG',
+    budget: 99.99,
+    krankenstandsQuote: 0.099,
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
     verfuegbar: true,
     gruendungsDatum: '2022-02-28',
     homepage: 'https://post.bueroNummer/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     abteilungsleiter: {
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
         vorname: 'VornamepostbueroNummer',
         nachname: 'NachnamepostbueroNummer',
+=======
+        nachname: 'NachnamepostbueroNummer',
+        vorname: 'vornamepostbueroNummer',
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
     },
     vieleMitarbeiter: undefined,
 };
@@ -145,7 +189,11 @@ describe('POST /rest', () => {
         expect(data).toBe('');
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
     test('Neue Abteilung mit ungueltigen Daten', async () => {
+=======
+    test('Neues Abteilung mit ungueltigen Daten', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -154,10 +202,17 @@ describe('POST /rest', () => {
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^art /u),
             expect.stringMatching(/^budget /u),
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
             expect.stringMatching(/^krankenstandsquote /u),
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
             expect.stringMatching(/^abteilungsleiter.abteilungsleiter /u),
+=======
+            expect.stringMatching(/^krankenstandsQuote /u),
+            expect.stringMatching(/^gruendungsDatum /u),
+            expect.stringMatching(/^homepage /u),
+            expect.stringMatching(/^abteilungsleiter.nachname /u),
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
         ];
 
         // when
@@ -180,7 +235,11 @@ describe('POST /rest', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
     test('Neue Abteilung, aber die bueroNummer existiert bereits', async () => {
+=======
+    test('Neue Abteilung, aber die BueroNummer existiert bereits', async () => {
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
@@ -197,7 +256,11 @@ describe('POST /rest', () => {
 
         const { message, statusCode } = data;
 
+<<<<<<< HEAD:__tests__/buch/abteilung-POST.controller.test.ts
         expect(message).toEqual(expect.stringContaining('bueroNummer'));
+=======
+        expect(message).toEqual(expect.stringContaining('BueroNummer'));
+>>>>>>> 94aed7b04e007475570dae24751e9ebf52e9d507:__tests__/abteilung/abteilung-POST.controller.test.ts
         expect(statusCode).toBe(HttpStatus.UNPROCESSABLE_ENTITY);
     });
 
