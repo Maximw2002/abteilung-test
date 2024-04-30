@@ -44,7 +44,7 @@ entity "Abteilung" {
 entity "Abteilungsleiter" {
   * id: integer <<generated>>
   --
-  * abteilungsleiter: text
+  * nachname: text
     vorname: text
 }
 

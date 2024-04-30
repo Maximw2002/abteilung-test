@@ -1,3 +1,4 @@
+/* eslint-disable @eslint-community/eslint-comments/disable-enable-pair */
 /* eslint-disable unicorn/import-style */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe

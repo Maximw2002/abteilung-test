@@ -225,7 +225,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query ($abteilungsleiter: String = \"Alpha\") {\r\n  abteilungen(suchkriterien: {abteilungsleiter: $abteilungsleiter}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"abteilungsleiter\": \"Alpha\"\r\n}"
+								"variables": "{\r\n  \"nachname\": \"Alpha\"\r\n}"
 							}
 						},
 						"url": {
@@ -282,7 +282,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query ($abteilungsleiter: String = \"a\") {\r\n  abteilungen(suchkriterien: {abteilungsleiter: $abteilungsleiter}) {\r\n    art\r\n    schlagwoerter\r\n    abteilungsleiter {\r\n      nachname\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"abteilungsleiter\": \"ta\"\r\n}"
+								"variables": "{\r\n  \"nachname\": \"ta\"\r\n}"
 							}
 						},
 						"url": {
@@ -338,7 +338,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query ($abteilungsleiter: String = \"Nichtvorhanden\") {\r\n  abteilungen(suchkriterien: {abteilungsleiter: $abteilungsleiter}) {\r\n    art\r\n  }\r\n}",
-								"variables": "{\r\n  \"abteilungsleiter\": \"Nichtvorhanden\"\r\n}"
+								"variables": "{\r\n  \"nachname\": \"Nichtvorhanden\"\r\n}"
 							}
 						},
 						"url": {

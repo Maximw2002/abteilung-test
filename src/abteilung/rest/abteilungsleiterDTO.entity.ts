@@ -30,7 +30,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class AbteilungsleiterDTO {
     @Matches('^\\w.*')
     @MaxLength(40)
-    @ApiProperty({ example: 'Der Abteilungsleiter', type: String })
+    @ApiProperty({ example: 'Der Abteilungsleiternachname', type: String })
     readonly nachname!: string;
 
     @IsOptional()

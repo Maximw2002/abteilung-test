@@ -44,7 +44,7 @@ ALTER TABLE abteilung AUTO_INCREMENT=1000;
 
 CREATE TABLE IF NOT EXISTS abteilungsleiter (
     id                  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    abteilungsleiter    VARCHAR(40) NOT NULL,
+    nachname    VARCHAR(40) NOT NULL,
     vorname             VARCHAR(40),
     abteilung_id        CHAR(36) UNIQUE NOT NULL references abteilung(id)
 ) TABLESPACE abteilungspace ROW_FORMAT=COMPACT;

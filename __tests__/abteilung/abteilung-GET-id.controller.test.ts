@@ -42,7 +42,7 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type AbteilungModel } from '../../src/abteilung/rest/abteilung-get.controller.js';
+import { type AbteilungsModel } from '../../src/abteilung/rest/abteilung-get.controller.js';
 import { type ErrorResponse } from './error-response.js';
 import { HttpStatus } from '@nestjs/common';
 
@@ -82,7 +82,7 @@ describe('GET /rest/:id', () => {
         const url = `/${idVorhanden}`;
 
         // when
-        const { status, headers, data }: AxiosResponse<AbteilungModel> =
+        const { status, headers, data }: AxiosResponse<AbteilungsModel> =
             await client.get(url);
 
         // then

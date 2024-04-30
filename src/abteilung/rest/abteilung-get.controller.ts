@@ -82,7 +82,7 @@ export interface Links {
 export type AbteilungsleiterModel = Omit<Abteilungsleiter, 'abteilung' | 'id'>;
 
 /** Abteilung-Objekt mit HATEOAS-Links */
-export type AbteilungModel = Omit<
+export type AbteilungsModel = Omit<
     Abteilung,
     | 'vieleMitarbeiter'
     | 'aktualisiert'
@@ -100,7 +100,7 @@ export type AbteilungModel = Omit<
 export interface AbteilungenModel {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     _embedded: {
-        abteilungen: AbteilungModel[];
+        abteilungen: AbteilungsModel[];
     };
 }
 
@@ -220,7 +220,7 @@ export class AbteilungGetController {
         @Req() req: Request,
         @Headers('If-None-Match') version: string | undefined,
         @Res() res: Response,
-    ): Promise<Response<AbteilungModel | undefined>> {
+    ): Promise<Response<AbteilungsModel | undefined>> {
         this.#logger.debug('getById: idStr=%s, version=%s', idStr, version);
         const id = Number(idStr);
         if (!Number.isInteger(id)) {
@@ -254,9 +254,9 @@ export class AbteilungGetController {
         res.header('ETag', `"${versionDb}"`);
 
         // HATEOAS mit Atom Links und HAL (= Hypertext Application Language)
-        const abteilungModel = this.#toModel(abteilung, req);
-        this.#logger.debug('getById: abteilungModel=%o', abteilungModel);
-        return res.contentType(APPLICATION_HAL_JSON).json(abteilungModel);
+        const abteilungsModel = this.#toModel(abteilung, req);
+        this.#logger.debug('getById: abteilungsModel=%o', abteilungsModel);
+        return res.contentType(APPLICATION_HAL_JSON).json(abteilungsModel);
     }
 
     /**
@@ -326,11 +326,10 @@ export class AbteilungGetController {
             links,
         );
         const abteilungsleiterModel: AbteilungsleiterModel = {
-            abteilungsleiter:
-                abteilung.abteilungsleiter?.abteilungsleiter ?? 'N/A',
+            nachname: abteilung.abteilungsleiter?.nachname ?? 'N/A',
             vorname: abteilung.abteilungsleiter?.vorname ?? 'N/A',
         };
-        const abteilungModel: AbteilungModel = {
+        const abteilungsModel: AbteilungsModel = {
             bueroNummer: abteilung.bueroNummer,
             zufriedenheit: abteilung.zufriedenheit,
             art: abteilung.art,
@@ -344,7 +343,7 @@ export class AbteilungGetController {
             _links: links,
         };
 
-        return abteilungModel;
+        return abteilungsModel;
     }
 }
 /* eslint-enable max-lines */

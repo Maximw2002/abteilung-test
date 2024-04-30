@@ -183,8 +183,7 @@ export class AbteilungWriteService {
 
     async #sendmail(abteilung: Abteilung) {
         const subject = `Neue Abteilung ${abteilung.id}`;
-        const abteilungsleiter =
-            abteilung.abteilungsleiter?.abteilungsleiter ?? 'N/A';
+        const abteilungsleiter = abteilung.abteilungsleiter?.nachname ?? 'N/A';
         const body = `Die Abteilung mit dem Abteilungsleiter <strong>${abteilungsleiter}</strong> ist angelegt`;
         await this.#mailService.sendmail({ subject, body });
     }

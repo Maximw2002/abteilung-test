@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS abteilung (
 
 CREATE TABLE IF NOT EXISTS abteilungsleiter (
     id                  integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE abteilungspace,
-    abteilungsleiter    varchar(40) NOT NULL,
+    nachname    varchar(40) NOT NULL,
     vorname             varchar(40),
     abteilung_id        integer NOT NULL UNIQUE USING INDEX TABLESPACE abteilungspace REFERENCES abteilung
 ) TABLESPACE abteilungspace;
