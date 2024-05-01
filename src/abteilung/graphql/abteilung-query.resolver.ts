@@ -70,14 +70,11 @@ export class AbteilungQueryResolver {
         return abteilungen;
     }
 
-    @ResolveField('krankenstandsquote')
-    krankenstandsquote(
-        @Parent() abteilung: Abteilung,
-        short: boolean | undefined,
-    ) {
+    @ResolveField('krankenstandsQuote')
+    rabatt(@Parent() abteilung: Abteilung, short: boolean | undefined) {
         if (this.#logger.isLevelEnabled('debug')) {
             this.#logger.debug(
-                'krankenstandsquote: abteilung=%s, short=%s',
+                'krankenstandsQuote: abteilung=%s, short=%s',
                 abteilung.toString(),
                 short,
             );

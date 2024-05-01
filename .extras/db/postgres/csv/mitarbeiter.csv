@@ -1,9 +1,9 @@
 id;name;job_type;abteilung_id
-1;Abb. 1;img/png;1
-20;Abb. 1;img/png;20
-21;Abb. 2;img/png;20
-30;Abb. 1;img/png;30
-31;Abb. 2;img/png;30
-40;Abb. 1;img/png;40
-50;Abb. 1;img/png;50
-60;Abb. 1;img/png;60
+1;Wagner;Entwickler;1
+20;Wagner;Support;20
+21;Theis;Sales;20
+30;Butler;Entwickler;30
+31;Adebayo;Projektleiter;30
+40;Spoelstra;Sales;40
+50;Edwards;Support;50
+60;Curry;Entwickler;60

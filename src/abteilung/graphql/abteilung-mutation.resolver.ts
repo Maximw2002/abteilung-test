@@ -181,7 +181,7 @@ export class AbteilungMutationResolver {
     // #errorMsgCreateAbteilung(err: CreateError) {
     //     switch (err.type) {
     //         case 'BueroNummerExists': {
-    //             return `Die Büronummer ${err.bueroNummer} existiert bereits`;
+    //             return `Die BueroNummer ${err.bueroNummer} existiert bereits`;
     //         }
     //         default: {
     //             return 'Unbekannter Fehler';

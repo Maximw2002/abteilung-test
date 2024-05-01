@@ -86,7 +86,7 @@ describe('GraphQL Mutations', () => {
                             },
                             vieleMitarbeiter: [{
                                 name: "Moritz Wagner",
-                                contentType: "Projektleiter"
+                                jobType: "Projektleiter"
                             }]
                         }
                     ) {
@@ -122,7 +122,7 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            bueroNummer: "falsche-BueroNummer",
+                            bueroNummer: 0,
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
@@ -145,7 +145,7 @@ describe('GraphQL Mutations', () => {
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
             expect.stringMatching(/^krankenstandsQuote /u),
-            expect.stringMatching(/^datum /u),
+            expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
             expect.stringMatching(/^abteilungsleiter.nachname /u),
         ];
@@ -232,7 +232,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            bueroNummer: "falsche-BueroNummer",
+                            bueroNummer: -1,
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
@@ -294,7 +294,7 @@ describe('GraphQL Mutations', () => {
                             version: 0,
                             bueroNummer: "1-300",
                             zufriedenheit: 5,
-                            art: DRUCKAUSGABE,
+                            art: ENTWICKLUNG,
                             budget: 99.99,
                             krankenstandsQuote: 0.099,
                             verfuegbar: false,

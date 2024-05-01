@@ -55,7 +55,7 @@ const neueAbteilung: AbteilungDTO = {
     ],
 };
 const neueAbteilungInvalid: Record<string, unknown> = {
-    bueroNummer: 'falsche-BueroNummer',
+    bueroNummer: 3,
     zufriedenheit: -1,
     art: 'UNSICHTBAR',
     budget: -1,
@@ -69,7 +69,7 @@ const neueAbteilungInvalid: Record<string, unknown> = {
     },
 };
 const neueAbteilungBueroNummerExistiert: AbteilungDTO = {
-    bueroNummer: '3-300',
+    bueroNummer: '4-205',
     zufriedenheit: 1,
     art: 'ENTWICKLUNG',
     budget: 99.99,
@@ -145,7 +145,7 @@ describe('POST /rest', () => {
         expect(data).toBe('');
     });
 
-    test('Neues Abteilung mit ungueltigen Daten', async () => {
+    test('Neue Abteilung mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;

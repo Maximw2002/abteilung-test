@@ -22,7 +22,7 @@ schema {
 
 "Funktionen, um Abteilungsdaten zu lesen"
 type Query {
-  buecher(suchkriterien: SuchkriterienInput): [Abteilung!]
+  abteilungen(suchkriterien: SuchkriterienInput): [Abteilung!]
 
   abteilung(id: ID!): Abteilung
 }

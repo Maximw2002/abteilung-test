@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS abteilung (
     version       integer NOT NULL DEFAULT 0,
                   -- impliziter Index als B-Baum durch UNIQUE
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS
-    bueroNummer   varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE abteilungspace,
+    buero_nummer   varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE abteilungspace,
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
                   -- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
     zufriedenheit integer NOT NULL CHECK (zufriedenheit >= 0 AND zufriedenheit <= 5),
@@ -55,11 +55,11 @@ CREATE TABLE IF NOT EXISTS abteilung (
                   -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL
                   -- 10 Stellen, davon 2 Nachkommastellen
     budget        decimal(8,2) NOT NULL,
-    krankenstandsQuote decimal(4,3) NOT NULL,
+    krankenstands_quote decimal(4,3) NOT NULL,
                   -- https://www.postgresql.org/docs/current/datatype-boolean.html
     verfuegbar     boolean NOT NULL DEFAULT FALSE,
                   -- https://www.postgresql.org/docs/current/datatype-datetime.html
-    gruendungsDatum  date,
+    gruendungs_datum  date,
     homepage      varchar(40),
     -- schlagwoerter json,
     schlagwoerter varchar(64),

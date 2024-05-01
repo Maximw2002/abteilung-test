@@ -83,7 +83,7 @@ export class QueryBuilder {
         if (mitMitarbeitern) {
             // Fetch-Join: aus QueryBuilder "abteilung" die Property "vieleMitarbeiter" -> Tabelle "mitarbeiter"
             queryBuilder.leftJoinAndSelect(
-                `${this.#abteilungsleiterAlias}.vieleMitarbeiter`,
+                `${this.#abteilungAlias}.vieleMitarbeiter`,
                 this.#mitarbeiterAlias,
             );
         }
@@ -137,7 +137,7 @@ export class QueryBuilder {
             const ilike =
                 typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
             queryBuilder = queryBuilder.where(
-                `${this.#abteilungsleiterAlias}.abteilungsleiter ${ilike} :abteilungsleiter`,
+                `${this.#abteilungsleiterAlias}.nachname ${ilike} :abteilungsleiter`,
                 { abteilungsleiter: `%${abteilungsleiter}%` },
             );
             useWhere = false;

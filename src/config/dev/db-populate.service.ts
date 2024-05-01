@@ -57,18 +57,18 @@ export class DbPopulateService implements OnApplicationBootstrap {
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/using-oracle-external-tables-examples.html
     // https://docs.oracle.com/en/database/oracle/oracle-database/23/sutil/oracle-sql-loader-commands.html
     readonly #oracleInsertAbteilung = `
-        INSERT INTO abteilung(id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert)
-        SELECT id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,gruendungsDatum,homepage,schlagwoerter,erzeugt,aktualisiert
+        INSERT INTO abteilung(id,version,buero_nummer,zufriedenheit,art,budget,krankenstands_quote,verfuegbar,gruendungs_qatum,homepage,schlagwoerter,erzeugt,aktualisiert)
+        SELECT id,version,buero_nummer,zufriedenheit,art,budget,krankenstands_quote,verfuegbar,gruendungs_datum,homepage,schlagwoerter,erzeugt,aktualisiert
         FROM   EXTERNAL (
             (id                NUMBER(10,0),
             version            NUMBER(3,0),
-            bueroNummer        VARCHAR2(17),
+            buero_nummer        VARCHAR2(17),
             zufriedenheit      NUMBER(1,0),
             art                VARCHAR2(12),
             budget             NUMBER(8,2),
-            krankenstandsQuote NUMBER(4,3),
+            krankenstands_quote NUMBER(4,3),
             verfuegbar          NUMBER(1,0),
-            gruendungsDatum    DATE,
+            gruendungs_datum    DATE,
             homepage           VARCHAR2(40),
             schlagwoerter      VARCHAR2(64),
             erzeugt            TIMESTAMP,
@@ -79,8 +79,8 @@ export class DbPopulateService implements OnApplicationBootstrap {
                 RECORDS DELIMITED BY NEWLINE
                 SKIP 1
                 FIELDS TERMINATED BY ';'
-                (id,version,bueroNummer,zufriedenheit,art,budget,krankenstandsQuote,verfuegbar,
-                 gruendungsDatum DATE 'YYYY-MM-DD',
+                (id,version,buero_nummer,zufriedenheit,art,budget,krankenstands_quote,verfuegbar,
+                 gruendungs_datum DATE 'YYYY-MM-DD',
                  homepage,schlagwoerter,
                  erzeugt CHAR(19) date_format TIMESTAMP mask 'YYYY-MM-DD HH24:MI:SS',
                  aktualisiert CHAR(19) date_format TIMESTAMP mask 'YYYY-MM-DD HH24:MI:SS')

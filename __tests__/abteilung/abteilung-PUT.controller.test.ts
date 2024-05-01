@@ -59,7 +59,7 @@ const geaenderteAbteilungIdNichtVorhanden: AbteilungDtoOhneRef = {
 const idNichtVorhanden = '999999';
 
 const geaenderteAbteilungInvalid: Record<string, unknown> = {
-    bueroNummer: 'falsche-BueroNummer',
+    bueroNummer: 1,
     zufriedenheit: -1,
     art: 'UNSICHTBAR',
     budget: -1,

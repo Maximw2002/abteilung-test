@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file, @typescript-eslint/no-magic-numbers */
+/* eslint-disable max-classes-per-file */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
  *
@@ -25,11 +25,11 @@ import {
     ArrayUnique,
     IsArray,
     IsBoolean,
-    IsISBN,
     IsISO8601,
     IsInt,
     IsOptional,
     IsPositive,
+    IsString,
     IsUrl,
     Matches,
     Max,
@@ -42,20 +42,20 @@ import { ApiProperty } from '@nestjs/swagger';
 import { MitarbeiterDTO } from './mitarbeiterDTO.entity.js';
 import { Type } from 'class-transformer';
 
-export const MAX_RATING = 5;
+export const MAX_ZUFRIEDENHEIT = 5;
 
 /**
  * Entity-Klasse für Abteilungen ohne TypeORM und ohne Referenzen.
  */
 export class AbteilungDtoOhneRef {
     // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html
-    @IsISBN(13)
+    @IsString()
     @ApiProperty({ example: '2-201', type: String })
     readonly bueroNummer!: string;
 
     @IsInt()
     @Min(0)
-    @Max(MAX_RATING)
+    @Max(MAX_ZUFRIEDENHEIT)
     @ApiProperty({ example: 5, type: Number })
     readonly zufriedenheit: number | undefined;
 
@@ -113,4 +113,4 @@ export class AbteilungDTO extends AbteilungDtoOhneRef {
 
     // MitarbeiterDTO
 }
-/* eslint-enable max-classes-per-file, @typescript-eslint/no-magic-numbers */
+/* eslint-enable max-classes-per-file */

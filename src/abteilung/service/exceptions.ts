@@ -30,7 +30,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 export class BueroNummerExistsException extends HttpException {
     constructor(readonly bueroNummer: string) {
         super(
-            `Die Büronummer ${bueroNummer} existiert bereits.`,
+            `Die BueroNummer ${bueroNummer} existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
     }
