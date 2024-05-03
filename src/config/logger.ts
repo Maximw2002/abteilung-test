@@ -20,6 +20,7 @@ import { config } from './app.js';
 import { env } from './env.js';
 import { nodeConfig } from './node.js';
 import pino from 'pino';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 /**

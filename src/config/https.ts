@@ -23,6 +23,7 @@
 import { type HttpsOptions } from '@nestjs/common/interfaces/external/https-options.interface.js';
 import { RESOURCES_DIR } from './app.js';
 import { readFileSync } from 'node:fs';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 // https://nodejs.org/api/path.html

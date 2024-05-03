@@ -1,0 +1,88 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+' Preview durch <Alt>d
+
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package mail {
+  class MailService
+}
+
+package abteilung {
+  package entity {
+    class Abteilung
+  }
+
+  package service #DDDDDD {
+    class AbteilungInvalid
+    class AbteilungsleiterExists
+    class BueroNummerExists
+    class VersionInvalid
+    class VersionOutdated
+
+    class AbteilungWriteService << control >> <<@Injectable()>> {
+      + async create(abteilung: Abteilung): Promise<string|AbteilungInvalid|AbteilungsleiterExists|BueroNummerExists>
+      + async update(id: number, abteilung: Abteilung, version: string): Promise<number|AbteilungInvalid|AbteilungsleiterExists|BueroNummerExists|VersionInvalid|VersionOutdated>
+      + async delete(id: number): Promise<boolean>
+    }
+
+    AbteilungWriteService o--> "1" AbteilungValidationService: validationService
+    AbteilungWriteService o--> "1" AbteilungReadService: readService
+    AbteilungWriteService o--> "1" Repository: @InjectRepository repo
+    AbteilungWriteService o--> "1" MailService: mailService
+
+    AbteilungWriteService .up.> Injectable
+    AbteilungWriteService .up.> InjectRepository
+
+    AbteilungWriteService .up.> Promise
+    AbteilungWriteService ..> Abteilung
+    AbteilungWriteService .up.> AbteilungInvalid
+    AbteilungWriteService .up.> AbteilungsleiterExists
+    AbteilungWriteService .up.> BueroNummerExists
+    AbteilungWriteService .up.> VersionInvalid
+    AbteilungWriteService .up.> VersionOutdated
+
+    AbteilungInvalid .up[hidden].> Abteilung
+    Abteilung .up[hidden].> Promise
+    Abteilung .up[hidden].> Injectable
+    Abteilung .up[hidden].> InjectRepository
+    AbteilungsleiterExists .up[hidden].> Abteilung
+    AbteilungValidationService .[hidden].> Repository
+    AbteilungValidationService .[hidden].> MailService
+  }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml
