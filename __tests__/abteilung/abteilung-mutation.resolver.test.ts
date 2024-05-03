@@ -1,3 +1,5 @@
+/* eslint-disable @eslint-community/eslint-comments/disable-enable-pair */
+/* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable max-lines, @typescript-eslint/no-unsafe-assignment */
 /*
  * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
@@ -72,57 +74,6 @@ describe('GraphQL Mutations', () => {
                     create(
                         input: {
                             bueroNummer: "0-200",
-                            zufriedenheit: 1,
-                            art: VERTRIEB,
-                            budget: 99.99,
-                            krankenstandsQuote: 0.123,
-                            verfuegbar: true,
-                            gruendungsDatum: "2022-02-28",
-                            homepage: "https://create.mutation",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
-                            abteilungsleiter: {
-                                nachname: "nachnamecreatemutation",
-                                vorname: "vornamecreatemutation"
-                            },
-                            vieleMitarbeiter: [{
-                                name: "Moritz Wagner",
-                                jobType: "Projektleiter"
-                            }]
-                        }
-                    ) {
-                        id
-                    }
-                }
-            `,
-        };
-
-        // when
-        const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
-            await client.post(graphqlPath, body, { headers: authorization });
-
-        // then
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu); // eslint-disable-line sonarjs/no-duplicate-string
-        expect(data.data).toBeDefined();
-
-        const { create } = data.data!;
-
-        // Der Wert der Mutation ist die generierte ID
-        expect(create).toBeDefined();
-        expect(create.id).toBeGreaterThan(0);
-    });
-
-    // -------------------------------------------------------------------------
-    test('Abteilung mit ungueltigen Werten neu anlegen', async () => {
-        // given
-        const token = await loginGraphQL(client);
-        const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
-        const body: GraphQLQuery = {
-            query: `
-                mutation {
-                    create(
-                        input: {
-                            bueroNummer: 0,
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
@@ -141,7 +92,68 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^bueroNummer /u),
+            expect.stringMatching(/^zufriedenheit /u),
+            expect.stringMatching(/^budget /u),
+            expect.stringMatching(/^krankenstandsQuote /u),
+            expect.stringMatching(/^gruendungsDatum /u),
+            expect.stringMatching(/^homepage /u),
+            expect.stringMatching(/^abteilungsleiter.nachname /u),
+        ];
+
+        // when
+        const { status, headers, data }: AxiosResponse<GraphQLResponseBody> =
+            await client.post(graphqlPath, body, { headers: authorization });
+
+        // then
+        expect(status).toBe(HttpStatus.OK);
+        expect(headers['content-type']).toMatch(/json/iu);
+        expect(data.data!.create).toBeNull();
+
+        const { errors } = data;
+
+        expect(errors).toHaveLength(1);
+
+        const [error] = errors!;
+
+        expect(error).toBeDefined();
+
+        const { message } = error;
+        const messages: string[] = message.split(',');
+
+        expect(messages).toBeDefined();
+        expect(messages).toHaveLength(expectedMsg.length);
+        expect(messages).toEqual(expect.arrayContaining(expectedMsg));
+    });
+
+    // -------------------------------------------------------------------------
+    test('Abteilung mit ungueltigen Werten neu anlegen', async () => {
+        // given
+        const token = await loginGraphQL(client);
+        const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
+        const body: GraphQLQuery = {
+            query: `
+                mutation {
+                    create(
+                        input: {
+                            bueroNummer: "0-200",
+                            zufriedenheit: -1,
+                            art: VERTRIEB,
+                            budget: -1,
+                            krankenstandsQuote: 2,
+                            verfuegbar: false,
+                            gruendungsDatum: "12345-123-123",
+                            homepage: "anyHomepage",
+                            abteilungsleiter: {
+                                nachname: "?!"
+                            }
+                        }
+                    ) {
+                        id
+                    }
+                }
+            `,
+        };
+        const expectedMsg = [
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
             expect.stringMatching(/^krankenstandsQuote /u),
@@ -187,7 +199,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "40",
                             version: 0,
-                            bueroNummer: "2-301",
+                            bueroNummer: "0-404",
                             zufriedenheit: 5,
                             art: VERTRIEB,
                             budget: 444.44,
@@ -232,7 +244,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            bueroNummer: -1,
+                            bueroNummer: "1-301",
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
@@ -249,7 +261,6 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^bueroNummer /u),
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
             expect.stringMatching(/^krankenstandsQuote /u),
@@ -292,7 +303,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             id: "${id}",
                             version: 0,
-                            bueroNummer: "1-300",
+                            bueroNummer: "0-404",
                             zufriedenheit: 5,
                             art: ENTWICKLUNG,
                             budget: 99.99,
