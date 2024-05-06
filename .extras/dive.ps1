@@ -21,7 +21,7 @@
 
 # "Param" muss in der 1. Zeile sein
 Param (
-  [string]$base = 'bookworm'
+  [string]$base = 'distroless'
 )
 
 Set-StrictMode -Version Latest
@@ -37,7 +37,7 @@ $host.ui.RawUI.WindowTitle = 'dive'
 
 $diveVersion = 'v0.12.0'
 $imagePrefix = 'juergenzimmermann/'
-$imageBase = 'buch'
+$imageBase = 'abteilung'
 $imageTag = "2024.04.0-$base"
 $image = "$imagePrefix${imageBase}:$imageTag"
 

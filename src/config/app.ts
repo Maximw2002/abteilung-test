@@ -22,6 +22,7 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { load } from 'js-yaml';
+// eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 
 // im Docker-Image gibt es kein Unterverzeichnis "src"
