@@ -21,7 +21,7 @@
 
 # "Param" muss in der 1. Zeile sein
 Param (
-  [string]$base = 'bookworm'
+  [string]$base = 'distroless'
 )
 
 Set-StrictMode -Version Latest
