@@ -128,9 +128,6 @@ export class AbteilungQuery implements Suchkriterien {
     declare readonly budget: number;
 
     @ApiProperty({ required: false })
-    declare readonly krankenstandsQuote: number;
-
-    @ApiProperty({ required: false })
     declare readonly verfügabr: boolean;
 
     @ApiProperty({ required: false })
@@ -334,7 +331,6 @@ export class AbteilungGetController {
             zufriedenheit: abteilung.zufriedenheit,
             art: abteilung.art,
             budget: abteilung.budget,
-            krankenstandsQuote: abteilung.krankenstandsQuote,
             verfuegbar: abteilung.verfuegbar,
             gruendungsDatum: abteilung.gruendungsDatum,
             homepage: abteilung.homepage,

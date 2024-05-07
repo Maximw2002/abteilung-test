@@ -67,8 +67,6 @@ type Abteilung {
   schlagwoerter: [String]
   # 1:1-Beziehung
   abteilungsleiter: Abteilungsleiter!
-  # field mit @ResolveField
-  krankenstandsQuote(short: Boolean): String!
 }
 
 "Enum-Typ für die Art einer Abteilung"
@@ -104,7 +102,6 @@ input AbteilungInput {
   zufriedenheit: Int
   art: Art
   budget: Float
-  krankenstandsQuote: Float
   verfuegbar: Boolean
   gruendungsDatum: String
   homepage: String
@@ -125,7 +122,6 @@ input AbteilungUpdateInput {
   zufriedenheit: Int
   art: Art
   budget: Float
-  krankenstandsQuote: Float
   verfuegbar: Boolean
   gruendungsDatum: String
   homepage: String

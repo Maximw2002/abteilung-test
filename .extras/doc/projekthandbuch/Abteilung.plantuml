@@ -47,7 +47,6 @@ package abteilung.entity {
     @Column() readonly zufriedenheit: number
     @Column() readonly art: AbteilungsArt
     @Column() readonly budget: number
-    @Column() readonly krankenstandsQuote: number
     @Column() readonly verfuegbar: boolean
     @Column() readonly gruendungsDatum: Date
     @Column() readonly homepage?: string

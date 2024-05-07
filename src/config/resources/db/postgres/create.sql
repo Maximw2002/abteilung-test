@@ -55,7 +55,6 @@ CREATE TABLE IF NOT EXISTS abteilung (
                   -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL
                   -- 10 Stellen, davon 2 Nachkommastellen
     budget        decimal(8,2) NOT NULL,
-    krankenstands_quote decimal(4,3) NOT NULL,
                   -- https://www.postgresql.org/docs/current/datatype-boolean.html
     verfuegbar     boolean NOT NULL DEFAULT FALSE,
                   -- https://www.postgresql.org/docs/current/datatype-datetime.html

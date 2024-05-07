@@ -30,7 +30,6 @@ export interface Suchkriterien {
     readonly zufriedenheit?: number;
     readonly art?: AbteilungsArt;
     readonly budget?: number;
-    readonly krankenstandsQuote?: number;
     readonly verfuegbar?: boolean;
     readonly gruendungsDatum?: string;
     readonly homepage?: string;
