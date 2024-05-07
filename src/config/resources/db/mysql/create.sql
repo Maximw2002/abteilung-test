@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS abteilung (
     zufriedenheit       INT NOT NULL CHECK (zufriedenheit >= 0 AND zufriedenheit <= 5),
     art                 ENUM('ENTWICKLUNG', 'VERTRIEB'),
     budget              DECIMAL(8,2) NOT NULL,
-    krankenstandsQuote  DECIMAL(4,3) NOT NULL,
     verfuegbar           BOOLEAN NOT NULL DEFAULT FALSE,
     gruendungsDatum     DATE,
     homepage            VARCHAR(40),

@@ -2251,7 +2251,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"krankenstandsQuote\": 0.123,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"img/png\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"img/png\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2332,7 +2332,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.9,\r\n  \"krankenstandsQuote\": 0.1,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.bueroNummer\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"nachnamepostbueroNummer\",\r\n    \"vorname\": \"vornamepostbueroNummer\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.9,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.bueroNummer\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"nachnamepostbueroNummer\",\r\n    \"vorname\": \"vornamepostbueroNummer\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2366,7 +2366,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['abteilungsleiter.nachname', 'bueroNummer', 'zufriedenheit', 'art', 'budget', 'krankenstandsQuote', 'gruendungsDatum', 'homepage'];\r",
+									"    const props = ['abteilungsleiter.nachname', 'bueroNummer', 'zufriedenheit', 'art', 'budget', 'gruendungsDatum', 'homepage'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -2415,7 +2415,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"falsche-BueroNummer\",\r\n  \"zufriedenheit\": -1,\r\n  \"art\": \"UNSICHTBAR\",\r\n  \"budget\": -1,\r\n  \"krankenstandsQuote\": 2,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-02-30\",\r\n  \"homepage\": \"anyHomepage\",\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"?!\",\r\n    \"vorname\": \"vornameinvalid\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"falsche-BueroNummer\",\r\n  \"zufriedenheit\": -1,\r\n  \"art\": \"UNSICHTBAR\",\r\n  \"budget\": -1,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-02-30\",\r\n  \"homepage\": \"anyHomepage\",\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"?!\",\r\n    \"vorname\": \"vornameinvalid\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2495,7 +2495,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"krankenstandsQuote\": 0.123,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"Nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"Entwickler\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"Nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"Entwickler\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2547,7 +2547,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"krankenstandsQuote\": 0.123,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"Nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"Entwickler\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 1,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 99.99,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-01-31\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\", \"TYPESCRIPT\"],\r\n  \"abteilungsleiter\": {\r\n    \"nachname\": \"Nachnamepost\",\r\n    \"vorname\": \"vornamepost\"\r\n  },\r\n  \"vieleMitarbeiter\": [{\r\n    \"name\": \"Franz Wagner\",\r\n    \"jobType\": \"Entwickler\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2619,7 +2619,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"krankenstandsQuote\": 0.33,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2680,7 +2680,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"krankenstandsQuote\": 0.33,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2741,7 +2741,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"krankenstandsQuote\": 0.33,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2802,7 +2802,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"krankenstandsQuote\": 0.33,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2863,7 +2863,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"krankenstandsQuote\": 0.33,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"0-200\",\r\n  \"zufriedenheit\": 5,\r\n  \"art\": \"VERTRIEB\",\r\n  \"budget\": 3333,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"2022-03-03\",\r\n  \"homepage\": \"https://put.rest\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2906,7 +2906,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['bueroNummer', 'zufriedenheit', 'art', 'budget', 'krankenstandsQuote', 'gruendungsDatum', 'homepage'];\r",
+									"    const props = ['bueroNummer', 'zufriedenheit', 'art', 'budget', 'gruendungsDatum', 'homepage'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -2926,7 +2926,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"bueroNummer\": \"falsche-BueroNummer\",\r\n  \"zufriedenheit\": -1,\r\n  \"art\": \"UNSICHTBAR\",\r\n  \"budget\": -1,\r\n  \"krankenstandsQuote\": 2,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"12345-123-123\",\r\n  \"homepage\": \"anyHomepage\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
+							"raw": "{\r\n  \"bueroNummer\": \"falsche-BueroNummer\",\r\n  \"zufriedenheit\": -1,\r\n  \"art\": \"UNSICHTBAR\",\r\n  \"budget\": -1,\r\n  \"verfuegbar\": true,\r\n  \"gruendungsDatum\": \"12345-123-123\",\r\n  \"homepage\": \"anyHomepage\",\r\n  \"schlagwoerter\": [\"JAVASCRIPT\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

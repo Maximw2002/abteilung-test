@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UseFilters, UseInterceptors } from '@nestjs/common';
 import { Abteilung } from '../entity/abteilung.entity.js';
 import { AbteilungReadService } from '../service/abteilung-read.service.js';
@@ -68,20 +68,5 @@ export class AbteilungQueryResolver {
         const abteilungen = await this.#service.find(input?.suchkriterien);
         this.#logger.debug('find: abteilungen=%o', abteilungen);
         return abteilungen;
-    }
-
-    @ResolveField('krankenstandsQuote')
-    rabatt(@Parent() abteilung: Abteilung, short: boolean | undefined) {
-        if (this.#logger.isLevelEnabled('debug')) {
-            this.#logger.debug(
-                'krankenstandsQuote: abteilung=%s, short=%s',
-                abteilung.toString(),
-                short,
-            );
-        }
-        const krankenstandsQuote = abteilung.krankenstandsQuote ?? 0;
-        const shortStr = short === undefined || short ? '%' : 'Prozent';
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        return `${(krankenstandsQuote * 100).toFixed(2)} ${shortStr}`;
     }
 }

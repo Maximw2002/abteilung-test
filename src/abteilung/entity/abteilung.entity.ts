@@ -95,14 +95,6 @@ export class Abteilung {
     // statt number ggf. Decimal aus decimal.js analog zu BigDecimal von Java
     readonly budget!: number;
 
-    @Column('decimal', {
-        precision: 4,
-        scale: 3,
-        transformer: new DecimalTransformer(),
-    })
-    @ApiProperty({ example: 0.1, type: Number })
-    readonly krankenstandsQuote: number | undefined;
-
     @Column('decimal') // TypeORM unterstuetzt bei Oracle *NICHT* den Typ boolean
     @ApiProperty({ example: true, type: Boolean })
     readonly verfuegbar: boolean | undefined;
@@ -160,7 +152,6 @@ export class Abteilung {
             zufriedenheit: this.zufriedenheit,
             art: this.art,
             budget: this.budget,
-            krankenstandsQuote: this.krankenstandsQuote,
             verfuegbar: this.verfuegbar,
             gruendungsDatum: this.gruendungsDatum,
             homepage: this.homepage,

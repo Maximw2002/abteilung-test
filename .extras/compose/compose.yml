@@ -41,7 +41,7 @@ include:
 # https://docs.docker.com/compose/compose-file/05-services
 services:
   abteilung:
-    image: juergenzimmermann/abteilung:2024.04.0-bookworm
+    image: juergenzimmermann/abteilung:2024.04.0-distroless
     depends_on:
       db:
         condition: service_healthy

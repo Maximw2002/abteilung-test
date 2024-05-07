@@ -69,12 +69,6 @@ export class AbteilungDtoOhneRef {
     // statt number ggf. Decimal aus decimal.js analog zu BigDecimal von Java
     readonly budget!: number;
 
-    @Min(0)
-    @Max(1)
-    @IsOptional()
-    @ApiProperty({ example: 0.1, type: Number })
-    readonly krankenstandsQuote: number | undefined;
-
     @IsBoolean()
     @ApiProperty({ example: true, type: Boolean })
     readonly verfuegbar: boolean | undefined;

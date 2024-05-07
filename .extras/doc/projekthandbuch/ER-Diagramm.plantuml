@@ -31,7 +31,6 @@ entity "Abteilung" {
   * zufriedenheit: number
   * art: text
   * budget: number
-  * krankenstandsQuote: number
   * verfuegbar: boolean
     gruendungsDatum: date
     homepage: text

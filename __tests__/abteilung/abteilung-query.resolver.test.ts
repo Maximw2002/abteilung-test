@@ -43,10 +43,8 @@ export interface GraphQLResponseBody {
 
 type AbteilungDTO = Omit<
     Abteilung,
-    'vieleMitarbeiter' | 'aktualisiert' | 'erzeugt' | 'krankenstandsQuote'
-> & {
-    krankenstandsQuote: string;
-};
+    'vieleMitarbeiter' | 'aktualisiert' | 'erzeugt'
+>;
 
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
@@ -106,7 +104,6 @@ describe('GraphQL Queries', () => {
                         abteilungsleiter {
                             nachname
                         }
-                        krankenstandsQuote(short: true)
                     }
                 }
             `,

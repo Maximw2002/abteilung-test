@@ -77,7 +77,6 @@ describe('GraphQL Mutations', () => {
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
-                            krankenstandsQuote: 2,
                             verfuegbar: false,
                             gruendungsDatum: "12345-123-123",
                             homepage: "anyHomepage",
@@ -94,7 +93,6 @@ describe('GraphQL Mutations', () => {
         const expectedMsg = [
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
-            expect.stringMatching(/^krankenstandsQuote /u),
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
             expect.stringMatching(/^abteilungsleiter.nachname /u),
@@ -139,7 +137,6 @@ describe('GraphQL Mutations', () => {
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
-                            krankenstandsQuote: 2,
                             verfuegbar: false,
                             gruendungsDatum: "12345-123-123",
                             homepage: "anyHomepage",
@@ -156,7 +153,6 @@ describe('GraphQL Mutations', () => {
         const expectedMsg = [
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
-            expect.stringMatching(/^krankenstandsQuote /u),
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
             expect.stringMatching(/^abteilungsleiter.nachname /u),
@@ -203,7 +199,6 @@ describe('GraphQL Mutations', () => {
                             zufriedenheit: 5,
                             art: VERTRIEB,
                             budget: 444.44,
-                            krankenstandsQuote: 0.099,
                             verfuegbar: false,
                             gruendungsDatum: "2021-04-04",
                             homepage: "https://update.mutation"
@@ -248,7 +243,6 @@ describe('GraphQL Mutations', () => {
                             zufriedenheit: -1,
                             art: VERTRIEB,
                             budget: -1,
-                            krankenstandsQuote: 2,
                             verfuegbar: false,
                             gruendungsDatum: "12345-123-123",
                             homepage: "anyHomepage",
@@ -263,7 +257,6 @@ describe('GraphQL Mutations', () => {
         const expectedMsg = [
             expect.stringMatching(/^zufriedenheit /u),
             expect.stringMatching(/^budget /u),
-            expect.stringMatching(/^krankenstandsQuote /u),
             expect.stringMatching(/^gruendungsDatum /u),
             expect.stringMatching(/^homepage /u),
         ];
@@ -307,7 +300,6 @@ describe('GraphQL Mutations', () => {
                             zufriedenheit: 5,
                             art: ENTWICKLUNG,
                             budget: 99.99,
-                            krankenstandsQuote: 0.099,
                             verfuegbar: false,
                             gruendungsDatum: "2021-01-02",
                             homepage: "https://acme.com",
