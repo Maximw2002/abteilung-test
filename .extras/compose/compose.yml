@@ -14,8 +14,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # Aufruf:   docker compose [-f compose.yml -f compose.distroless.yml|compose.wolfi.yml] up
-#           docker compose exec buch bash   # Bookworm
-#           docker compose exec buch ash    # Wolfi
+#           docker compose exec abteilung bash   # Bookworm
+#           docker compose exec abteilung ash    # Wolfi
 #             id
 #             ps -ef                        # NUR Wolfi, NICHT Bookworm
 #             env
@@ -41,7 +41,7 @@ include:
 # https://docs.docker.com/compose/compose-file/05-services
 services:
   abteilung:
-    image: juergenzimmermann/abteilung:2024.04.0-bookworm
+    image: juergenzimmermann/abteilung:2024.04.0-distroless
     depends_on:
       db:
         condition: service_healthy

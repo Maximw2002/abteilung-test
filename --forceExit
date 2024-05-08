@@ -1,0 +1,456 @@
+  console.debug
+    NODE_ENV = test
+
+      at Object.<anonymous> (src/config/env.ts:52:9)
+
+  console.debug
+    tlsDir = C:\Users\Studi\VSCodeProjects\abteilung-v0\src\config\resources\tls
+
+      at Object.<anonymous> (src/config/https.ts:34:9)
+
+  console.debug
+    logger config: logLevel=debug, logFile=C:\Users\Studi\VSCodeProjects\abteilung-v0\log\server.log, pretty=true, loggerDefaultValue=false
+
+      at Object.<anonymous> (src/config/logger.ts:68:13)
+
+  console.debug
+    dbResourcesDir = C:\Users\Studi\VSCodeProjects\abteilung-v0\src\config\resources\db\postgres
+
+      at Object.<anonymous> (src/config/typeormOptions.ts:64:9)
+
+  console.debug
+    typeOrmModuleOptions = {
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'abteilung',
+      database: 'abteilung',
+      schema: 'abteilung',
+      poolSize: 10,
+      entities: [
+        <ref *1> [class Mitarbeiter] {
+          [length]: 0,
+          [name]: 'Mitarbeiter',
+          [prototype]: { [constructor]: [Circular *1] }
+        },
+        <ref *2> [class Abteilung] {
+          [length]: 0,
+          [name]: 'Abteilung',
+          [prototype]: { [constructor]: [Circular *2] }
+        },
+        <ref *3> [class Abteilungsleiter] {
+          [length]: 0,
+          [name]: 'Abteilungsleiter',
+          [prototype]: { [constructor]: [Circular *3] }
+        },
+        [length]: 3
+      ],
+      namingStrategy: SnakeNamingStrategy {
+        nestedSetColumnNames: { left: 'nsleft', right: 'nsright' },
+        materializedPathColumnName: 'mpath'
+      },
+      logging: true,
+      logger: 'advanced-console',
+      extra: { ssl: { rejectUnauthorized: false } }
+    }
+
+      at Object.<anonymous> (src/config/typeormOptions.ts:165:13)
+
+  console.debug
+    mailConfig = {
+      activated: true,
+      options: {
+        host: 'localhost',
+        port: 5025,
+        secure: false,
+        priority: 'normal',
+        logger: false
+      }
+    }
+
+      at Object.<anonymous> (src/config/mail.ts:64:13)
+
+  console.debug
+    keycloakConnectOptions = {
+      authServerUrl: 'http://localhost:8080',
+      realm: 'acme',
+      clientId: 'abteilung-client',
+      policyEnforcement: 'permissive',
+      tokenValidation: 'online'
+    }
+
+      at Object.<anonymous> (src/config/keycloak.ts:61:13)
+
+  console.debug
+    schemaGraphQL = src\config\resources\graphql\schema.graphql
+
+      at Object.<anonymous> (src/config/graphql.ts:30:9)
+
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:43 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +276ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMailModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLoggerModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHttpModule dependencies initialized[39m[38;5;3m +12ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTerminusModule dependencies initialized[39m[38;5;3m +8ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mKeycloakConnectModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAdminModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mKeycloakModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +2ms[39m
+[2024-05-02 10:32:44.003 +0200] [34mDEBUG[39m: [36mkeycloakClient={"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"common":{"Accept":"application/json, text/plain, */*"},"delete":{},"get":{},"head":{},"post":{},"put":{},"patch":{}},"baseURL":"http://localhost:8080"}[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:44.005 +0200] [34mDEBUG[39m: [36mkeycloakClient={"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"common":{"Accept":"application/json, text/plain, */*"},"delete":{},"get":{},"head":{},"post":{},"put":{},"patch":{}},"baseURL":"http://localhost:8080"}[39m [90m{"class":"KeycloakService"}[39m
+  console.log
+    query: SELECT * FROM current_schema()
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: SELECT version();
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +766ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDevModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAbteilungModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mHealthController {/health}:[39m[38;5;3m +36ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/health/liveness, GET} route[39m[38;5;3m +8ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/health/readiness, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPrometheusController {/metrics}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/metrics, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAbteilungGetController {/rest}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rest/:id, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rest, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAbteilungWriteController {/rest}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rest, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rest/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/rest/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLoginController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/refresh, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDevController {/dev}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:44 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dev/db_populate, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:45 [32m    LOG[39m [38;5;3m[GraphQLModule] [39m[32mMapped {/graphql, POST} route[39m[38;5;3m +274ms[39m
+  console.log
+    query: -- Copyright (C) 2023 - present Juergen Zimmermann, Hochschule Karlsruhe
+    --
+    -- This program is free software: you can redistribute it and/or modify
+    -- it under the terms of the GNU General Public License as published by
+    -- the Free Software Foundation, either version 3 of the License, or
+    -- (at your option) any later version.
+    --
+    -- This program is distributed in the hope that it will be useful,
+    -- but WITHOUT ANY WARRANTY; without even the implied warranty of
+    -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    -- GNU General Public License for more details.
+    --
+    -- You should have received a copy of the GNU General Public License
+    -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+    -- https://www.postgresql.org/docs/current/sql-droptable.html
+    
+    DROP TABLE IF EXISTS mitarbeiter CASCADE;
+    DROP TABLE IF EXISTS abteilungsleiter CASCADE;
+    DROP TABLE IF EXISTS abteilung CASCADE;
+    
+    -- https://www.postgresql.org/docs/current/sql-droptype.html
+    DROP TYPE IF EXISTS abteilungsart;
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+[2024-05-02 10:32:45.171 +0200] [33mWARN[39m: [36mpostgres: DB wird neu geladen[39m [90m{"class":"DbPopulateService"}[39m
+[2024-05-02 10:32:45.171 +0200] [34mDEBUG[39m: [36mdropScript = C:\Users\Studi\VSCodeProjects\abteilung-v0\src\config\resources\db\postgres\drop.sql[39m [90m{"class":"DbPopulateService"}[39m
+  console.log
+    query: -- Copyright (C) 2022 - present Juergen Zimmermann, Hochschule Karlsruhe
+    --
+    -- This program is free software: you can redistribute it and/or modify
+    -- it under the terms of the GNU General Public License as published by
+    -- the Free Software Foundation, either version 3 of the License, or
+    -- (at your option) any later version.
+    --
+    -- This program is distributed in the hope that it will be useful,
+    -- but WITHOUT ANY WARRANTY; without even the implied warranty of
+    -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    -- GNU General Public License for more details.
+    --
+    -- You should have received a copy of the GNU General Public License
+    -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+    -- docker compose exec postgres bash
+    -- psql --dbname=abteilung --username=abteilung --file=/scripts/create-table-abteilung.sql
+    
+    -- Indexe mit pgAdmin auflisten: "Query Tool" verwenden mit
+    --  SELECT   tablename, indexname, indexdef, tablespace
+    --  FROM     pg_indexes
+    --  WHERE    schemaname = 'abteilung'
+    --  ORDER BY tablename, indexname;
+    
+    -- https://www.postgresql.org/docs/devel/app-psql.html
+    -- https://www.postgresql.org/docs/current/ddl-schemas.html
+    -- https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-CREATE
+    -- "user-private schema" (Default-Schema: public)
+    CREATE SCHEMA IF NOT EXISTS AUTHORIZATION abteilung;
+    
+    ALTER ROLE abteilung SET search_path = 'abteilung';
+    
+    -- https://www.postgresql.org/docs/current/sql-createtype.html
+    -- https://www.postgresql.org/docs/current/datatype-enum.html
+    CREATE TYPE abteilungsart AS ENUM ('ENTWICKLUNG', 'VERTRIEB');
+    
+    -- https://www.postgresql.org/docs/current/sql-createtable.html
+    -- https://www.postgresql.org/docs/current/datatype.html
+    CREATE TABLE IF NOT EXISTS abteilung (
+                      -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-INT
+                      -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS
+                      -- impliziter Index fuer Primary Key
+                      -- "GENERATED ALWAYS AS IDENTITY" gemaess SQL-Standard
+                      -- entspricht SERIAL mit generierter Sequenz abteilung_id_seq
+        id            integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE abteilungspace,
+                      -- https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6
+        version       integer NOT NULL DEFAULT 0,
+                      -- impliziter Index als B-Baum durch UNIQUE
+                      -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS
+        buero_nummer   varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE abteilungspace,
+                      -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
+                      -- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
+        zufriedenheit integer NOT NULL CHECK (zufriedenheit >= 0 AND zufriedenheit <= 5),
+        art           abteilungsart,
+                      -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL
+                      -- 10 Stellen, davon 2 Nachkommastellen
+        budget        decimal(8,2) NOT NULL,
+        krankenstands_quote decimal(4,3) NOT NULL,
+                      -- https://www.postgresql.org/docs/current/datatype-boolean.html
+        verfuegbar     boolean NOT NULL DEFAULT FALSE,
+                      -- https://www.postgresql.org/docs/current/datatype-datetime.html
+        gruendungs_datum  date,
+        homepage      varchar(40),
+        -- schlagwoerter json,
+        schlagwoerter varchar(64),
+                      -- https://www.postgresql.org/docs/current/datatype-datetime.html
+        erzeugt       timestamp NOT NULL DEFAULT NOW(),
+        aktualisiert  timestamp NOT NULL DEFAULT NOW()
+    ) TABLESPACE abteilungspace;
+    
+    CREATE TABLE IF NOT EXISTS abteilungsleiter (
+        id                  integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE abteilungspace,
+        nachname    varchar(40) NOT NULL,
+        vorname             varchar(40),
+        abteilung_id        integer NOT NULL UNIQUE USING INDEX TABLESPACE abteilungspace REFERENCES abteilung
+    ) TABLESPACE abteilungspace;
+    
+    
+    CREATE TABLE IF NOT EXISTS mitarbeiter (
+        id              integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE abteilungspace,
+        name            varchar(32) NOT NULL,
+        job_type        varchar(16) NOT NULL,
+        abteilung_id    integer NOT NULL REFERENCES abteilung
+    ) TABLESPACE abteilungspace;
+    CREATE INDEX IF NOT EXISTS mitarbeiter_abteilung_id_idx ON mitarbeiter(abteilung_id) TABLESPACE abteilungspace;
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+[2024-05-02 10:32:46.141 +0200] [34mDEBUG[39m: [36mcreateScript = C:\Users\Studi\VSCodeProjects\abteilung-v0\src\config\resources\db\postgres\create.sql[39m [90m{"class":"DbPopulateService"}[39m
+  console.log
+    query: SELECT * FROM current_schema()
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: SELECT version();
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: SET search_path TO abteilung;
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: COPY abteilung FROM '/csv/abteilung.csv' (FORMAT csv, DELIMITER ';', HEADER true);
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: COPY abteilungsleiter FROM '/csv/abteilungsleiter.csv' (FORMAT csv, DELIMITER ';', HEADER true);
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: COPY mitarbeiter FROM '/csv/mitarbeiter.csv' (FORMAT csv, DELIMITER ';', HEADER true);
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+[32m[Nest] 8324  - [39m02.05.2024, 10:32:47 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1856ms[39m
+  console.info
+            _     _       _ _                   
+       __ _| |__ | |_ ___(_) |_   _ _ __   __ _ 
+      / _` | '_ \| __/ _ \ | | | | | '_ \ / _` |
+     | (_| | |_) | ||  __/ | | |_| | | | | (_| |
+      \__,_|_.__/ \__\___|_|_|\__,_|_| |_|\__, |
+                                          |___/
+
+      at src/logger/banner.service.ts:43:50
+
+[2024-05-02 10:32:47.014 +0200] [33mWARN[39m: [36mDB wurde neu geladen[39m [90m{"class":"DbPopulateService"}[39m
+[2024-05-02 10:32:47.016 +0200] [32mINFO[39m: [36mNode: v21.7.2[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.016 +0200] [32mINFO[39m: [36mNODE_ENV: test[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.016 +0200] [32mINFO[39m: [36mRechnername: DESKTOP-HNTA75S[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.017 +0200] [32mINFO[39m: [36mPort: 3000[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.017 +0200] [32mINFO[39m: [36mDB-System: postgres[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.017 +0200] [32mINFO[39m: [36mBetriebssystem: Windows_NT (10.0.22631)[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.021 +0200] [32mINFO[39m: [36mUsername: Studi[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.021 +0200] [32mINFO[39m: [36mSwagger UI: /swagger[39m [90m{"class":"BannerService"}[39m
+[2024-05-02 10:32:47.201 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","user-agent":"axios/1.6.8","content-length":"238","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:47.243 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:47.243 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:48.109 +0200] [34mDEBUG[39m: [36m#logPayload: exp=1714640568[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:48.109 +0200] [34mDEBUG[39m: [36m#logPayload: roles=["admin"][39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:48.109 +0200] [34mDEBUG[39m: [36mlogin: response.data={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjgsImlhdCI6MTcxNDYzODc2OCwianRpIjoiODQ3MTE5NGItNzU2Mi00YTRhLTk3NjYtMjQxYWUyYzU1NDUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1YWI3NTU4Ny1mMWU4LTQyN2MtYTY5NC1jZDE2NmYwZTE1ODEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yOciz8d8vuQVEq-UKgyuoLfmmMUmZkKHZQv1_6gA_S-Rs6Ve6t56zuD6cn6kwm4GrrwMjn0zF8_qtbAdglDv0rHvm3t0A1k4l9wpydAtwxqCCGzmLPje8r1L-9jwPQC1ifgWFmDs9C4PK0inZ0uQK_SAjPG-_GhSx3DhdxlmsOJZw0EMQmwbqLvFGa_yJsImmtw9RuHnSUQ8yF-LI_GvDvXFREMx4I4EqT8RONXNmS9Oz8soxzq_-WNE2_3wjuYsb2yBbx7_f8OSVobsgcC7L4i4zFX9CIn1RyGVn2rTcCi9RX-DnLPltoa7njUszqR6eHxUbxZ9It5pTe4RNEPbtA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjgsImlhdCI6MTcxNDYzODc2OCwianRpIjoiNjY5NmE4ZTUtZGUyNi00NTk4LWJjOGEtOTZjYmQ5ODYxY2FiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIn0.qPjVynemuh2l1HswGHrd5vE-S9dlkGP0fOVuJf3KtJRup8VsE4pivmRZ9yRRnS9laZmxz6-vLrM4qvE8dlX3EA","token_type":"Bearer","not-before-policy":0,"session_state":"5ab75587-f1e8-427c-a694-cd166f0e1581","scope":"profile email"}[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:48.109 +0200] [34mDEBUG[39m: [36mlogin: result={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjgsImlhdCI6MTcxNDYzODc2OCwianRpIjoiODQ3MTE5NGItNzU2Mi00YTRhLTk3NjYtMjQxYWUyYzU1NDUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1YWI3NTU4Ny1mMWU4LTQyN2MtYTY5NC1jZDE2NmYwZTE1ODEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yOciz8d8vuQVEq-UKgyuoLfmmMUmZkKHZQv1_6gA_S-Rs6Ve6t56zuD6cn6kwm4GrrwMjn0zF8_qtbAdglDv0rHvm3t0A1k4l9wpydAtwxqCCGzmLPje8r1L-9jwPQC1ifgWFmDs9C4PK0inZ0uQK_SAjPG-_GhSx3DhdxlmsOJZw0EMQmwbqLvFGa_yJsImmtw9RuHnSUQ8yF-LI_GvDvXFREMx4I4EqT8RONXNmS9Oz8soxzq_-WNE2_3wjuYsb2yBbx7_f8OSVobsgcC7L4i4zFX9CIn1RyGVn2rTcCi9RX-DnLPltoa7njUszqR6eHxUbxZ9It5pTe4RNEPbtA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjgsImlhdCI6MTcxNDYzODc2OCwianRpIjoiNjY5NmE4ZTUtZGUyNi00NTk4LWJjOGEtOTZjYmQ5ODYxY2FiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIn0.qPjVynemuh2l1HswGHrd5vE-S9dlkGP0fOVuJf3KtJRup8VsE4pivmRZ9yRRnS9laZmxz6-vLrM4qvE8dlX3EA","token_type":"Bearer","not-before-policy":0,"session_state":"5ab75587-f1e8-427c-a694-cd166f0e1581","scope":"profile email"}[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:48.111 +0200] [34mDEBUG[39m: [36mResponse time: 875 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:48.144 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjgsImlhdCI6MTcxNDYzODc2OCwianRpIjoiODQ3MTE5NGItNzU2Mi00YTRhLTk3NjYtMjQxYWUyYzU1NDUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWFiNzU1ODctZjFlOC00MjdjLWE2OTQtY2QxNjZmMGUxNTgxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1YWI3NTU4Ny1mMWU4LTQyN2MtYTY5NC1jZDE2NmYwZTE1ODEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yOciz8d8vuQVEq-UKgyuoLfmmMUmZkKHZQv1_6gA_S-Rs6Ve6t56zuD6cn6kwm4GrrwMjn0zF8_qtbAdglDv0rHvm3t0A1k4l9wpydAtwxqCCGzmLPje8r1L-9jwPQC1ifgWFmDs9C4PK0inZ0uQK_SAjPG-_GhSx3DhdxlmsOJZw0EMQmwbqLvFGa_yJsImmtw9RuHnSUQ8yF-LI_GvDvXFREMx4I4EqT8RONXNmS9Oz8soxzq_-WNE2_3wjuYsb2yBbx7_f8OSVobsgcC7L4i4zFX9CIn1RyGVn2rTcCi9RX-DnLPltoa7njUszqR6eHxUbxZ9It5pTe4RNEPbtA","user-agent":"axios/1.6.8","content-length":"1158","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+  console.log
+    query: SELECT 1 AS "row_exists" FROM (SELECT 1 AS dummy_column) "dummy_table" WHERE EXISTS (SELECT 1 FROM "abteilung"."abteilung" "Abteilung" WHERE (("Abteilung"."buero_nummer" = $1))) LIMIT 1 -- PARAMETERS: ["0-200"]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+[2024-05-02 10:32:48.239 +0200] [34mDEBUG[39m: [36mcreate: abteilungDTO={"bueroNummer":"0-200","zufriedenheit":1,"art":"VERTRIEB","budget":99.99,"krankenstandsQuote":0.123,"verfuegbar":true,"gruendungsDatum":"2022-02-28","homepage":"https://create.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"abteilungsleiter":{"nachname":"nachnamecreatemutation","vorname":"vornamecreatemutation"},"vieleMitarbeiter":[{"name":"Moritz Wagner","jobType":"Projektleiter"}]}[39m [90m{"class":"AbteilungMutationResolver"}[39m
+[2024-05-02 10:32:48.240 +0200] [34mDEBUG[39m: [36mcreate: abteilung={"abteilungsleiter":{"abteilung":"[Circular]","nachname":"nachnamecreatemutation","vorname":"vornamecreatemutation"},"aktualisiert":"2024-05-02T08:32:48.239Z","art":"VERTRIEB","budget":99.99,"bueroNummer":"0-200","erzeugt":"2024-05-02T08:32:48.239Z","gruendungsDatum":"2022-02-28","homepage":"https://create.mutation","krankenstandsQuote":0.123,"schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"verfuegbar":true,"vieleMitarbeiter":[{"jobType":"Projektleiter","name":"Moritz Wagner"}],"zufriedenheit":1}[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:48.240 +0200] [34mDEBUG[39m: [36m#validateCreate: bueroNummer=0-200[39m [90m{"class":"AbteilungWriteService"}[39m
+  console.log
+    query: START TRANSACTION
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: INSERT INTO "abteilung"."abteilung"("version", "buero_nummer", "zufriedenheit", "art", "budget", "krankenstands_quote", "verfuegbar", "gruendungs_datum", "homepage", "schlagwoerter", "erzeugt", "aktualisiert") VALUES (1, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id", "version", "erzeugt", "aktualisiert" -- PARAMETERS: ["0-200",1,"VERTRIEB","99.99","0.123",true,"2022-02-28","https://create.mutation","JAVASCRIPT,TYPESCRIPT","2024-05-02T08:32:48.239Z","2024-05-02T08:32:48.239Z"]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: INSERT INTO "abteilung"."mitarbeiter"("name", "job_type", "abteilung_id") VALUES ($1, $2, $3) RETURNING "id" -- PARAMETERS: ["Moritz Wagner","Projektleiter",1000]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: INSERT INTO "abteilung"."abteilungsleiter"("nachname", "vorname", "abteilung_id") VALUES ($1, $2, $3) RETURNING "id" -- PARAMETERS: ["nachnamecreatemutation","vornamecreatemutation",1000]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: COMMIT
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+[2024-05-02 10:32:48.585 +0200] [34mDEBUG[39m: [36mcreate: abteilungDb={"abteilungsleiter":{"abteilung":"[Circular]","id":1000,"nachname":"nachnamecreatemutation","vorname":"vornamecreatemutation"},"aktualisiert":"2024-05-02T08:32:48.239Z","art":"VERTRIEB","budget":99.99,"bueroNummer":"0-200","erzeugt":"2024-05-02T08:32:48.239Z","gruendungsDatum":"2022-02-28","homepage":"https://create.mutation","id":1000,"krankenstandsQuote":0.123,"schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"verfuegbar":true,"version":1,"vieleMitarbeiter":[{"id":1000,"jobType":"Projektleiter","name":"Moritz Wagner"}],"zufriedenheit":1}[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:48.585 +0200] [34mDEBUG[39m: [36m#sendMail: data={"from":"\"Joe Doe\" <Joe.Doe@acme.com>","to":"\"Foo Bar\" <Foo.Bar@acme.com>","subject":"Neue Abteilung 1000","html":"Die Abteilung mit dem Abteilungsleiter <strong>nachnamecreatemutation</strong> ist angelegt"}[39m [90m{"class":"MailService"}[39m
+[2024-05-02 10:32:48.702 +0200] [33mWARN[39m: [36m#sendmail: Fehler {"errno":-4078,"code":"ESOCKET","syscall":"connect","address":"127.0.0.1","port":5025,"command":"CONN"}[39m [90m{"class":"MailService"}[39m
+[2024-05-02 10:32:48.702 +0200] [34mDEBUG[39m: [36mcreateAbteilung: id=1000[39m [90m{"class":"AbteilungMutationResolver"}[39m
+[2024-05-02 10:32:48.703 +0200] [34mDEBUG[39m: [36mResponse time: 476 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:48.721 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","user-agent":"axios/1.6.8","content-length":"238","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:48.723 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:48.723 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.282 +0200] [34mDEBUG[39m: [36m#logPayload: exp=1714640569[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.282 +0200] [34mDEBUG[39m: [36m#logPayload: roles=["admin"][39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.283 +0200] [34mDEBUG[39m: [36mlogin: response.data={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiNDIxMDdkNzktNTBlMS00ODc0LWEyNjctMmRjZTNkYTllN2M4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI5OTg2YTUyYi1hMjgzLTRjYjEtYjA4ZC01ZDA0ZWNlMDdhOGQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yUaUkoXDnqFE7ljuOvuC5aE81KYDfD7PSmen1W2fNJCvJb2Jh0uTDGxkHZXOWSsJpUkNqgepeT4558YjUTqP9RocAwTm1005cbU4T7UssSqxrE-uAxCIDt_ZcDAaqoZ8I3k_G88zsA5I93Bpflq3KsMNUj69B9lQFwjVNq0cHoPOP1kIyYgxyrnlCrvQwZ-ry0fXYOLg5bitxj0XdiZPMGIdoSUjCdX6O_GJDBak6kEkaz6JmzvaSiYEn4L4FEfaSJb-2xDyy794tPk8GMRPnYFsHDDNiVXLJbzb7LJsUpDoLxKDQjvuDlv_OGGZIXM4FfzBuRDf-xpsYArvraoh0Q","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiNmU3OThjMTYtZDBmOS00NjNhLTg3MjMtYWIyNDBjOThkZTE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIn0.LuooHmS8klVp9mdJRAprrdqYcnsvhofAsRCR33DwlF3NTVkjwmY1LpUkbJakkrghYrYoxJy2AJ1l2Z-MS-sAGw","token_type":"Bearer","not-before-policy":0,"session_state":"9986a52b-a283-4cb1-b08d-5d04ece07a8d","scope":"profile email"}[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.283 +0200] [34mDEBUG[39m: [36mlogin: result={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiNDIxMDdkNzktNTBlMS00ODc0LWEyNjctMmRjZTNkYTllN2M4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI5OTg2YTUyYi1hMjgzLTRjYjEtYjA4ZC01ZDA0ZWNlMDdhOGQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yUaUkoXDnqFE7ljuOvuC5aE81KYDfD7PSmen1W2fNJCvJb2Jh0uTDGxkHZXOWSsJpUkNqgepeT4558YjUTqP9RocAwTm1005cbU4T7UssSqxrE-uAxCIDt_ZcDAaqoZ8I3k_G88zsA5I93Bpflq3KsMNUj69B9lQFwjVNq0cHoPOP1kIyYgxyrnlCrvQwZ-ry0fXYOLg5bitxj0XdiZPMGIdoSUjCdX6O_GJDBak6kEkaz6JmzvaSiYEn4L4FEfaSJb-2xDyy794tPk8GMRPnYFsHDDNiVXLJbzb7LJsUpDoLxKDQjvuDlv_OGGZIXM4FfzBuRDf-xpsYArvraoh0Q","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiNmU3OThjMTYtZDBmOS00NjNhLTg3MjMtYWIyNDBjOThkZTE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIn0.LuooHmS8klVp9mdJRAprrdqYcnsvhofAsRCR33DwlF3NTVkjwmY1LpUkbJakkrghYrYoxJy2AJ1l2Z-MS-sAGw","token_type":"Bearer","not-before-policy":0,"session_state":"9986a52b-a283-4cb1-b08d-5d04ece07a8d","scope":"profile email"}[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:49.283 +0200] [34mDEBUG[39m: [36mResponse time: 561 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:49.296 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiNDIxMDdkNzktNTBlMS00ODc0LWEyNjctMmRjZTNkYTllN2M4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTk4NmE1MmItYTI4My00Y2IxLWIwOGQtNWQwNGVjZTA3YThkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI5OTg2YTUyYi1hMjgzLTRjYjEtYjA4ZC01ZDA0ZWNlMDdhOGQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.yUaUkoXDnqFE7ljuOvuC5aE81KYDfD7PSmen1W2fNJCvJb2Jh0uTDGxkHZXOWSsJpUkNqgepeT4558YjUTqP9RocAwTm1005cbU4T7UssSqxrE-uAxCIDt_ZcDAaqoZ8I3k_G88zsA5I93Bpflq3KsMNUj69B9lQFwjVNq0cHoPOP1kIyYgxyrnlCrvQwZ-ry0fXYOLg5bitxj0XdiZPMGIdoSUjCdX6O_GJDBak6kEkaz6JmzvaSiYEn4L4FEfaSJb-2xDyy794tPk8GMRPnYFsHDDNiVXLJbzb7LJsUpDoLxKDQjvuDlv_OGGZIXM4FfzBuRDf-xpsYArvraoh0Q","user-agent":"axios/1.6.8","content-length":"768","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:49.530 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","user-agent":"axios/1.6.8","content-length":"238","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:49.534 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:49.534 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"KeycloakService"}[39m
+  console.log
+    query: SELECT "abteilung"."id" AS "abteilung_id", "abteilung"."version" AS "abteilung_version", "abteilung"."buero_nummer" AS "abteilung_buero_nummer", "abteilung"."zufriedenheit" AS "abteilung_zufriedenheit", "abteilung"."art" AS "abteilung_art", "abteilung"."budget" AS "abteilung_budget", "abteilung"."krankenstands_quote" AS "abteilung_krankenstands_quote", "abteilung"."verfuegbar" AS "abteilung_verfuegbar", "abteilung"."gruendungs_datum" AS "abteilung_gruendungs_datum", "abteilung"."homepage" AS "abteilung_homepage", "abteilung"."schlagwoerter" AS "abteilung_schlagwoerter", "abteilung"."erzeugt" AS "abteilung_erzeugt", "abteilung"."aktualisiert" AS "abteilung_aktualisiert", "abteilungsleiter"."id" AS "abteilungsleiter_id", "abteilungsleiter"."nachname" AS "abteilungsleiter_nachname", "abteilungsleiter"."vorname" AS "abteilungsleiter_vorname", "abteilungsleiter"."abteilung_id" AS "abteilungsleiter_abteilung_id" FROM "abteilung"."abteilung" "abteilung" INNER JOIN "abteilung"."abteilungsleiter" "abteilungsleiter" ON "abteilungsleiter"."abteilung_id"="abteilung"."id" WHERE "abteilung"."id" = $1 -- PARAMETERS: [40]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+[2024-05-02 10:32:49.996 +0200] [34mDEBUG[39m: [36m#logPayload: exp=1714640569[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.996 +0200] [34mDEBUG[39m: [36m#logPayload: roles=["admin"][39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.996 +0200] [34mDEBUG[39m: [36mlogin: response.data={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiYTgxN2QzOWUtYmJjNi00YThhLWIyNzYtYTdmNzM4MWRjMDgwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMzdhZjEwYy1jZTA5LTRjYjYtOTVlMC1mMTQ3ODdiNzQ1MzMiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.IFAaia-FFvm7JIq158lg6IEwgo81CmDaEzMFoUOTjdPBmsdm79gs-d_zirWkBN-3fEQ4mUndfDRN3KG-V-3p98PyUd1cd2W48_d1Po-xNx7m1rcrWjPiiNtDw5QoQbrGzF0wstBgzjcQMc-kAZwwCPyj9NzLszpSWavFVPQbBBOXFxStl17SMM23k64XO8iESAuohphF4DTpNbdJfOlqoS7DTTMziJr8nWL3ETwYcnVLkL9t1QeP2l42PwA90NcIGsIS7ErSnLOwDzbFeh5nwcQVqEfkCCaU4056X4Bpby2mtubB_a6Ees13nNt2lnNZDeiNk66aMwmX-juAlF6uDA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiYWJlMWViMzktMjMwNC00YTExLWIxMGUtMzkzZjhlYjBmODQwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIn0.YXQDYgB9bAWx6ocgKFytfVt4fUndXtsW4UcXWEGFxAbNkrJ8dmKwTMue8UYVlzTvf-yoYlpd8eEJPwpOvpjS1Q","token_type":"Bearer","not-before-policy":0,"session_state":"237af10c-ce09-4cb6-95e0-f14787b74533","scope":"profile email"}[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:49.996 +0200] [34mDEBUG[39m: [36mlogin: result={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiYTgxN2QzOWUtYmJjNi00YThhLWIyNzYtYTdmNzM4MWRjMDgwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMzdhZjEwYy1jZTA5LTRjYjYtOTVlMC1mMTQ3ODdiNzQ1MzMiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.IFAaia-FFvm7JIq158lg6IEwgo81CmDaEzMFoUOTjdPBmsdm79gs-d_zirWkBN-3fEQ4mUndfDRN3KG-V-3p98PyUd1cd2W48_d1Po-xNx7m1rcrWjPiiNtDw5QoQbrGzF0wstBgzjcQMc-kAZwwCPyj9NzLszpSWavFVPQbBBOXFxStl17SMM23k64XO8iESAuohphF4DTpNbdJfOlqoS7DTTMziJr8nWL3ETwYcnVLkL9t1QeP2l42PwA90NcIGsIS7ErSnLOwDzbFeh5nwcQVqEfkCCaU4056X4Bpby2mtubB_a6Ees13nNt2lnNZDeiNk66aMwmX-juAlF6uDA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiYWJlMWViMzktMjMwNC00YTExLWIxMGUtMzkzZjhlYjBmODQwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIn0.YXQDYgB9bAWx6ocgKFytfVt4fUndXtsW4UcXWEGFxAbNkrJ8dmKwTMue8UYVlzTvf-yoYlpd8eEJPwpOvpjS1Q","token_type":"Bearer","not-before-policy":0,"session_state":"237af10c-ce09-4cb6-95e0-f14787b74533","scope":"profile email"}[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:49.997 +0200] [34mDEBUG[39m: [36mResponse time: 464 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:50.018 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NjksImlhdCI6MTcxNDYzODc2OSwianRpIjoiYTgxN2QzOWUtYmJjNi00YThhLWIyNzYtYTdmNzM4MWRjMDgwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMjM3YWYxMGMtY2UwOS00Y2I2LTk1ZTAtZjE0Nzg3Yjc0NTMzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIyMzdhZjEwYy1jZTA5LTRjYjYtOTVlMC1mMTQ3ODdiNzQ1MzMiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.IFAaia-FFvm7JIq158lg6IEwgo81CmDaEzMFoUOTjdPBmsdm79gs-d_zirWkBN-3fEQ4mUndfDRN3KG-V-3p98PyUd1cd2W48_d1Po-xNx7m1rcrWjPiiNtDw5QoQbrGzF0wstBgzjcQMc-kAZwwCPyj9NzLszpSWavFVPQbBBOXFxStl17SMM23k64XO8iESAuohphF4DTpNbdJfOlqoS7DTTMziJr8nWL3ETwYcnVLkL9t1QeP2l42PwA90NcIGsIS7ErSnLOwDzbFeh5nwcQVqEfkCCaU4056X4Bpby2mtubB_a6Ees13nNt2lnNZDeiNk66aMwmX-juAlF6uDA","user-agent":"axios/1.6.8","content-length":"826","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:50.080 +0200] [34mDEBUG[39m: [36mupdate: abteilung={"id":"40","version":0,"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"]}[39m [90m{"class":"AbteilungMutationResolver"}[39m
+[2024-05-02 10:32:50.080 +0200] [34mDEBUG[39m: [36mupdate: id=40, abteilung={"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"aktualisiert":"2024-05-02T08:32:50.080Z"}, version="0"[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.081 +0200] [34mDEBUG[39m: [36m#validateUpdate: abteilung={"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"aktualisiert":"2024-05-02T08:32:50.080Z"}, id=40, versionStr="0"[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.081 +0200] [34mDEBUG[39m: [36m#validateUpdate: abteilung={"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"aktualisiert":"2024-05-02T08:32:50.080Z"}, version=0[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.081 +0200] [34mDEBUG[39m: [36mfindById: id=40[39m [90m{"class":"AbteilungReadService"}[39m
+  console.log
+    query: SELECT "Abteilung"."id" AS "Abteilung_id", "Abteilung"."version" AS "Abteilung_version", "Abteilung"."buero_nummer" AS "Abteilung_buero_nummer", "Abteilung"."zufriedenheit" AS "Abteilung_zufriedenheit", "Abteilung"."art" AS "Abteilung_art", "Abteilung"."budget" AS "Abteilung_budget", "Abteilung"."krankenstands_quote" AS "Abteilung_krankenstands_quote", "Abteilung"."verfuegbar" AS "Abteilung_verfuegbar", "Abteilung"."gruendungs_datum" AS "Abteilung_gruendungs_datum", "Abteilung"."homepage" AS "Abteilung_homepage", "Abteilung"."schlagwoerter" AS "Abteilung_schlagwoerter", "Abteilung"."erzeugt" AS "Abteilung_erzeugt", "Abteilung"."aktualisiert" AS "Abteilung_aktualisiert" FROM "abteilung"."abteilung" "Abteilung" WHERE "Abteilung"."id" IN ($1) -- PARAMETERS: [40]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+          at async Promise.all (index 0)
+
+  console.log
+    query: SELECT "Abteilungsleiter"."id" AS "Abteilungsleiter_id", "Abteilungsleiter"."nachname" AS "Abteilungsleiter_nachname", "Abteilungsleiter"."vorname" AS "Abteilungsleiter_vorname", "Abteilungsleiter"."abteilung_id" AS "Abteilungsleiter_abteilung_id" FROM "abteilung"."abteilungsleiter" "Abteilungsleiter" WHERE "Abteilungsleiter"."id" IN ($1) -- PARAMETERS: [40]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 1)
+          at async Promise.all (index 0)
+
+[2024-05-02 10:32:50.168 +0200] [34mDEBUG[39m: [36mfindById: abteilung={"id":40,"version":0,"bueroNummer":"1-010","zufriedenheit":4,"art":"ENTWICKLUNG","budget":44.4,"krankenstandsQuote":0.044,"verfuegbar":true,"gruendungsDatum":"2022-02-04","homepage":"https://acme.de","schlagwoerter":[],"erzeugt":"2022-02-03T23:00:00.000Z","aktualisiert":"2022-02-03T23:00:00.000Z"}, abteilungsleiter={"id":40,"nachname":"Delta","vorname":"delta"}[39m [90m{"class":"AbteilungReadService"}[39m
+[2024-05-02 10:32:50.169 +0200] [34mDEBUG[39m: [36m#validateUpdate: abteilungDb={"id":40,"version":0,"bueroNummer":"1-010","zufriedenheit":4,"art":"ENTWICKLUNG","budget":44.4,"krankenstandsQuote":0.044,"verfuegbar":true,"gruendungsDatum":"2022-02-04","homepage":"https://acme.de","schlagwoerter":[],"abteilungsleiter":{"id":40,"nachname":"Delta","vorname":"delta"},"erzeugt":"2022-02-03T23:00:00.000Z","aktualisiert":"2022-02-03T23:00:00.000Z"}[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.169 +0200] [34mDEBUG[39m: [36mupdate: validateResult={"id":40,"version":0,"bueroNummer":"1-010","zufriedenheit":4,"art":"ENTWICKLUNG","budget":44.4,"krankenstandsQuote":0.044,"verfuegbar":true,"gruendungsDatum":"2022-02-04","homepage":"https://acme.de","schlagwoerter":[],"abteilungsleiter":{"id":40,"nachname":"Delta","vorname":"delta"},"erzeugt":"2022-02-03T23:00:00.000Z","aktualisiert":"2022-02-03T23:00:00.000Z"}[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.169 +0200] [34mDEBUG[39m: [36mupdate: merged={"id":40,"version":0,"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"abteilungsleiter":{"id":40,"nachname":"Delta","vorname":"delta"},"erzeugt":"2022-02-03T23:00:00.000Z","aktualisiert":"2024-05-02T08:32:50.080Z"}[39m [90m{"class":"AbteilungWriteService"}[39m
+  console.log
+    query: SELECT "abteilungsleiter"."id" AS "id", "abteilungsleiter"."abteilung_id" AS "abteilung_id" FROM "abteilung"."abteilungsleiter" "abteilungsleiter" WHERE (("abteilungsleiter"."abteilung_id" = $1)) -- PARAMETERS: [40]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: START TRANSACTION
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+  console.log
+    query: UPDATE "abteilung"."abteilung" SET "buero_nummer" = $1, "zufriedenheit" = $2, "art" = $3, "budget" = $4, "krankenstands_quote" = $5, "verfuegbar" = $6, "gruendungs_datum" = $7, "homepage" = $8, "schlagwoerter" = $9, "aktualisiert" = $10, "version" = "version" + 1 WHERE "id" IN ($11) RETURNING "version", "aktualisiert" -- PARAMETERS: ["2-301",5,"VERTRIEB","444.44","0.099",false,"2021-04-04","https://update.mutation","JAVASCRIPT,TYPESCRIPT","2024-05-02T08:32:50.080Z",40]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+          at async Promise.all (index 0)
+
+  console.log
+    query: COMMIT
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+[2024-05-02 10:32:50.426 +0200] [34mDEBUG[39m: [36mupdate: updated={"id":40,"version":1,"bueroNummer":"2-301","zufriedenheit":5,"art":"VERTRIEB","budget":444.44,"krankenstandsQuote":0.099,"verfuegbar":false,"gruendungsDatum":"2021-04-04","homepage":"https://update.mutation","schlagwoerter":["JAVASCRIPT","TYPESCRIPT"],"abteilungsleiter":{"id":40,"nachname":"Delta","vorname":"delta"},"erzeugt":"2022-02-03T23:00:00.000Z","aktualisiert":"2024-05-02T08:32:50.080Z"}[39m [90m{"class":"AbteilungWriteService"}[39m
+[2024-05-02 10:32:50.426 +0200] [34mDEBUG[39m: [36mupdateAbteilung: versionResult=1[39m [90m{"class":"AbteilungMutationResolver"}[39m
+[2024-05-02 10:32:50.426 +0200] [34mDEBUG[39m: [36mResponse time: 351 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:50.452 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","user-agent":"axios/1.6.8","content-length":"238","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:50.454 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:50.454 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:51.030 +0200] [34mDEBUG[39m: [36m#logPayload: exp=1714640571[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:51.030 +0200] [34mDEBUG[39m: [36m#logPayload: roles=["admin"][39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:51.030 +0200] [34mDEBUG[39m: [36mlogin: response.data={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NzEsImlhdCI6MTcxNDYzODc3MSwianRpIjoiMGYyYjVmN2YtMjU3Ni00MWQwLWI2ODYtMTIyMjY1MmQyM2Y2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJjMTA2MjRkYy05MGQ1LTRiODMtOGQwNi0zM2Y1YTdjMTY5MzIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.Z1-NujQjzTV-StmJNj0DAV0xUnDBospKI1VCG96pdULlGfqfOBHmbzXbEXMmwfjxBe88bGp3h7Cw27zjlvwEm_rx__eqcoN-LULE1vnyjrSVlSXU1Q2xLGNheeZTZnfaQ2s9tGa7MVukgivt49nrapf8RVpzxvPBlCGlBgEL53_Y6t26KgsFwqueoIoUbL2OZ6wgsDFalC3bbLTijU_rACtKAwzjNlgCifeEVLbVJKbQBnDHjnsfBnHHHx_yTgiZ2tBgcLwMFk3pDYWX2OorOg2gD6Zb4EZr45UokN_x4_x7D80SfeN9-bvdPFOwc7xwFjSaAtHA1uyKeIvMFylfjA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNzEsImlhdCI6MTcxNDYzODc3MSwianRpIjoiM2JmMWVlNGEtZWNhOS00NzA5LTg3ZTAtOTQyZjkzMGMzZjNmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIn0.xGR1_K_JQ98bKe_egAySxXvMRD1U6gUT9_gqqj7pCshsVmB4dA7Df7RqlK-JBHEJYnbCMWX0R8a7CHa-AK4B2Q","token_type":"Bearer","not-before-policy":0,"session_state":"c10624dc-90d5-4b83-8d06-33f5a7c16932","scope":"profile email"}[39m [90m{"class":"KeycloakService"}[39m
+[2024-05-02 10:32:51.030 +0200] [34mDEBUG[39m: [36mlogin: result={"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NzEsImlhdCI6MTcxNDYzODc3MSwianRpIjoiMGYyYjVmN2YtMjU3Ni00MWQwLWI2ODYtMTIyMjY1MmQyM2Y2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJjMTA2MjRkYy05MGQ1LTRiODMtOGQwNi0zM2Y1YTdjMTY5MzIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.Z1-NujQjzTV-StmJNj0DAV0xUnDBospKI1VCG96pdULlGfqfOBHmbzXbEXMmwfjxBe88bGp3h7Cw27zjlvwEm_rx__eqcoN-LULE1vnyjrSVlSXU1Q2xLGNheeZTZnfaQ2s9tGa7MVukgivt49nrapf8RVpzxvPBlCGlBgEL53_Y6t26KgsFwqueoIoUbL2OZ6wgsDFalC3bbLTijU_rACtKAwzjNlgCifeEVLbVJKbQBnDHjnsfBnHHHx_yTgiZ2tBgcLwMFk3pDYWX2OorOg2gD6Zb4EZr45UokN_x4_x7D80SfeN9-bvdPFOwc7xwFjSaAtHA1uyKeIvMFylfjA","expires_in":1800,"refresh_expires_in":3600,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZjQ3ZjRjZC02ZjM2LTQyMjQtYjI1Yy03MWZhN2E3NTY3YTEifQ.eyJleHAiOjE3MTQ2NDIzNzEsImlhdCI6MTcxNDYzODc3MSwianRpIjoiM2JmMWVlNGEtZWNhOS00NzA5LTg3ZTAtOTQyZjkzMGMzZjNmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwic3ViIjoiOTYxNjE1YjItYTgyOC00ZGM1LTkzNDktOGFkYjVlZGUwYjRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIn0.xGR1_K_JQ98bKe_egAySxXvMRD1U6gUT9_gqqj7pCshsVmB4dA7Df7RqlK-JBHEJYnbCMWX0R8a7CHa-AK4B2Q","token_type":"Bearer","not-before-policy":0,"session_state":"c10624dc-90d5-4b83-8d06-33f5a7c16932","scope":"profile email"}[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:51.031 +0200] [34mDEBUG[39m: [36mResponse time: 577 ms[39m [90m{"class":"ResponseTimeInterceptor"}[39m
+[2024-05-02 10:32:51.051 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoYlRwbjExWFR3MXNxVUtsNzVSMXIxZ3U3dzZrNHU4cUc3RUwwd2JvUGxZIn0.eyJleHAiOjE3MTQ2NDA1NzEsImlhdCI6MTcxNDYzODc3MSwianRpIjoiMGYyYjVmN2YtMjU3Ni00MWQwLWI2ODYtMTIyMjY1MmQyM2Y2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9hY21lIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijk2MTYxNWIyLWE4MjgtNGRjNS05MzQ5LThhZGI1ZWRlMGI0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFidGVpbHVuZy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYzEwNjI0ZGMtOTBkNS00YjgzLThkMDYtMzNmNWE3YzE2OTMyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9hYnRlaWx1bmc6MzAwMCIsImh0dHBzOi8vb2F1dGgucHN0bW4uaW8iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYWNtZSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhYnRlaWx1bmctY2xpZW50Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJjMTA2MjRkYy05MGQ1LTRiODMtOGQwNi0zM2Y1YTdjMTY5MzIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.Z1-NujQjzTV-StmJNj0DAV0xUnDBospKI1VCG96pdULlGfqfOBHmbzXbEXMmwfjxBe88bGp3h7Cw27zjlvwEm_rx__eqcoN-LULE1vnyjrSVlSXU1Q2xLGNheeZTZnfaQ2s9tGa7MVukgivt49nrapf8RVpzxvPBlCGlBgEL53_Y6t26KgsFwqueoIoUbL2OZ6wgsDFalC3bbLTijU_rACtKAwzjNlgCifeEVLbVJKbQBnDHjnsfBnHHHx_yTgiZ2tBgcLwMFk3pDYWX2OorOg2gD6Zb4EZr45UokN_x4_x7D80SfeN9-bvdPFOwc7xwFjSaAtHA1uyKeIvMFylfjA","user-agent":"axios/1.6.8","content-length":"803","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:51.097 +0200] [34mDEBUG[39m: [36mmethod=POST, url=/graphql, header={"accept":"application/json, text/plain, */*","content-type":"application/json","user-agent":"axios/1.6.8","content-length":"238","accept-encoding":"gzip, compress, deflate, br","host":"desktop-hnta75s:3000","connection":"close"}[39m [90m{"class":"RequestLoggerMiddleware"}[39m
+[2024-05-02 10:32:51.099 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"LoginResolver"}[39m
+[2024-05-02 10:32:51.099 +0200] [34mDEBUG[39m: [36mlogin: username=admin[39m [90m{"class":"KeycloakService"}[39m
+  console.log
+    query: SELECT "abteilung"."id" AS "abteilung_id", "abteilung"."version" AS "abteilung_version", "abteilung"."buero_nummer" AS "abteilung_buero_nummer", "abteilung"."zufriedenheit" AS "abteilung_zufriedenheit", "abteilung"."art" AS "abteilung_art", "abteilung"."budget" AS "abteilung_budget", "abteilung"."krankenstands_quote" AS "abteilung_krankenstands_quote", "abteilung"."verfuegbar" AS "abteilung_verfuegbar", "abteilung"."gruendungs_datum" AS "abteilung_gruendungs_datum", "abteilung"."homepage" AS "abteilung_homepage", "abteilung"."schlagwoerter" AS "abteilung_schlagwoerter", "abteilung"."erzeugt" AS "abteilung_erzeugt", "abteilung"."aktualisiert" AS "abteilung_aktualisiert", "abteilungsleiter"."id" AS "abteilungsleiter_id", "abteilungsleiter"."nachname" AS "abteilungsleiter_nachname", "abteilungsleiter"."vorname" AS "abteilungsleiter_vorname", "abteilungsleiter"."abteilung_id" AS "abteilungsleiter_abteilung_id" FROM "abteilung"."abteilung" "abteilung" INNER JOIN "abteilung"."abteilungsleiter" "abteilungsleiter" ON "abteilungsleiter"."abteilung_id"="abteilung"."id" WHERE "abteilung"."id" = $1 -- PARAMETERS: [999999]
+
+      at Function.logInfo (src/platform/PlatformTools.ts:235:17)
+
+No tests found, exiting with code 1
+Run with `--passWithNoTests` to exit with code 0
+In C:\Users\Studi\VSCodeProjects\abteilung-v0
+  469 files checked.
+  testMatch:  - 0 matches
+  testPathIgnorePatterns: \\node_modules\\ - 469 matches
+  testRegex: __tests__\.*\\.*test\.m?ts$ - 10 matches
+Pattern: abteilung-mutation.resolver.test.ts - 0 matches

@@ -31,6 +31,7 @@ import { entities } from '../abteilung/entity/entities.js';
 import { loggerDefaultValue } from './logger.js';
 import { nodeConfig } from './node.js';
 import { readFileSync } from 'node:fs';
+
 // eslint-disable-next-line unicorn/import-style
 import { resolve } from 'node:path';
 

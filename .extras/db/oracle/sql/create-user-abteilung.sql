@@ -15,16 +15,16 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program. If not, see <https://www.gnu.org/licenses/>.
 
--- docker compose exec db sqlplus SYS/p@FREEPDB1 as SYSDBA '@/sql/create-user-buch.sql'
--- docker compose exec db sqlplus buch/p@FREEPDB1 '@/sql/create-schema-buch.sql'
--- docker compose exec db sqlplus buch/p@FREEPDB1 '@/sql/create.sql'
+-- docker compose exec db sqlplus SYS/p@FREEPDB1 as SYSDBA '@/sql/create-user-abteilung.sql'
+-- docker compose exec db sqlplus abteilung/p@FREEPDB1 '@/sql/create-schema-abteilung.sql'
+-- docker compose exec db sqlplus abteilung/p@FREEPDB1 '@/sql/create.sql'
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/CREATE-DIRECTORY.html
 CREATE DIRECTORY IF NOT EXISTS csv_dir AS '/csv';
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/CREATE-USER.html
 -- https://blogs.oracle.com/sql/post/how-to-create-users-grant-them-privileges-and-remove-them-in-oracle-database
-CREATE USER IF NOT EXISTS buch IDENTIFIED BY p;
+CREATE USER IF NOT EXISTS abteilung IDENTIFIED BY p;
 
 -- https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/GRANT.html
 GRANT
@@ -39,9 +39,9 @@ GRANT
   DELETE ANY TABLE,
   CREATE ANY INDEX,
   DROP ANY INDEX
-TO buch;
-GRANT READ, WRITE ON DIRECTORY csv_dir TO buch;
-GRANT UNLIMITED TABLESPACE TO buch;
+TO abteilung;
+GRANT READ, WRITE ON DIRECTORY csv_dir TO abteilung;
+GRANT UNLIMITED TABLESPACE TO abteilung;
 
 -- Remote-Login zulassen
 EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
@@ -51,7 +51,7 @@ EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 -- hier: initiale Groesse 10 MB mit 500 KB Extensions
 -- dbf = data(base) file, default: im Verzeichnis /opt/oracle/product/18c/dbhomeXE/dbs
 -- ALTER SYSTEM SET DB_CREATE_FILE_DEST = '/opt/oracle/tablespace';
--- DROP TABLESPACE buchspace INCLUDING CONTENTS AND DATAFILES;
--- CREATE TABLESPACE buchspace DATAFILE 'buch.dbf' SIZE 10M;
+-- DROP TABLESPACE abteilungspace INCLUDING CONTENTS AND DATAFILES;
+-- CREATE TABLESPACE abteilungspace DATAFILE 'abteilung.dbf' SIZE 10M;
 
 exit

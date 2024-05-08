@@ -1,5 +1,5 @@
 /* eslint-disable @eslint-community/eslint-comments/disable-enable-pair */
-/* eslint-disable unicorn/import-style */
+
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
@@ -29,6 +29,7 @@ import { config } from '../src/config/app.js';
 import { dbType } from '../src/config/db.js';
 import { env } from '../src/config/env.js';
 import isPortReachable from 'is-port-reachable';
+// eslint-disable-next-line unicorn/import-style
 import { join } from 'node:path';
 import { nodeConfig } from '../src/config/node.js';
 import { paths } from '../src/config/paths.js';
