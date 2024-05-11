@@ -66,7 +66,6 @@ export type AbteilungsArt = 'ENTWICKLUNG' | 'VERTRIEB';
 // https://typeorm.io/entities
 @Entity()
 export class Abteilung {
-    // comment
     // https://typeorm.io/entities#primary-columns
     // default: strategy = 'increment' (SEQUENCE, GENERATED ALWAYS AS IDENTITY, AUTO_INCREMENT)
     @PrimaryGeneratedColumn()

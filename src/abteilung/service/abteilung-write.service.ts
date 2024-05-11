@@ -150,7 +150,6 @@ export class AbteilungWriteService {
         await this.#repo.manager.transaction(async (transactionalMgr) => {
             // Die Abteilung zur gegebenen ID mit Abteilungsleiter und Abb. asynchron loeschen
 
-            // TODO "cascade" funktioniert nicht beim Loeschen
             const abteilungsleiterId = abteilung.abteilungsleiter?.id;
             if (abteilungsleiterId !== undefined) {
                 await transactionalMgr.delete(
