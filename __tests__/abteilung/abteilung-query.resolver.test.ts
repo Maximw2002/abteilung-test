@@ -165,7 +165,7 @@ describe('GraphQL Queries', () => {
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });
 
-    test('Abteilung zu vorhandenem Abteilungsleiter', async () => {
+    test('Abteilungen zu vorhandenem Abteilungsleiter', async () => {
         // given
         const body: GraphQLRequest = {
             query: `
@@ -208,7 +208,7 @@ describe('GraphQL Queries', () => {
         );
     });
 
-    test('Abteilung zu vorhandenem Teil-Abteilungsleiter', async () => {
+    test('Abteilungen zu vorhandenem Teil-Abteilungsleiter', async () => {
         // given
         const body: GraphQLRequest = {
             query: `

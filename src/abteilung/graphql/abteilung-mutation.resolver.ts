@@ -76,7 +76,6 @@ export class AbteilungMutationResolver {
 
         const abteilung = this.#abteilungDtoToAbteilung(abteilungDTO);
         const id = await this.#service.create(abteilung);
-        // TODO BadUserInputError
         this.#logger.debug('createAbteilung: id=%d', id);
         const payload: CreatePayload = { id };
         return payload;
@@ -95,7 +94,6 @@ export class AbteilungMutationResolver {
             abteilung,
             version: versionStr,
         });
-        // TODO BadUserInputError
         this.#logger.debug('updateAbteilung: versionResult=%d', versionResult);
         const payload: UpdatePayload = { version: versionResult };
         return payload;
